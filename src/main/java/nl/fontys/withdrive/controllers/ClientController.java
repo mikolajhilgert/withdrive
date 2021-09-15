@@ -1,7 +1,7 @@
 package nl.fontys.withdrive.controllers;
 
-import nl.fontys.withdrive.dto.ClientDTO;
-import nl.fontys.withdrive.interfaces.ClientSupplier;
+import nl.fontys.withdrive.dto.UserDTO;
+import nl.fontys.withdrive.interfaces.UserSupplier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,54 +11,66 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping("/user")
 public class ClientController {
-    private final ClientSupplier clients;
+    private final UserSupplier users;
 
     @Autowired
-    public ClientController(ClientSupplier clients){
-        this.clients = clients;
+    public ClientController(UserSupplier users){
+        this.users = users;
     }
     @GetMapping
-    public ResponseEntity<List<ClientDTO>> GetAllClients(){
-        List<ClientDTO> list = this.clients.RetrieveAll();
+    public ResponseEntity<List<UserDTO>> GetAllClients(){
+        List<UserDTO> list = this.users.RetrieveAll();
         if(list.size()>0)
             return ResponseEntity.ok().body(list);
         return ResponseEntity.notFound().build();
     }
 
     @GetMapping("{clientNumber}")
-    public ResponseEntity<ClientDTO> GetClientByNumber(@PathVariable(value = "clientNumber") int number){
-        ClientDTO route = this.clients.RetrieveByNumber(number);
-        if(route!=null){
-            return ResponseEntity.ok().body(route);
+    public ResponseEntity<UserDTO> GetClientByNumber(@PathVariable(value = "clientNumber") int number){
+        UserDTO user = this.users.RetrieveByNumber(number);
+        if(user!=null){
+            return ResponseEntity.ok().body(user);
         }
-        return ResponseEntity.notFound().build();
+        //return ResponseEntity.notFound().build();
+        return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<UserDTO> GetUserCount(){
+        List<UserDTO> users = this.users.RetrieveAll();
+        return new ResponseEntity(users.size(),HttpStatus.FOUND);
     }
 
     @PostMapping()
-    public ResponseEntity<ClientDTO> CreateClient(@RequestBody ClientDTO client) {
-        if (!this.clients.Add(client)){
-            String entity =  "Student with student number " + client.getClientNumber() + " already exists.";
+    public ResponseEntity<UserDTO> CreateClient(@RequestBody UserDTO user) {
+        if (!this.users.Add(user)){
+            String entity =  "Student with student number " + user.getClientNumber() + " already exists.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);
         } else {
-            String url = "client" + "/" + client.getClientNumber(); // url of the created student
+            String url = "user" + "/" + user.getClientNumber(); // url of the created student
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);
         }
     }
+
     @PutMapping()
-    public ResponseEntity<ClientDTO> UpdateClient(@RequestBody ClientDTO client){
-        if(this.clients.Update(client)){
+    public ResponseEntity<UserDTO> UpdateClient(@RequestBody UserDTO user){
+        if(this.users.Update(user)){
             return ResponseEntity.noContent().build();
         }
         else{
-            return new ResponseEntity("Please provide a valid route ID.",HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
         }
     }
     @DeleteMapping("{clientNumber}")
     public ResponseEntity DeleteClient(@PathVariable int clientNumber){
-        this.clients.Delete(clientNumber);
-        return ResponseEntity.ok().build();
+        if(this.users.Delete(clientNumber)){
+            return ResponseEntity.noContent().build();
+        }
+        else{
+            return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
+        }
     }
 }

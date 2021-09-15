@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.util.Date;
 
-public class ClientDTO {
+public class UserDTO {
     private @Getter
     final int clientNumber;
     private @Getter @Setter String email;
@@ -16,7 +16,7 @@ public class ClientDTO {
     private @Getter @Setter String phoneNumber;
     private @Getter @Setter String password;
 
-    public ClientDTO(int clientNumber, String email, String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String password){
+    public UserDTO(int clientNumber, String email, String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String password){
         this.clientNumber = clientNumber;
         this.email = email;
         this.firstName = firstName;

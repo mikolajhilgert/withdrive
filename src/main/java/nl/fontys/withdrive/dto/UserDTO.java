@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-//@AllArgsConstructor
+
 public class UserDTO {
     private @Getter
     final int clientNumber;

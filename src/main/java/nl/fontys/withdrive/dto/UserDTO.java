@@ -1,10 +1,10 @@
 package nl.fontys.withdrive.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
+//@AllArgsConstructor
 public class UserDTO {
     private @Getter
     final int clientNumber;
@@ -26,19 +26,6 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
-
-//    @Override
-//    public String toString() {
-//        return "Student{" +
-//                "clientNumber=" + clientNumber +
-//                ", firstname='" + firstName + '\'' +
-//                ", lastname='" + lastName + '\'' +
-//                ", dateOfBirth='" + dateOfBirth + '\'' +
-//                ", firstname='" + firstName + '\'' +
-//                ", gender=" + gender +
-//                '}';
-//    }
-
 }
 
 

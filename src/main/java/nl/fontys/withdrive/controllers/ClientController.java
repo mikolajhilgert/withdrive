@@ -1,7 +1,7 @@
 package nl.fontys.withdrive.controllers;
 
 import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.interfaces.UserSupplier;
+import nl.fontys.withdrive.interfaces.managers.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +13,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 public class ClientController {
-    private final UserSupplier users;
+    private final IUserService users;
 
     @Autowired
-    public ClientController(UserSupplier users){
+    public ClientController(IUserService users){
         this.users = users;
     }
+
     @GetMapping
     public ResponseEntity<List<UserDTO>> GetAllClients(){
         List<UserDTO> list = this.users.RetrieveAll();
@@ -65,12 +66,11 @@ public class ClientController {
         }
     }
     @DeleteMapping("{clientNumber}")
-    public ResponseEntity DeleteClient(@PathVariable int clientNumber){
-        if(this.users.Delete(clientNumber)){
+    public ResponseEntity<UserDTO> DeleteClient(@PathVariable int clientNumber) {
+        if (this.users.Delete(clientNumber)) {
             return ResponseEntity.noContent().build();
-        }
-        else{
-            return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);
         }
     }
 }

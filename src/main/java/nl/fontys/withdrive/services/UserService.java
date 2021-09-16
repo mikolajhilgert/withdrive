@@ -1,19 +1,19 @@
 package nl.fontys.withdrive.services;
 
 import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.interfaces.UserStorage;
-import nl.fontys.withdrive.interfaces.UserSupplier;
+import nl.fontys.withdrive.interfaces.data.IUserData;
+import nl.fontys.withdrive.interfaces.managers.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserManager implements UserSupplier {
-    private final UserStorage saved;
+public class UserService implements IUserService {
+    private final IUserData saved;
 
     @Autowired
-    UserManager(UserStorage saved){
+    public UserService(IUserData saved){
         this.saved = saved;
     }
 

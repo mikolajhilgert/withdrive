@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class UserTests {
+    //5 Tests as expected of 5th spring
     @Test
     public void TestIfRetrieveAllUsersWorks(){
         //Arrange

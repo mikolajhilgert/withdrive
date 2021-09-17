@@ -1,7 +1,7 @@
 package nl.fontys.withdrive.controllers;
 
 import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.interfaces.managers.IUserService;
+import nl.fontys.withdrive.interfaces.services.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class ClientController {
-    private final IUserService users;
+public class UserController {
+    private final IUserManager users;
 
     @Autowired
-    public ClientController(IUserService users){
+    public UserController(IUserManager users){
         this.users = users;
     }
 
@@ -59,7 +59,9 @@ public class ClientController {
     @PutMapping()
     public ResponseEntity<UserDTO> UpdateClient(@RequestBody UserDTO user){
         if(this.users.Update(user)){
-            return ResponseEntity.noContent().build();
+            String url = "user" + "/" + user.getClientNumber(); // url of the created student
+            URI uri = URI.create(url);
+            return new ResponseEntity(uri,HttpStatus.CREATED);
         }
         else{
             return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);

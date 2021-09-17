@@ -1,10 +1,10 @@
-package nl.fontys.withdrive.interfaces.managers;
+package nl.fontys.withdrive.interfaces.services;
 
 import nl.fontys.withdrive.dto.UserDTO;
 
 import java.util.List;
 
-public interface IUserService {
+public interface IUserManager {
     boolean Add(UserDTO user);
 
     List<UserDTO> RetrieveAll();

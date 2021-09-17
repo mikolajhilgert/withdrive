@@ -10,9 +10,10 @@ import java.util.List;
 
 public class UserTests {
     @Test
-    public void TestCreateUser(){
+    public void TestIfRetrieveAllUsersWorks(){
         //Arrange
         UserManager users = new UserManager(new FakeUserData());
+        users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
         //Act
         List<UserDTO> result = users.RetrieveAll();
         //Assert

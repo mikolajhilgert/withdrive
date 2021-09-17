@@ -2,42 +2,45 @@ package nl.fontys.withdrive;
 
 import nl.fontys.withdrive.dto.UserDTO;
 import nl.fontys.withdrive.repositories.FakeUserData;
-import nl.fontys.withdrive.services.UserService;
+import nl.fontys.withdrive.services.UserManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 public class UserTests {
+    //5 Tests as expected of 5th spring
     @Test
-    public void TestCreateUser(){
+    public void TestIfRetrieveAllUsersWorks(){
         //Arrange
-        UserService users = new UserService(new FakeUserData());
+        UserManager users = new UserManager(new FakeUserData());
+        users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
         //Act
         List<UserDTO> result = users.RetrieveAll();
         //Assert
         Assertions.assertFalse(result.isEmpty());
     }
     @Test
-    public void TestUser(){
+    public void TestCreatingUserAndTestDetails(){
         //Arrange
-        UserService users = new UserService(new FakeUserData());
+        UserManager users = new UserManager(new FakeUserData());
         //Act
-        UserDTO actual = users.RetrieveAll().get(0);
+        users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
+        UserDTO result = users.RetrieveByNumber(1);
         //Assert
-        Assertions.assertEquals(0,actual.getClientNumber());
-        Assertions.assertEquals("JohnDoe@example.com",actual.getEmail());
-        Assertions.assertEquals("John",actual.getFirstName());
-        Assertions.assertEquals("Doe",actual.getLastName());
-        Assertions.assertEquals("10-05-2002",actual.getDateOfBirth());
-        Assertions.assertEquals("Male",actual.getGender());
-        Assertions.assertEquals("+42060605797",actual.getPhoneNumber());
-        Assertions.assertEquals("qwerty",actual.getPassword());
+        Assertions.assertEquals(1,result.getClientNumber());
+        Assertions.assertEquals("EmilyJones@example.com",result.getEmail());
+        Assertions.assertEquals("Emily",result.getFirstName());
+        Assertions.assertEquals("Jones",result.getLastName());
+        Assertions.assertEquals("19-11-1998",result.getDateOfBirth());
+        Assertions.assertEquals("Female",result.getGender());
+        Assertions.assertEquals("+3165526368",result.getPhoneNumber());
+        Assertions.assertEquals("abcdef",result.getPassword());
     }
     @Test
-    public void TestNonExistingUser(){
+    public void TestRetrievalOfNonExistingUser(){
         //Arrange
-        UserService users = new UserService(new FakeUserData());
+        UserManager users = new UserManager(new FakeUserData());
         //Act
         UserDTO actual = users.RetrieveByNumber(1);
         //Assert
@@ -45,26 +48,16 @@ public class UserTests {
     }
 
     @Test
-    public void TestCreatingUser(){
+    public void TestUpdatingAddedUserInformation(){
         //Arrange
-        UserService users = new UserService(new FakeUserData());
-        //Act
+        UserManager users = new UserManager(new FakeUserData());
         users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
-        UserDTO result = users.RetrieveByNumber(1);
-        //Assert
-        Assertions.assertNotNull(result);
-    }
-
-    @Test
-    public void TestUpdatingUser(){
-        //Arrange
-        UserService users = new UserService(new FakeUserData());
+        users.Update(new UserDTO(1, "test", "test", "test", "test", "test", "test", "test"));
         //Act
-        users.Update(new UserDTO(0, "test", "test", "test", "test", "test", "test", "test"));
+        UserDTO actual = users.RetrieveByNumber(1);
 
-        UserDTO actual = users.RetrieveByNumber(0);
         //Assert
-        Assertions.assertEquals(0,actual.getClientNumber());
+        Assertions.assertEquals(1,actual.getClientNumber());
         Assertions.assertEquals("test",actual.getEmail());
         Assertions.assertEquals("test",actual.getFirstName());
         Assertions.assertEquals("test",actual.getLastName());
@@ -75,13 +68,14 @@ public class UserTests {
     }
 
     @Test
-    public void TestDeleteUser(){
+    public void TestAddUserThenDeleteUserExpectUserWasDeleted(){
         //Arrange
-        UserService users = new UserService(new FakeUserData());
+        UserManager users = new UserManager(new FakeUserData());
+        users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
         //Act
-        users.Delete(0);
-        List<UserDTO> result = users.RetrieveAll();
+        users.Delete(1);
+        UserDTO result = users.RetrieveByNumber(1);
         //Assert
-        Assertions.assertTrue(result.isEmpty());
+        Assertions.assertNull(result);
     }
 }

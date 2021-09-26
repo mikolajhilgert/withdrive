@@ -27,21 +27,35 @@ public class FakeTripData implements ITripData {
 
     @Override
     public List<TripDTO> RetrieveAll() {
-        return null;
+        return this.trips;
     }
 
     @Override
     public TripDTO RetrieveByNumber(int number) {
+        for (TripDTO temp : trips)
+        {
+            if(temp.getTripID() == number){
+                return temp;
+            }
+        }
         return null;
     }
 
     @Override
     public boolean Update(TripDTO trip) {
+        TripDTO temp = RetrieveByNumber(trip.getTripID());
+        if(temp != null){
+            return this.trips.set(this.trips.indexOf(temp),trip) != null;
+        }
         return false;
     }
 
     @Override
     public boolean Delete(int number) {
+        TripDTO temp = RetrieveByNumber(number);
+        if(temp != null){
+            return this.trips.remove(temp);
+        }
         return false;
     }
 }

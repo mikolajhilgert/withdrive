@@ -67,6 +67,7 @@ public class UserController {
             return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
         }
     }
+
     @DeleteMapping("{clientNumber}")
     public ResponseEntity<UserDTO> DeleteClient(@PathVariable int clientNumber) {
         if (this.users.Delete(clientNumber)) {

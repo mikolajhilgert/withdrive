@@ -44,10 +44,10 @@ public class TripController {
     @PostMapping()
     public ResponseEntity<TripVM> CreateTrip(@RequestBody TripVM trip) {
         if (!this.trips.Add(trip)){
-            String entity =  "Trip with TripID " + trip.getTripID() + " already exists.";
+            String entity =  "Trip with TripID " + trip.getTripID() + " already exists, or you tried to apply to your own trip.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);
         } else {
-            String url = "trip" + "/" + trip.getTripID(); // url of the created student
+            String url = "trip" + "/" + trip.getTripID(); // url of the created trip
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);
         }
@@ -56,12 +56,12 @@ public class TripController {
     @PutMapping()
     public ResponseEntity<TripVM> UpdateTrip(@RequestBody TripVM trip){
         if(this.trips.Update(trip)){
-            String url = "user" + "/" + trip.getTripID(); // url of the created student
+            String url = "trip" + "/" + trip.getTripID(); // url of the edited trip
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);
         }
         else{
-            return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Please provide a valid trip number.",HttpStatus.NOT_FOUND);
         }
     }
 

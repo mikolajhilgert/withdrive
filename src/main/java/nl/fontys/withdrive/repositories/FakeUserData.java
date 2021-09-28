@@ -42,15 +42,7 @@ public class FakeUserData implements IUserData {
         UserDTO temp = RetrieveClientByNumber(user.getClientNumber());
 
         if (temp != null) {
-            //Potentially could delete old and create new object but ensure the id will be the same?
-            temp.setEmail(user.getEmail());
-            temp.setFirstName(user.getFirstName());
-            temp.setLastName(user.getLastName());
-            temp.setDateOfBirth(user.getDateOfBirth());
-            temp.setGender(user.getGender());
-            temp.setPhoneNumber(user.getPhoneNumber());
-            temp.setPassword(user.getPassword());
-            return true;
+            return this.users.set(this.users.indexOf(temp),user) != null;
         }
         return false;
     }

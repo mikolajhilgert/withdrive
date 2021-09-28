@@ -27,7 +27,10 @@ public class TripManager implements ITripManager {
     public boolean Add(TripVM trip) {
         UserDTO driver = users.RetrieveByNumber(trip.getDriver());
         List<UserDTO> passengers = ConvertPassengerIDToObject(trip.getPassengers());
-        return saved.Create(new TripDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),driver,passengers));
+        if(DriverIsNotAPassenger(driver,passengers)){
+            return saved.Create(new TripDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),driver,passengers));
+        }
+        return false;
     }
 
     @Override
@@ -44,7 +47,10 @@ public class TripManager implements ITripManager {
     public boolean Update(TripVM trip) {
         UserDTO driver = users.RetrieveByNumber(trip.getDriver());
         List<UserDTO> passengers = ConvertPassengerIDToObject(trip.getPassengers());
-        return saved.Update(new TripDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),driver,passengers));
+        if(DriverIsNotAPassenger(driver,passengers)){
+            return saved.Update(new TripDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),driver,passengers));
+        }
+        return false;
     }
 
     @Override
@@ -58,5 +64,14 @@ public class TripManager implements ITripManager {
             passengers.add(users.RetrieveByNumber(passengerID));
         }
         return passengers;
+    }
+
+    private boolean DriverIsNotAPassenger(UserDTO driver, List<UserDTO> passengers){
+        for(UserDTO p : passengers){
+            if(p == driver){
+                return false;
+            }
+        }
+        return true;
     }
 }

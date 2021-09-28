@@ -1,6 +1,6 @@
 package nl.fontys.withdrive.dto;
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,6 +14,8 @@ public class UserDTO {
     private @Getter @Setter String dateOfBirth;
     private @Getter @Setter String gender;
     private @Getter @Setter String phoneNumber;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private @Getter @Setter String password;
 
     public UserDTO(int clientNumber, String email, String firstName, String lastName, String dateOfBirth, String gender, String phoneNumber, String password){
@@ -26,7 +28,19 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
+
+//    @JsonIgnore
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
 }
+
+
+
 
 
 

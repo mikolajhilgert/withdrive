@@ -15,5 +15,4 @@ public interface ITripManager {
     boolean Update(TripVM trip);
 
     boolean Delete(int number);
-
 }

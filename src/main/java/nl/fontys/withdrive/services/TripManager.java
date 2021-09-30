@@ -41,7 +41,7 @@ public class TripManager implements ITripManager {
     @Override
     public TripDTO RetrieveByNumber(int number) {
         return saved.RetrieveByNumber(number);
-    }
+    }   
 
     @Override
     public boolean Update(TripVM trip) {

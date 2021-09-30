@@ -28,15 +28,6 @@ public class UserDTO {
         this.phoneNumber = phoneNumber;
         this.password = password;
     }
-
-//    @JsonIgnore
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
 }
 
 

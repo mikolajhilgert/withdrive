@@ -27,6 +27,7 @@ public class TripManager implements ITripManager {
     public boolean Add(TripVM trip) {
         UserDTO driver = users.RetrieveByNumber(trip.getDriver());
         List<UserDTO> passengers = ConvertPassengerIDToObject(trip.getPassengers());
+        //Should I add && UniqueIDCheck(trip.getTripID())?
         if(DriverIsNotAPassenger(driver,passengers)){
             return saved.Create(new TripDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),driver,passengers));
         }
@@ -74,4 +75,13 @@ public class TripManager implements ITripManager {
         }
         return true;
     }
+
+//    private boolean UniqueIDCheck(int id){
+//        for(TripDTO trips : saved.RetrieveAll()){
+//            if(trips.getTripID() == id){
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 }

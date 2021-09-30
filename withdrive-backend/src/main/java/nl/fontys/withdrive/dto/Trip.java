@@ -15,5 +15,6 @@ public abstract class Trip {
         this.destination = destination;
         this.description = description;
     }
+
 }
 

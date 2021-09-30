@@ -14,4 +14,5 @@ public class TripDTO extends Trip{
         this.driver = driver;
         this.passengers = passengers;
     }
+
 }

@@ -23,4 +23,8 @@ public class TripVM extends Trip {
     public TripVM(TripDTO trip){
         super(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription());
     }
+
+    public void AddPassanger(int passenger) {
+        this.passengers.add(passenger);
+    }
 }

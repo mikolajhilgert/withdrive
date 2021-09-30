@@ -5,22 +5,13 @@ import lombok.Setter;
 
 import java.util.List;
 
-public class TripDTO {
-    private @Getter
-    final int tripID;
-    private @Getter
-    final UserDTO driver;
-    private @Getter @Setter String origin;
-    private @Getter @Setter String destination;
-    private @Getter @Setter String description;
-    private @Getter @Setter
-    List<UserDTO> passengers;
+public class TripDTO extends Trip{
+    private @Getter @Setter UserDTO driver;
+    private @Getter @Setter List<UserDTO> passengers;
 
-    public TripDTO(int tripID,UserDTO driver,String origin, String destination, String description) {
-        this.tripID = tripID;
-        this.origin = origin;
-        this.destination = destination;
+    public TripDTO(int tripID, String origin, String destination, String description, UserDTO driver, List<UserDTO> passengers) {
+        super(tripID, origin, destination, description);
         this.driver = driver;
-        this.description = description;
+        this.passengers = passengers;
     }
 }

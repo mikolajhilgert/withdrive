@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -67,6 +68,7 @@ public class UserController {
             return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
         }
     }
+
     @DeleteMapping("{clientNumber}")
     public ResponseEntity<UserDTO> DeleteClient(@PathVariable int clientNumber) {
         if (this.users.Delete(clientNumber)) {

@@ -33,7 +33,8 @@ sonarqube-check:
 
 build:
   stage: build
-  script: gradle --build-cache assemble
+  script: cd withdrive-backend gradle --build-cache assemble
+
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -48,5 +49,6 @@ test:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
     paths:
+      
       - build
       - .gradle

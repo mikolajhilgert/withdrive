@@ -38,6 +38,7 @@ build:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
     paths:
+      - withdrive-backend
       - build
       - .gradle
 
@@ -48,5 +49,6 @@ test:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
     paths:
+      - withdrive-backend
       - build
       - .gradle

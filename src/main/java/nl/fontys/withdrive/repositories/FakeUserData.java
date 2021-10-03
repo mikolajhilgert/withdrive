@@ -15,6 +15,7 @@ public class FakeUserData implements IUserData {
     public FakeUserData() {
         users = new ArrayList<>();
         users.add(new UserDTO(UUID.randomUUID(), "JohnDoe@example.com", "John", "Doe", "10-05-2002", "Male", "+42060605797", "qwerty"));
+        users.add(new UserDTO(UUID.randomUUID(), "MaryPoppins@example.com", "Mary", "Poppins", "10-05-1999", "Female", "+41526369568", "abcdef"));
     }
 
     @Override

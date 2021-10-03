@@ -7,10 +7,10 @@ import lombok.Setter;
 
 import java.util.UUID;
 
-@NoArgsConstructor
+//@NoArgsConstructor
 public class UserDTO {
     private @Getter
-    UUID clientNumber = null;
+    UUID clientNumber;
     private @Getter @Setter String email;
     private @Getter @Setter String firstName;
     private @Getter @Setter String lastName;

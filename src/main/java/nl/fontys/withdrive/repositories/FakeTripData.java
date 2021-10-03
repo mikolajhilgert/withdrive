@@ -6,6 +6,7 @@ import nl.fontys.withdrive.interfaces.data.ITripData;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ public class FakeTripData implements ITripData {
 
     public FakeTripData() {
         trips = new ArrayList<>();
-        trips.add(new TripDTO(UUID.randomUUID(),"Prague","Brno","Quick drive",new UserDTO(UUID.randomUUID(), "JohnDoe@example.com", "John", "Doe", "10-05-2002", "Male", "+42060605797", "qwerty"),null));
+        trips.add(new TripDTO(UUID.randomUUID(),"Prague","Brno","Quick drive",new UserDTO(UUID.randomUUID(), "JohnDoe@example.com", "John", "Doe", "10-05-2002", "Male", "+42060605797", "qwerty"), Collections.emptyList()));
     }
 
     @Override

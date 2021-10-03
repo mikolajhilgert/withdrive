@@ -45,7 +45,9 @@ public class TripController {
 
     @PostMapping()
     public ResponseEntity<TripVM> CreateTrip(@RequestBody TripVM trip) {
+        //System.out.println(trip.getTripID());
         if (!this.trips.Add(trip)){
+
             String entity =  "Trip with TripID " + trip.getTripID() + " already exists, or you tried to apply to your own trip.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);
         } else {

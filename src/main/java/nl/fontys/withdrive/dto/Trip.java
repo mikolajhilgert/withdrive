@@ -19,5 +19,12 @@ public abstract class Trip {
         this.description = description;
     }
 
+//    public Trip(String origin, String destination, String description) {
+//        this.tripID = UUID.randomUUID();
+//        this.origin = origin;
+//        this.destination = destination;
+//        this.description = description;
+//    }
+
 }
 

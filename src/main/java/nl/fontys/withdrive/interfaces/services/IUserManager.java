@@ -3,16 +3,17 @@ package nl.fontys.withdrive.interfaces.services;
 import nl.fontys.withdrive.dto.UserDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IUserManager {
     boolean Add(UserDTO user);
 
     List<UserDTO> RetrieveAll();
 
-    UserDTO RetrieveByNumber(int number);
+    UserDTO RetrieveByNumber(UUID number);
 
     boolean Update(UserDTO client);
 
-    boolean Delete(int number);
+    boolean Delete(UUID number);
 
 }

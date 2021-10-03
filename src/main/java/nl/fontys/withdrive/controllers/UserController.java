@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -30,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("{clientNumber}")
-    public ResponseEntity<UserDTO> GetClientByNumber(@PathVariable(value = "clientNumber") int number){
+    public ResponseEntity<UserDTO> GetClientByNumber(@PathVariable(value = "clientNumber") UUID number){
         UserDTO user = this.users.RetrieveByNumber(number);
         if(user!=null){
             return ResponseEntity.ok().body(user);
@@ -70,7 +71,7 @@ public class UserController {
     }
 
     @DeleteMapping("{clientNumber}")
-    public ResponseEntity<UserDTO> DeleteClient(@PathVariable int clientNumber) {
+    public ResponseEntity<UserDTO> DeleteClient(@PathVariable UUID clientNumber) {
         if (this.users.Delete(clientNumber)) {
             return ResponseEntity.noContent().build();
         } else {

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class FakeUserData implements IUserData {
@@ -13,7 +14,7 @@ public class FakeUserData implements IUserData {
 
     public FakeUserData() {
         users = new ArrayList<>();
-        users.add(new UserDTO(0, "JohnDoe@example.com", "John", "Doe", "10-05-2002", "Male", "+42060605797", "qwerty"));
+        users.add(new UserDTO(UUID.randomUUID(), "JohnDoe@example.com", "John", "Doe", "10-05-2002", "Male", "+42060605797", "qwerty"));
     }
 
     @Override
@@ -33,7 +34,7 @@ public class FakeUserData implements IUserData {
     }
 
     @Override
-    public UserDTO RetrieveByNumber(int number) {
+    public UserDTO RetrieveByNumber(UUID number) {
         return RetrieveClientByNumber(number);
     }
 
@@ -48,7 +49,7 @@ public class FakeUserData implements IUserData {
     }
 
     @Override
-    public boolean Delete(int number) {
+    public boolean Delete(UUID number) {
         UserDTO temp = RetrieveClientByNumber(number);
 
         if (temp != null) {
@@ -58,9 +59,9 @@ public class FakeUserData implements IUserData {
         return false;
     }
 
-    private UserDTO RetrieveClientByNumber(int number) {
+    private UserDTO RetrieveClientByNumber(UUID number) {
         for (UserDTO user : users) {
-            if (user.getClientNumber() == number)
+            if (user.getClientNumber().equals(number))
                 return user;
         }
         return null;

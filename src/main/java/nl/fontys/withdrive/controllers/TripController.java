@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -33,7 +34,7 @@ public class TripController {
     }
 
     @GetMapping("{tripNumber}")
-    public ResponseEntity<TripDTO> GetTripByID(@PathVariable(value = "tripNumber") int number){
+    public ResponseEntity<TripDTO> GetTripByID(@PathVariable(value = "tripNumber") UUID number){
         TripDTO user = this.trips.RetrieveByNumber(number);
         if(user!=null){
             return ResponseEntity.ok().body(user);
@@ -67,7 +68,7 @@ public class TripController {
     }
 
     @DeleteMapping("{tripNumber}")
-    public ResponseEntity<UserDTO> DeleteClient(@PathVariable int tripNumber) {
+    public ResponseEntity<UserDTO> DeleteClient(@PathVariable UUID tripNumber) {
         if (this.trips.Delete(tripNumber)) {
             return ResponseEntity.noContent().build();
         } else {

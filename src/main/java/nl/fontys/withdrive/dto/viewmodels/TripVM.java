@@ -6,15 +6,16 @@ import nl.fontys.withdrive.dto.Trip;
 import nl.fontys.withdrive.dto.TripDTO;
 
 import java.util.List;
+import java.util.UUID;
 
 public class TripVM extends Trip {
 
     private @Getter @Setter
-    int driver;
+    UUID driver;
     private @Getter @Setter
-    List<Integer> passengers;
+    List<UUID> passengers;
 
-    public TripVM(int tripID, String origin, String destination, String description, int driver, List<Integer> passengers) {
+    public TripVM(UUID tripID, String origin, String destination, String description, UUID driver, List<UUID> passengers) {
         super(tripID, origin, destination, description);
         this.driver = driver;
         this.passengers = passengers;
@@ -24,7 +25,7 @@ public class TripVM extends Trip {
         super(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription());
     }
 
-    public void AddPassanger(int passenger) {
+    public void AddPassanger(UUID passenger) {
         this.passengers.add(passenger);
     }
 }

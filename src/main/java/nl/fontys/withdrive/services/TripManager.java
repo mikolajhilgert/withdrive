@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class TripManager implements ITripManager {
@@ -27,8 +28,7 @@ public class TripManager implements ITripManager {
     public boolean Add(TripVM trip) {
         UserDTO driver = users.RetrieveByNumber(trip.getDriver());
         List<UserDTO> passengers = ConvertPassengerIDToObject(trip.getPassengers());
-        //Should I add && UniqueIDCheck(trip.getTripID())?
-        if(DriverIsNotAPassenger(driver,passengers)){
+        if(DriverIsNotAPassenger(driver,passengers) && UniqueIDCheck(trip.getTripID())){
             return saved.Create(new TripDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),driver,passengers));
         }
         return false;
@@ -40,7 +40,7 @@ public class TripManager implements ITripManager {
     }
 
     @Override
-    public TripDTO RetrieveByNumber(int number) {
+    public TripDTO RetrieveByNumber(UUID number) {
         return saved.RetrieveByNumber(number);
     }   
 
@@ -55,13 +55,13 @@ public class TripManager implements ITripManager {
     }
 
     @Override
-    public boolean Delete(int number) {
+    public boolean Delete(UUID number) {
         return saved.Delete(number);
     }
 
-    private List<UserDTO> ConvertPassengerIDToObject(List<Integer> passengerList){
+    private List<UserDTO> ConvertPassengerIDToObject(List<UUID> passengerList){
         List<UserDTO> passengers = new ArrayList<>();
-        for (int passengerID :passengerList){
+        for (UUID passengerID :passengerList){
             passengers.add(users.RetrieveByNumber(passengerID));
         }
         return passengers;
@@ -76,12 +76,12 @@ public class TripManager implements ITripManager {
         return true;
     }
 
-//    private boolean UniqueIDCheck(int id){
-//        for(TripDTO trips : saved.RetrieveAll()){
-//            if(trips.getTripID() == id){
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+    private boolean UniqueIDCheck(UUID id){
+        for(TripDTO trips : saved.RetrieveAll()){
+            if(trips.getTripID().equals(id)){
+                return false;
+            }
+        }
+        return true;
+    }
 }

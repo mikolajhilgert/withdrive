@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserManager implements IUserManager {
@@ -18,9 +19,7 @@ public class UserManager implements IUserManager {
     }
 
     @Override
-    public boolean Add(UserDTO user) {
-        return this.saved.Create(user);
-    }
+    public boolean Add(UserDTO user) { return this.saved.Create(user);    }
 
     @Override
     public List<UserDTO> RetrieveAll() {
@@ -28,7 +27,7 @@ public class UserManager implements IUserManager {
     }
 
     @Override
-    public UserDTO RetrieveByNumber(int number) {
+    public UserDTO RetrieveByNumber(UUID number) {
         return this.saved.RetrieveByNumber(number);
     }
 
@@ -38,7 +37,7 @@ public class UserManager implements IUserManager {
     }
 
     @Override
-    public boolean Delete(int number) {
+    public boolean Delete(UUID number) {
         return this.saved.Delete(number);
     }
 }

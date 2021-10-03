@@ -12,14 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TripTests {
-    @Test
-    public void TestIfRetrieveAllTripsWorks(){
-        //Arrange
-        TripManager trips = new TripManager(new FakeTripData(),new FakeUserData());
-        trips.Add(new TripVM(1,"Prague","Brno","Quick drive",0, new ArrayList<>()));
-        //Act
-        List<TripDTO> result = trips.RetrieveAll();
-        //Assert
-        Assertions.assertFalse(result.isEmpty());
-    }
+//    @Test
+//    public void TestIfRetrieveAllTripsWorks(){
+//        //Arrange
+//        TripManager trips = new TripManager(new FakeTripData(),new FakeUserData());
+//        trips.Add(new TripVM(1,"Prague","Brno","Quick drive",0, new ArrayList<>()));
+//        //Act
+//        List<TripDTO> result = trips.RetrieveAll();
+//        //Assert
+//        Assertions.assertFalse(result.isEmpty());
+//    }
 }

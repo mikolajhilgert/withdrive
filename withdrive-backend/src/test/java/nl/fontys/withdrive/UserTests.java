@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.UUID;
 
 public class UserTests {
     //5 Tests as expected of 5th spring
@@ -14,7 +15,7 @@ public class UserTests {
     public void TestIfRetrieveAllUsersWorks(){
         //Arrange
         UserManager users = new UserManager(new FakeUserData());
-        users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
+        users.Add(new UserDTO(UUID.randomUUID(), "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
         //Act
         List<UserDTO> result = users.RetrieveAll();
         //Assert
@@ -24,11 +25,12 @@ public class UserTests {
     public void TestCreatingUserAndTestDetails(){
         //Arrange
         UserManager users = new UserManager(new FakeUserData());
+        UUID temp = UUID.randomUUID();
         //Act
-        users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
-        UserDTO result = users.RetrieveByNumber(1);
+        users.Add(new UserDTO(temp, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
+        UserDTO result = users.RetrieveByNumber(temp);
         //Assert
-        Assertions.assertEquals(1,result.getClientNumber());
+        Assertions.assertEquals(temp,result.getClientNumber());
         Assertions.assertEquals("EmilyJones@example.com",result.getEmail());
         Assertions.assertEquals("Emily",result.getFirstName());
         Assertions.assertEquals("Jones",result.getLastName());
@@ -42,7 +44,7 @@ public class UserTests {
         //Arrange
         UserManager users = new UserManager(new FakeUserData());
         //Act
-        UserDTO actual = users.RetrieveByNumber(1);
+        UserDTO actual = users.RetrieveByNumber(UUID.randomUUID());
         //Assert
         Assertions.assertNull(actual);
     }
@@ -51,13 +53,14 @@ public class UserTests {
     public void TestUpdatingAddedUserInformation(){
         //Arrange
         UserManager users = new UserManager(new FakeUserData());
-        users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
-        users.Update(new UserDTO(1, "test", "test", "test", "test", "test", "test", "test"));
+        UUID temp = UUID.randomUUID();
+        users.Add(new UserDTO(temp, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
+        users.Update(new UserDTO(temp, "test", "test", "test", "test", "test", "test", "test"));
         //Act
-        UserDTO actual = users.RetrieveByNumber(1);
+        UserDTO actual = users.RetrieveByNumber(temp);
 
         //Assert
-        Assertions.assertEquals(1,actual.getClientNumber());
+        Assertions.assertEquals(temp,actual.getClientNumber());
         Assertions.assertEquals("test",actual.getEmail());
         Assertions.assertEquals("test",actual.getFirstName());
         Assertions.assertEquals("test",actual.getLastName());
@@ -71,10 +74,11 @@ public class UserTests {
     public void TestAddUserThenDeleteUserExpectUserWasDeleted(){
         //Arrange
         UserManager users = new UserManager(new FakeUserData());
-        users.Add(new UserDTO(1, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
+        UUID temp = UUID.randomUUID();
+        users.Add(new UserDTO(temp, "EmilyJones@example.com", "Emily", "Jones", "19-11-1998", "Female", "+3165526368", "abcdef"));
         //Act
-        users.Delete(1);
-        UserDTO result = users.RetrieveByNumber(1);
+        users.Delete(temp);
+        UserDTO result = users.RetrieveByNumber(temp);
         //Assert
         Assertions.assertNull(result);
     }

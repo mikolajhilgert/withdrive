@@ -3,20 +3,21 @@
 # https://docs.gitlab.com/ee/development/cicd/templates.html
 # This specific template is located at:
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Gradle.gitlab-ci.yml
-
+ 
 # This is the Gradle build system for JVM applications
 # https://gradle.org/
 # https://github.com/gradle/gradle
-
+ 
 image: gradle:alpine
-
+ 
 # Disable the Gradle daemon for Continuous Integration servers as correctness
 # is usually a priority over speed in CI environments. Using a fresh
 # runtime for each build is more reliable since the runtime is completely
 # isolated from any previous builds.
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-
+ 
+ 
 sonarqube-check:
   image: gradle:jre11-slim
   variables:
@@ -30,21 +31,23 @@ sonarqube-check:
   allow_failure: true
   only:
     - master # or the name of your main branch
-
+ 
 build:
   stage: build
-  script: gradle --build-cache assemble
-
+  script: 
+    - cd TransitSpot
+    - gradle --build-cache assemble
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
     paths:
       - build
       - .gradle
+ 
 test:
   stage: test
-    script:
-    - cd withdrive-backend
+  script:
+    - cd withdrive-backend 
     - gradle check
   cache:
     key: "$CI_COMMIT_REF_NAME"

@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.util.List;
 import java.util.UUID;
 
+
 public class TripDTO extends Trip{
     private @Getter @Setter UserDTO driver;
     private @Getter @Setter List<UserDTO> passengers;

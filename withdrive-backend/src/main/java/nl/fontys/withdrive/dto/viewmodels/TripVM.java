@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public class TripVM extends Trip {
 
+
     private @Getter @Setter
     UUID driver;
     private @Getter @Setter

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class UserTests {
-    //5 Tests as expected of 5th spring
+    //5 Tests as expected of first sprint
     @Test
     public void TestIfRetrieveAllUsersWorks(){
         //Arrange

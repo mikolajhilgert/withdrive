@@ -16,16 +16,16 @@ public class TripVM extends Trip {
     private @Getter @Setter
     List<UUID> passengers;
 
-//    public TripVM(UUID tripID, String origin, String destination, String description, UUID driver, List<UUID> passengers) {
-//        super(tripID, origin, destination, description);
+
+//    public TripVM(String origin, String destination, String description, UUID driver, List<UUID> passengers) {
+//        super(UUID.randomUUID(), origin, destination, description);
 //        this.driver = driver;
 //        this.passengers = passengers;
 //    }
 
-    public TripVM(String origin, String destination, String description, UUID driver, List<UUID> passengers) {
-        super(UUID.randomUUID(), origin, destination, description);
+    public TripVM(UUID tripID, String origin, String destination, String description, UUID driver, List<UUID> passengers) {
+        super(tripID, origin, destination, description);
         this.driver = driver;
         this.passengers = passengers;
     }
-
 }

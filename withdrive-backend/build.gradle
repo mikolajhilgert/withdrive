@@ -24,7 +24,6 @@ dependencies {
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 }
 
-
 sonarqube {
     properties {
         property "sonar.projectKey", "I456096_withdrive_AXxuRdObo27ypKC5y_rT"

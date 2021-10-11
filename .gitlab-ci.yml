@@ -17,7 +17,6 @@ image: gradle:alpine
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
  
- 
 sonarqube-check:
   image: gradle:jre11-slim
   variables:
@@ -36,8 +35,8 @@ sonarqube-check:
  
 build:
   stage: build
-  script: 
-    - cd withdrive-backend
+  script:
+    - cd withdrive-backend 
     - gradle --build-cache assemble
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -49,7 +48,7 @@ build:
 test:
   stage: test
   script:
-    - cd withdrive-backend 
+    - cd withdrive-backend
     - gradle check
   cache:
     key: "$CI_COMMIT_REF_NAME"
@@ -57,3 +56,4 @@ test:
     paths:
       - build
       - .gradle
+ 

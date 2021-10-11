@@ -57,4 +57,4 @@ sonarqube-check:
     - gradle sonarqube
   allow_failure: true
   only:
-    - master # or the name of your main branch
+    - main # or the name of your main branch

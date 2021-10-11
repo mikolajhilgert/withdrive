@@ -14,7 +14,7 @@ function App() {
   return (
     <Router>
       <Nav/>
-      <div className="auth-wrapper">
+      <div className="auth-wrapper">  
             <div className="auth-inner">
               <Switch>
                 <Route exact path='/' component={Index} />

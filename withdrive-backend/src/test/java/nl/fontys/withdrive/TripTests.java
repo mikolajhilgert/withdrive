@@ -1,13 +1,11 @@
 package nl.fontys.withdrive;
 
-import nl.fontys.withdrive.dto.TripDTO;
-import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.dto.viewmodels.TripVM;
+import nl.fontys.withdrive.model.dto.TripDTO;
+import nl.fontys.withdrive.model.viewmodel.TripVM;
 import nl.fontys.withdrive.interfaces.data.IUserData;
-import nl.fontys.withdrive.repositories.FakeTripData;
-import nl.fontys.withdrive.repositories.FakeUserData;
-import nl.fontys.withdrive.services.TripManager;
-import nl.fontys.withdrive.services.UserManager;
+import nl.fontys.withdrive.repository.mock.FakeTripData;
+import nl.fontys.withdrive.repository.mock.FakeUserData;
+import nl.fontys.withdrive.service.TripManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

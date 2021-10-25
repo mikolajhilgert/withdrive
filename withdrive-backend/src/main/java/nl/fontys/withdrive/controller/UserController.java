@@ -1,6 +1,6 @@
-package nl.fontys.withdrive.controllers;
+package nl.fontys.withdrive.controller;
 
-import nl.fontys.withdrive.dto.UserDTO;
+import nl.fontys.withdrive.model.dto.UserDTO;
 import nl.fontys.withdrive.interfaces.services.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

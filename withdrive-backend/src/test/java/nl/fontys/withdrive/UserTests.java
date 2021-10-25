@@ -1,8 +1,8 @@
 package nl.fontys.withdrive;
 
-import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.repositories.FakeUserData;
-import nl.fontys.withdrive.services.UserManager;
+import nl.fontys.withdrive.model.dto.UserDTO;
+import nl.fontys.withdrive.repository.mock.FakeUserData;
+import nl.fontys.withdrive.service.UserManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

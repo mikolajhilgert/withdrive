@@ -1,7 +1,7 @@
 package nl.fontys.withdrive.interfaces.services;
 
-import nl.fontys.withdrive.dto.TripDTO;
-import nl.fontys.withdrive.dto.viewmodels.TripVM;
+import nl.fontys.withdrive.model.dto.TripDTO;
+import nl.fontys.withdrive.model.viewmodel.TripVM;
 
 import java.util.List;
 import java.util.UUID;

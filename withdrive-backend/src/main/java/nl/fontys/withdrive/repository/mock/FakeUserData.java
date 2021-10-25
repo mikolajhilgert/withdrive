@@ -1,14 +1,13 @@
-package nl.fontys.withdrive.repositories;
+package nl.fontys.withdrive.repository.mock;
 
-import nl.fontys.withdrive.dto.UserDTO;
+import nl.fontys.withdrive.model.dto.UserDTO;
 import nl.fontys.withdrive.interfaces.data.IUserData;
-import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+//@Repository
 public class FakeUserData implements IUserData {
     private final List<UserDTO> users;
 

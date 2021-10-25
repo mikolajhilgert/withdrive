@@ -1,13 +1,16 @@
-package nl.fontys.withdrive.dto;
+package nl.fontys.withdrive.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.fontys.withdrive.model.Trip;
 
+import javax.persistence.Table;
 import java.util.List;
 import java.util.UUID;
 
-
-public class TripDTO extends Trip{
+//@Entity
+@Table(name="trip")
+public class TripDTO extends Trip {
     private @Getter @Setter UserDTO driver;
     private @Getter @Setter List<UserDTO> passengers;
 
@@ -16,5 +19,4 @@ public class TripDTO extends Trip{
         this.driver = driver;
         this.passengers = passengers;
     }
-
 }

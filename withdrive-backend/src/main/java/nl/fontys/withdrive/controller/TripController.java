@@ -1,10 +1,9 @@
-package nl.fontys.withdrive.controllers;
+package nl.fontys.withdrive.controller;
 
-import nl.fontys.withdrive.dto.TripDTO;
-import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.dto.viewmodels.TripVM;
+import nl.fontys.withdrive.model.dto.TripDTO;
+import nl.fontys.withdrive.model.dto.UserDTO;
+import nl.fontys.withdrive.model.viewmodel.TripVM;
 import nl.fontys.withdrive.interfaces.services.ITripManager;
-import nl.fontys.withdrive.interfaces.services.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,9 +45,9 @@ public class TripController {
     @PostMapping()
     public ResponseEntity<TripVM> CreateTrip(@RequestBody TripVM trip) {
         //System.out.println(trip.getTripID());
-        if(trip.getTripID() == null){
-            trip.setTripID(UUID.randomUUID());
-        }
+//        if(trip.getTripID() == null){
+//            trip.setTripID(UUID.randomUUID());
+//        }
         if (!this.trips.Add(trip)){
             String entity =  "Trip with TripID " + trip.getTripID() + " already exists, or you tried to apply to your own trip.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);

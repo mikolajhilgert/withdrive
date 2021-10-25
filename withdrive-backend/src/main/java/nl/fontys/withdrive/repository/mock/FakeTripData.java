@@ -1,7 +1,7 @@
-package nl.fontys.withdrive.repositories;
+package nl.fontys.withdrive.repository.mock;
 
-import nl.fontys.withdrive.dto.TripDTO;
-import nl.fontys.withdrive.dto.UserDTO;
+import nl.fontys.withdrive.model.dto.TripDTO;
+import nl.fontys.withdrive.model.dto.UserDTO;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+//@Repository
 public class FakeTripData implements ITripData {
     private final List<TripDTO> trips;
 

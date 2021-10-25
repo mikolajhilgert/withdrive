@@ -1,8 +1,8 @@
-package nl.fontys.withdrive.services;
+package nl.fontys.withdrive.service;
 
-import nl.fontys.withdrive.dto.TripDTO;
-import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.dto.viewmodels.TripVM;
+import nl.fontys.withdrive.model.dto.TripDTO;
+import nl.fontys.withdrive.model.dto.UserDTO;
+import nl.fontys.withdrive.model.viewmodel.TripVM;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import nl.fontys.withdrive.interfaces.services.ITripManager;

@@ -1,6 +1,6 @@
-package nl.fontys.withdrive.services;
+package nl.fontys.withdrive.service;
 
-import nl.fontys.withdrive.dto.UserDTO;
+import nl.fontys.withdrive.model.dto.UserDTO;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import nl.fontys.withdrive.interfaces.services.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;

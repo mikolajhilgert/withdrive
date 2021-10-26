@@ -21,7 +21,7 @@ public class JPATripData implements ITripData {
 
     @Override
     public boolean Create(TripDTO trip) {
-        TripVM temp = new TripVM(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),trip.getDriver().getClientNumber(), Collections.emptyList());
+        TripVM temp = new TripVM(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),trip.getDriver().getClientNumber(),null);
         db.save(temp);
         return true;
     }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import nl.fontys.withdrive.model.Trip;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Table(name="trip")
 public class TripVM extends Trip {
+    @Type(type="org.hibernate.type.UUIDCharType")
     private @Getter @Setter
     UUID driver;
 

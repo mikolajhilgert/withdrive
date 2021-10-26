@@ -2,12 +2,10 @@ package nl.fontys.withdrive.repository.jpa;
 
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.jpa.IJPATripData;
-import nl.fontys.withdrive.model.dto.TripDTO;
 import nl.fontys.withdrive.model.viewmodel.TripVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,30 +18,33 @@ public class JPATripData implements ITripData {
     }
 
     @Override
-    public boolean Create(TripDTO trip) {
-        TripVM temp = new TripVM(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),trip.getDriver().getClientNumber(),null);
-        db.save(temp);
-        return true;
+    public void Create(TripVM trip) {
+        db.save(trip);
     }
 
     @Override
-    public List<TripDTO> RetrieveAll() {
-        //return db.findAll();
-        return null;
+    public List<TripVM> RetrieveAll() {
+        return db.findAll();
     }
 
     @Override
-    public TripDTO RetrieveByNumber(UUID number) {
-        return null;
+    public TripVM RetrieveByNumber(UUID number) {
+        return db.getFirstByTripID(number);
     }
 
     @Override
-    public boolean Update(TripDTO trip) {
-        return false;
+    public void Update(TripVM trip) {
+        TripVM toUpdate = RetrieveByNumber(trip.getTripID());
+        toUpdate.setDescription(trip.getDescription());
+        toUpdate.setDestination(trip.getDestination());
+        toUpdate.setOrigin(trip.getOrigin());
+        toUpdate.setDriver(trip.getDriver());
+        toUpdate.setPassengers(trip.getPassengers());
+        db.save(toUpdate);
     }
 
     @Override
-    public boolean Delete(UUID number) {
-        return false;
+    public void Delete(UUID number) {
+        db.deleteById(number);
     }
 }

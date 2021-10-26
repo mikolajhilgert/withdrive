@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IUserData {
-    boolean Create(UserDTO user);
+    void Create(UserDTO user);
 
     List<UserDTO> RetrieveAll();
 
     UserDTO RetrieveByNumber(UUID number);
 
-    boolean Update(UserDTO client);
+    void Update(UserDTO client);
 
-    boolean Delete(UUID number);
+    void Delete(UUID number);
 
 }

@@ -18,9 +18,8 @@ public class JPAUserData implements IUserData {
     }
 
     @Override
-    public boolean Create(UserDTO user) {
+    public void Create(UserDTO user) {
         db.save(user);
-        return true;
     }
 
     @Override
@@ -34,16 +33,20 @@ public class JPAUserData implements IUserData {
     }
 
     @Override
-    public boolean Update(UserDTO client) {
+    public void Update(UserDTO client) {
         UserDTO toUpdate = RetrieveByNumber(client.getClientNumber());
         toUpdate.setEmail(client.getEmail());
+        toUpdate.setDateOfBirth(client.getDateOfBirth());
+        toUpdate.setFirstName(client.getFirstName());
+        toUpdate.setLastName(client.getLastName());
+        toUpdate.setGender(client.getGender());
+        toUpdate.setPhoneNumber(client.getPhoneNumber());
+        toUpdate.setPassword(client.getPassword());
         db.save(toUpdate);
-        return true;
     }
 
     @Override
-    public boolean Delete(UUID number) {
+    public void Delete(UUID number) {
         db.deleteById(number);
-        return true;
     }
 }

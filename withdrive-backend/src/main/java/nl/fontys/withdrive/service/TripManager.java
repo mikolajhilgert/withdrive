@@ -26,55 +26,64 @@ public class TripManager implements ITripManager {
 
     @Override
     public boolean Add(TripVM trip) {
-        UserDTO driver = users.RetrieveByNumber(trip.getDriver());
-        List<UserDTO> passengers = ConvertPassengerIDToObject(trip.getPassengers());
-        if(DriverCheck(driver,passengers)){
-            return saved.Create(new TripDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),driver,passengers));
-        }
-        return false;
+        saved.Create(trip);
+        return true;
     }
 
     @Override
     public List<TripDTO> RetrieveAll() {
-        return saved.RetrieveAll();
+        return GetTripVMToDTO(saved.RetrieveAll());
     }
 
     @Override
     public TripDTO RetrieveByNumber(UUID number) {
-        return saved.RetrieveByNumber(number);
+        List<TripVM> temp = new ArrayList<>();
+        temp.add(saved.RetrieveByNumber(number));
+        return GetTripVMToDTO(temp).get(0);
     }   
 
     @Override
     public boolean Update(TripVM trip) {
-        UserDTO driver = users.RetrieveByNumber(trip.getDriver());
-        List<UserDTO> passengers = ConvertPassengerIDToObject(trip.getPassengers());
-        if(DriverCheck(driver,passengers)){
-            return saved.Update(new TripDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),driver,passengers));
-        }
-        return false;
+        saved.Create(trip);
+        return true;
     }
 
     @Override
     public boolean Delete(UUID number) {
-        return saved.Delete(number);
+        saved.Delete(number);
+        return true;
     }
 
-    private List<UserDTO> ConvertPassengerIDToObject(List<UUID> passengerList){
-        List<UserDTO> passengers = new ArrayList<>();
-        for (UUID passengerID :passengerList){
-            passengers.add(users.RetrieveByNumber(passengerID));
-        }
-        return passengers;
-    }
-
-    private boolean DriverCheck(UserDTO driver, List<UserDTO> passengers){
-        for(UserDTO p : passengers){
-            if(p == driver){
-                return false;
+    private List<TripDTO> GetTripVMToDTO(List<TripVM> input){
+        List<TripDTO> temp = new ArrayList<>();
+        for(TripVM vm : input){
+            List<UserDTO> passengers = new ArrayList<>();
+            if(vm.getPassengers() != null){
+                for(UUID pass : vm.getPassengers()){
+                    passengers.add(users.RetrieveByNumber(pass));
+                }
             }
+            temp.add(new TripDTO(vm.getTripID(),vm.getOrigin(),vm.getDestination(),vm.getDescription(),users.RetrieveByNumber(vm.getDriver()),passengers));
         }
-        return users.RetrieveAll().contains(driver);
+        return temp;
     }
+
+//    private List<UserDTO> ConvertPassengerIDToObject(List<UUID> passengerList){
+//        List<UserDTO> passengers = new ArrayList<>();
+//        for (UUID passengerID :passengerList){
+//            passengers.add(users.RetrieveByNumber(passengerID));
+//        }
+//        return passengers;
+//    }
+//
+//    private boolean DriverCheck(UserDTO driver, List<UserDTO> passengers){
+//        for(UserDTO p : passengers){
+//            if(p == driver){
+//                return false;
+//            }
+//        }
+//        return users.RetrieveAll().contains(driver);
+//    }
 
 //    private boolean UniqueIDCheck(UUID id){
 //        for(TripDTO trips : saved.RetrieveAll()){

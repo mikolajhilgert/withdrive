@@ -19,7 +19,10 @@ public class UserManager implements IUserManager {
     }
 
     @Override
-    public boolean Add(UserDTO user) { return this.saved.Create(user);    }
+    public boolean Add(UserDTO user) {
+        this.saved.Create(user);
+        return true;
+    }
 
     @Override
     public List<UserDTO> RetrieveAll() {
@@ -33,11 +36,13 @@ public class UserManager implements IUserManager {
 
     @Override
     public boolean Update(UserDTO user) {
-        return this.saved.Update(user);
+        this.saved.Update(user);
+        return true;
     }
 
     @Override
     public boolean Delete(UUID number) {
-        return this.saved.Delete(number);
+        this.saved.Delete(number);
+        return true;
     }
 }

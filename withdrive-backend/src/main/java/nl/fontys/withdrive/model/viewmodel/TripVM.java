@@ -5,17 +5,21 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import nl.fontys.withdrive.model.Trip;
+import nl.fontys.withdrive.model.dto.TripApplicationDTO;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @NoArgsConstructor
-@Table(name="trip")
+@AllArgsConstructor
+@Table(name="trips")
 public class TripVM extends Trip {
     @Type(type="org.hibernate.type.UUIDCharType")
     private @Getter @Setter
@@ -25,9 +29,6 @@ public class TripVM extends Trip {
     private @Getter @Setter
     List<UUID> passengers;
 
-    public TripVM(UUID tripID, String origin, String destination, String description, UUID driver, List<UUID> passengers) {
-        super(tripID, origin, destination, description);
-        this.driver = driver;
-        this.passengers = passengers;
-    }
+    @OneToMany(mappedBy = "trip")
+    Set<TripApplicationDTO> application;
 }

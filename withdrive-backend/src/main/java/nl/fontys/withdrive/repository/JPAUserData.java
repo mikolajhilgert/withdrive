@@ -1,4 +1,4 @@
-package nl.fontys.withdrive.repository.jpa;
+package nl.fontys.withdrive.repository;
 
 import nl.fontys.withdrive.interfaces.jpa.IJPAUserData;
 import nl.fontys.withdrive.interfaces.data.IUserData;

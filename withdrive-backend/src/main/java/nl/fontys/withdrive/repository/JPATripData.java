@@ -1,4 +1,4 @@
-package nl.fontys.withdrive.repository.jpa;
+package nl.fontys.withdrive.repository;
 
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.jpa.IJPATripData;

@@ -1,19 +1,19 @@
 package nl.fontys.withdrive.interfaces.data;
 
-import nl.fontys.withdrive.model.dto.TripDTO;
-import nl.fontys.withdrive.model.viewmodel.TripVM;
+
+import nl.fontys.withdrive.entity.Trip;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface ITripData {
-    void Create(TripVM trip);
+    void Create(Trip trip);
 
-    List<TripVM> RetrieveAll();
+    List<Trip> RetrieveAll();
 
-    TripVM RetrieveByNumber(UUID number);
+    Trip RetrieveByNumber(UUID number);
 
-    void Update(TripVM trip);
+    void Update(Trip trip);
 
     void Delete(UUID number);
 

@@ -1,18 +1,18 @@
 package nl.fontys.withdrive.interfaces.data;
 
-import nl.fontys.withdrive.model.dto.UserDTO;
+import nl.fontys.withdrive.entity.User;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface IUserData {
-    void Create(UserDTO user);
+    void Create(User user);
 
-    List<UserDTO> RetrieveAll();
+    List<User> RetrieveAll();
 
-    UserDTO RetrieveByNumber(UUID number);
+    User RetrieveByID(UUID number);
 
-    void Update(UserDTO client);
+    void Update(User client);
 
     void Delete(UUID number);
 

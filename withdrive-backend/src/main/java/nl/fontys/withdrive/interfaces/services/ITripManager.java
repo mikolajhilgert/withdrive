@@ -1,19 +1,20 @@
 package nl.fontys.withdrive.interfaces.services;
 
-import nl.fontys.withdrive.model.dto.TripDTO;
-import nl.fontys.withdrive.model.viewmodel.TripVM;
+
+import nl.fontys.withdrive.dto.trip.TripRequestDTO;
+import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface ITripManager {
-    boolean Add(TripVM trip);
+    boolean Add(TripRequestDTO trip);
 
-    List<TripDTO> RetrieveAll();
+    List<TripResponseDTO> RetrieveAll();
 
-    TripDTO RetrieveByNumber(UUID number);
+    TripResponseDTO RetrieveByNumber(UUID number);
 
-    boolean Update(TripVM trip);
+    boolean Update(TripRequestDTO trip);
 
     boolean Delete(UUID number);
 }

@@ -1,8 +1,8 @@
 package nl.fontys.withdrive.repository;
 
+import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.jpa.IJPATripData;
-import nl.fontys.withdrive.model.viewmodel.TripVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,28 +18,27 @@ public class JPATripData implements ITripData {
     }
 
     @Override
-    public void Create(TripVM trip) {
+    public void Create(Trip trip) {
         db.save(trip);
     }
 
     @Override
-    public List<TripVM> RetrieveAll() {
+    public List<Trip> RetrieveAll() {
         return db.findAll();
     }
 
     @Override
-    public TripVM RetrieveByNumber(UUID number) {
+    public Trip RetrieveByNumber(UUID number) {
         return db.getFirstByTripID(number);
     }
 
     @Override
-    public void Update(TripVM trip) {
-        TripVM toUpdate = RetrieveByNumber(trip.getTripID());
+    public void Update(Trip trip) {
+        Trip toUpdate = RetrieveByNumber(trip.getTripID());
         toUpdate.setDescription(trip.getDescription());
         toUpdate.setDestination(trip.getDestination());
         toUpdate.setOrigin(trip.getOrigin());
         toUpdate.setDriver(trip.getDriver());
-        toUpdate.setPassengers(trip.getPassengers());
         db.save(toUpdate);
     }
 

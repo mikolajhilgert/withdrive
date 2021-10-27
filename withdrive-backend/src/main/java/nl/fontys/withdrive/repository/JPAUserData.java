@@ -2,7 +2,7 @@ package nl.fontys.withdrive.repository;
 
 import nl.fontys.withdrive.interfaces.jpa.IJPAUserData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
-import nl.fontys.withdrive.model.dto.UserDTO;
+import nl.fontys.withdrive.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,23 +18,23 @@ public class JPAUserData implements IUserData {
     }
 
     @Override
-    public void Create(UserDTO user) {
+    public void Create(User user) {
         db.save(user);
     }
 
     @Override
-    public List<UserDTO> RetrieveAll() {
+    public List<User> RetrieveAll() {
         return db.findAll();
     }
 
     @Override
-    public UserDTO RetrieveByNumber(UUID id) {
-        return db.getFirstByClientNumber(id);
+    public User RetrieveByID(UUID id) {
+        return db.getFirstByUserID(id);
     }
 
     @Override
-    public void Update(UserDTO client) {
-        UserDTO toUpdate = RetrieveByNumber(client.getClientNumber());
+    public void Update(User client) {
+        User toUpdate = RetrieveByID(client.getUserID());
         toUpdate.setEmail(client.getEmail());
         toUpdate.setDateOfBirth(client.getDateOfBirth());
         toUpdate.setFirstName(client.getFirstName());

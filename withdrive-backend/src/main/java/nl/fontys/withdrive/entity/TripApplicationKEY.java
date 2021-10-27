@@ -1,4 +1,4 @@
-package nl.fontys.withdrive.model;
+package nl.fontys.withdrive.entity;
 
 import org.hibernate.annotations.Type;
 

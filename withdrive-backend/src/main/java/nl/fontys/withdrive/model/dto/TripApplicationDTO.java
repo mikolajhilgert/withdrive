@@ -18,10 +18,10 @@ import java.util.UUID;
 @Table(name="applications")
 public class TripApplicationDTO {
     @EmbeddedId
-    @Type(type="org.hibernate.type.UUIDCharType")
     TripApplicationKEY id;
-    private @Getter @Setter
-    UUID ApplicationID = UUID.randomUUID();
+//    private @Getter @Setter
+//    @Type(type="org.hibernate.type.UUIDCharType")
+//    UUID ApplicationID = UUID.randomUUID();
 
     @ManyToOne
     @MapsId("userID")
@@ -33,7 +33,7 @@ public class TripApplicationDTO {
     @JoinColumn(name = "tripID")
     private @Getter @Setter TripVM trip;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private @Getter @Setter ApplicationStatus status = ApplicationStatus.PENDING;
     private @Getter @Setter String text;
 }

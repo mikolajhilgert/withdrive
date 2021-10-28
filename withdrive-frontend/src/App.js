@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Index from "./pages";
 import Login from "./pages/signin";
 import SignUp from "./pages/signup";
+import ViewTrips from "./pages/viewtrips";
 import ApiTest from "./pages/apitest";
 import NotFound from "./pages/notfound";
 import Nav from "./components/nav.component";
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path='/' component={Index} />
                 <Route path="/sign-in" component={Login} />
                 <Route path="/sign-up" component={SignUp} />
+                <Route path="/view-trips" component={ViewTrips} />
                 <Route path="/api-test" component={ApiTest} />
                 <Route component={NotFound}/>
               </Switch>

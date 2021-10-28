@@ -4,6 +4,7 @@ import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.interfaces.converter.ITripConverter;
+import nl.fontys.withdrive.interfaces.converter.IUserConverter;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import nl.fontys.withdrive.interfaces.services.ITripManager;
@@ -18,24 +19,24 @@ import java.util.UUID;
 public class TripManager implements ITripManager {
     private final ITripData saved;
     private final IUserData users;
-    private final ITripConverter converter;
+    private final ITripConverter tripConverter;
 
     @Autowired
     public TripManager(ITripData saved, IUserData users, ITripConverter tripConverter){
         this.saved = saved;
         this.users = users;
-        this.converter = tripConverter;
+        this.tripConverter = tripConverter;
     }
 
     @Override
     public boolean Add(TripRequestDTO trip) {
-        saved.Create(converter.RequestDTOToEntity(trip));
+        saved.Create(tripConverter.RequestDTOToEntity(trip));
         return true;
     }
 
     @Override
     public List<TripResponseDTO> RetrieveAll() {
-        return converter.ListEntityToResponseDTO(saved.RetrieveAll());
+        return tripConverter.ListEntityToResponseDTO(saved.RetrieveAll());
     }
 
     @Override
@@ -43,14 +44,14 @@ public class TripManager implements ITripManager {
         List<Trip> temp = new ArrayList<>();
         temp.add(saved.RetrieveByNumber(number));
         if(temp.get(0) != null){
-            return converter.EntityToResponseDTO((temp).get(0));
+            return tripConverter.EntityToResponseDTO((temp).get(0));
         }
         return null;
     }
 
     @Override
     public boolean Update(TripRequestDTO trip) {
-        saved.Create(converter.RequestDTOToEntity(trip));
+        saved.Create(tripConverter.RequestDTOToEntity(trip));
         return true;
     }
 

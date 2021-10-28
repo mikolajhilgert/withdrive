@@ -30,7 +30,6 @@ public class TripApplication {
     Trip trip;
 
     @Enumerated(EnumType.STRING)
-    private @Getter @Setter
-    ApplicationStatus status = ApplicationStatus.PENDING;
+    private @Getter @Setter ApplicationStatus status = ApplicationStatus.PENDING;
     private @Getter @Setter String text;
 }

@@ -10,21 +10,21 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="trips")
 public class Trip{
     @Id
     @Column(name="ID")
     @Type(type="org.hibernate.type.UUIDCharType")
-    private @Getter @Setter UUID tripID = UUID.randomUUID();
+    private @Getter @Setter UUID tripID;
     private @Getter @Setter String origin;
     private @Getter @Setter String destination;
     private @Getter @Setter String description;
 
     @Type(type="org.hibernate.type.UUIDCharType")
-    private @Getter
-    @Setter
-    UUID driver;
+    private @Getter @Setter UUID driver;
 
     @OneToMany(mappedBy = "trip")
     Set<TripApplication> application;

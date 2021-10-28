@@ -12,6 +12,7 @@ import java.util.UUID;
 @Repository
 public class JPATripData implements ITripData {
     private final IJPATripData db;
+
     @Autowired
     public JPATripData(IJPATripData db){
         this.db = db;

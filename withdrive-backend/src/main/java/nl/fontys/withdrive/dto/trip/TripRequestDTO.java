@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TripRequestDTO {
-    private @Getter @Setter UUID tripID;
+    private @Getter @Setter UUID tripID = UUID.randomUUID();
     private @Getter @Setter String origin;
     private @Getter @Setter String destination;
     private @Getter @Setter String description;

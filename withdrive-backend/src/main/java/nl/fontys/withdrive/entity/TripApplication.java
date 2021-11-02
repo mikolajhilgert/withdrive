@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name="applications")
 public class TripApplication {
     @EmbeddedId
-    TripApplicationKEY id;
+    TripApplicationKEY id = new TripApplicationKEY();
 
     @ManyToOne
     @MapsId("userID")
@@ -30,6 +30,6 @@ public class TripApplication {
     Trip trip;
 
     @Enumerated(EnumType.STRING)
-    private @Getter @Setter ApplicationStatus status = ApplicationStatus.PENDING;
+    private @Getter @Setter ApplicationStatus status;
     private @Getter @Setter String text;
 }

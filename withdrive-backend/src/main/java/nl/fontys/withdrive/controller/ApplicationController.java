@@ -47,16 +47,11 @@ public class ApplicationController {
         return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);
     }
 
-//    @PostMapping("/apply")
-//    public ResponseEntity<ApplicationRequestDTO> CreateTrip(@RequestBody ApplicationRequestDTO app) {
-//        if (!this.trips.Add(trip)){
-//            String entity =  "Trip with TripID " + trip.getTripID() + " already exists, or you tried to apply to your own trip.";
-//            return new ResponseEntity(entity,HttpStatus.CONFLICT);
-//        } else {
-//            String url = "trip" + "/" + trip.getTripID(); // url of the created trip
-//            URI uri = URI.create(url);
-//            return new ResponseEntity(uri,HttpStatus.CREATED);
-//        }
-//    }
+    @PostMapping()
+    public ResponseEntity<ApplicationRequestDTO> MakeApplication(@RequestBody ApplicationRequestDTO app) {
+        applications.Add(app);
+        String text = "Application for trip " + app.getTrip() + " has been submitted!";
+        return new ResponseEntity(text,HttpStatus.CREATED);
+    }
 
 }

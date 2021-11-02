@@ -13,6 +13,6 @@ import java.util.UUID;
 public class ApplicationRequestDTO {
     private @Getter @Setter UUID trip;
     private @Getter @Setter UUID user;
-    private @Getter @Setter ApplicationStatus status;
+    private @Getter @Setter ApplicationStatus status = ApplicationStatus.PENDING;
     private @Getter @Setter String text;
 }

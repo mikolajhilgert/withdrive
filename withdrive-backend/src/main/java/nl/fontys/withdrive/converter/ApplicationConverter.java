@@ -30,7 +30,10 @@ public class ApplicationConverter implements IApplicationConverter {
     @Override
     public TripApplication RequestDTOToEntity(ApplicationRequestDTO application) {
         TripApplication output = mapper.map(application, TripApplication.class);
+        output.setTrip(trips.RetrieveByNumber(application.getTrip()));
+        output.setApplicant(users.RetrieveByID(application.getUser()));
         return output;
+//        return mapper.map(application, TripApplication.class);
     }
 
     @Override

@@ -27,13 +27,15 @@ public class TripConverter implements ITripConverter {
 
     @Override
     public Trip RequestDTOToEntity(TripRequestDTO trip) {
-        return mapper.map(trip,Trip.class);
+        Trip output = mapper.map(trip,Trip.class);
+        output.setDriver(users.RetrieveByID(trip.getDriver()));
+        return output;
     }
 
     @Override
     public TripResponseDTO EntityToResponseDTO(Trip trip) {
         TripResponseDTO output = mapper.map(trip,TripResponseDTO.class);
-        output.setDriver(mapper.map(users.RetrieveByID(trip.getDriver()),UserDTO.class));
+        output.setDriver(mapper.map(users.RetrieveByID(trip.getDriver().getUserID()),UserDTO.class));
         return output;
     }
 
@@ -42,7 +44,7 @@ public class TripConverter implements ITripConverter {
         List<TripResponseDTO> output = new ArrayList<>();
         for(Trip trip : trips){
             TripResponseDTO temp = mapper.map(trip,TripResponseDTO.class);
-            temp.setDriver(mapper.map(users.RetrieveByID(trip.getDriver()),UserDTO.class));
+            temp.setDriver(mapper.map(users.RetrieveByID(trip.getDriver().getUserID()),UserDTO.class));
             output.add(temp);
         }
         return output;

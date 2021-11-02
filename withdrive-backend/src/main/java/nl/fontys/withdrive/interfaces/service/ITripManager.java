@@ -1,4 +1,4 @@
-package nl.fontys.withdrive.interfaces.services;
+package nl.fontys.withdrive.interfaces.service;
 
 
 import nl.fontys.withdrive.dto.trip.TripRequestDTO;

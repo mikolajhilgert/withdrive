@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import nl.fontys.withdrive.dto.user.UserDTO;
+import nl.fontys.withdrive.enumeration.TripStatus;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,5 +19,6 @@ public class TripResponseDTO {
     private @Getter @Setter String destination;
     private @Getter @Setter String description;
     private @Getter @Setter UserDTO driver;
+    private @Getter @Setter TripStatus status;
     private @Getter @Setter List<UserDTO> passengers = Collections.emptyList();
 }

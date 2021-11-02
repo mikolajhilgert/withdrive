@@ -4,10 +4,9 @@ import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.interfaces.converter.ITripConverter;
-import nl.fontys.withdrive.interfaces.converter.IUserConverter;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
-import nl.fontys.withdrive.interfaces.services.ITripManager;
+import nl.fontys.withdrive.interfaces.service.ITripManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

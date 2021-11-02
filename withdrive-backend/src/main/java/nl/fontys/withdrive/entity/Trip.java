@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import nl.fontys.withdrive.enumeration.ApplicationStatus;
+import nl.fontys.withdrive.enumeration.TripStatus;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -23,9 +26,12 @@ public class Trip{
     private @Getter @Setter String destination;
     private @Getter @Setter String description;
 
-    @Type(type="org.hibernate.type.UUIDCharType")
-    private @Getter @Setter UUID driver;
+    @Enumerated(EnumType.STRING)
+    private @Getter @Setter TripStatus status;
 
     @OneToMany(mappedBy = "trip")
     Set<TripApplication> application;
+
+    @ManyToOne
+    private @Getter @Setter User driver;
 }

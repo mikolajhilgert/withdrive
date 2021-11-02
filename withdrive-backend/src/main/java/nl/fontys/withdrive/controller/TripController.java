@@ -3,7 +3,7 @@ package nl.fontys.withdrive.controller;
 import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
-import nl.fontys.withdrive.interfaces.services.ITripManager;
+import nl.fontys.withdrive.interfaces.service.ITripManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,9 +44,9 @@ public class TripController {
 
     @PostMapping()
     public ResponseEntity<TripRequestDTO> CreateTrip(@RequestBody TripRequestDTO trip) {
-        if(trip.getTripID() == null){
-            trip.setTripID(UUID.randomUUID());
-        }
+//        if(trip.getTripID() == null){
+//            trip.setTripID(UUID.randomUUID());
+//        }
         if (!this.trips.Add(trip)){
             String entity =  "Trip with TripID " + trip.getTripID() + " already exists, or you tried to apply to your own trip.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);

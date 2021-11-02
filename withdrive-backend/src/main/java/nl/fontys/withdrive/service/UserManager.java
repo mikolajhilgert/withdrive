@@ -3,7 +3,7 @@ package nl.fontys.withdrive.service;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.interfaces.converter.IUserConverter;
 import nl.fontys.withdrive.interfaces.data.IUserData;
-import nl.fontys.withdrive.interfaces.services.IUserManager;
+import nl.fontys.withdrive.interfaces.service.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

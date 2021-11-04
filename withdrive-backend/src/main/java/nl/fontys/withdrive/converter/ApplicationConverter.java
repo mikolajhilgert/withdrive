@@ -7,6 +7,7 @@ import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.entity.TripApplication;
 import nl.fontys.withdrive.interfaces.converter.IApplicationConverter;
+import nl.fontys.withdrive.interfaces.data.IApplicationData;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import org.modelmapper.ModelMapper;
@@ -21,10 +22,12 @@ public class ApplicationConverter implements IApplicationConverter {
     private final IUserData users;
     private final ITripData trips;
 
-    public ApplicationConverter(ModelMapper mapper, IUserData users, ITripData trips){
+
+    public ApplicationConverter(ModelMapper mapper, IUserData users, ITripData trips, IApplicationData apps){
         this.mapper = mapper;
         this.users = users;
         this.trips = trips;
+
     }
 
     @Override
@@ -34,6 +37,14 @@ public class ApplicationConverter implements IApplicationConverter {
         output.setApplicant(users.RetrieveByID(application.getUser()));
         return output;
 //        return mapper.map(application, TripApplication.class);
+    }
+
+    @Override
+    public ApplicationRequestDTO EntityToRequestDTO(TripApplication application) {
+        ApplicationRequestDTO output = mapper.map(application, ApplicationRequestDTO.class);
+        output.setTrip(application.getTrip().getTripID());
+        output.setUser(application.getApplicant().getUserID());
+        return output;
     }
 
     @Override

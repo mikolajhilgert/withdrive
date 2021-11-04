@@ -38,6 +38,9 @@ dependencies {
     // add dependencies to H2 in-memory database and Java Persistency API
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.h2database:h2'
+
+    // mockito
+    dependencies { testImplementation "org.mockito:mockito-core:3.+" }
 }
 
 

@@ -36,6 +36,10 @@ public class User {
 
     @OneToMany(mappedBy = "applicant")
     Set<TripApplication> application;
+
+    public User(UUID userID,String email, String firstName, String lastName,String dateOfBirth,String gender, String phoneNumber,String password){
+        this.userID = userID;
+    }
 }
 
 

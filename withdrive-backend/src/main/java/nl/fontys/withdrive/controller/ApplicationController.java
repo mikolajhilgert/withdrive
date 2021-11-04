@@ -5,6 +5,7 @@ import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationRequestDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
+import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import nl.fontys.withdrive.interfaces.service.IApplicationManager;
 import nl.fontys.withdrive.interfaces.service.ITripManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,29 @@ public class ApplicationController {
     @PostMapping()
     public ResponseEntity<ApplicationRequestDTO> MakeApplication(@RequestBody ApplicationRequestDTO app) {
         applications.Add(app);
-        String text = "Application for trip " + app.getTrip() + " has been submitted!";
+        String text = "Your application for trip " + app.getTrip() + " has been submitted!";
         return new ResponseEntity(text,HttpStatus.CREATED);
     }
 
+    @PostMapping("/accept")
+    public ResponseEntity<ApplicationRequestDTO> AcceptApplication(@RequestBody ApplicationRequestDTO app) {
+        applications.RespondToApplication(app,ApplicationStatus.ACCEPTED);
+        String text = app.getUser() + "'s application for trip " + app.getTrip() + " has been accepted!";
+        return new ResponseEntity(text,HttpStatus.CREATED);
+    }
+
+    @PostMapping("/reject")
+    public ResponseEntity<ApplicationRequestDTO> RejectApplication(@RequestBody ApplicationRequestDTO app) {
+        app.setStatus(ApplicationStatus.REJECTED);
+        applications.RespondToApplication(app,ApplicationStatus.REJECTED);
+        String text = app.getUser() + "'s application for trip " + app.getTrip() + " has been rejected!";
+        return new ResponseEntity(text,HttpStatus.CREATED);
+    }
+
+    @PutMapping()
+    public ResponseEntity<ApplicationRequestDTO> UpdateApplication(@RequestBody ApplicationRequestDTO app){
+        applications.Update(app);
+        String text = "Your application for trip " + app.getTrip() + " has been updated!";
+        return new ResponseEntity(text,HttpStatus.CREATED);
+    }
 }

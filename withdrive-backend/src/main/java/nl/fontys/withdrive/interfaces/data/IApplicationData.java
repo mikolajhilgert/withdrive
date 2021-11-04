@@ -16,4 +16,6 @@ public interface IApplicationData {
     void Update(TripApplication application);
 
     void Delete(UUID id);
+
+    TripApplication RetrieveByUserIDAndTripID(UUID uID, UUID tID);
 }

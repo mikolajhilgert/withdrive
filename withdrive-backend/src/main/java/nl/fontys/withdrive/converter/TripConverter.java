@@ -4,9 +4,10 @@ import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Trip;
-import nl.fontys.withdrive.entity.User;
+import nl.fontys.withdrive.entity.TripApplication;
+import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import nl.fontys.withdrive.interfaces.converter.ITripConverter;
-import nl.fontys.withdrive.interfaces.converter.IUserConverter;
+import nl.fontys.withdrive.interfaces.data.IApplicationData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,12 @@ public class TripConverter implements ITripConverter {
 
     private final ModelMapper mapper;
     private final IUserData users;
+    private final IApplicationData apps;
 
-    public TripConverter(ModelMapper mapper, IUserData users){
+    public TripConverter(ModelMapper mapper, IUserData users, IApplicationData apps){
         this.mapper = mapper;
         this.users = users;
+        this.apps = apps;
     }
 
     @Override
@@ -36,6 +39,7 @@ public class TripConverter implements ITripConverter {
     public TripResponseDTO EntityToResponseDTO(Trip trip) {
         TripResponseDTO output = mapper.map(trip,TripResponseDTO.class);
         output.setDriver(mapper.map(users.RetrieveByID(trip.getDriver().getUserID()),UserDTO.class));
+        output.setPassengers(ExtractPassengers(apps.RetrieveByTripID(trip.getTripID())));
         return output;
     }
 
@@ -45,8 +49,19 @@ public class TripConverter implements ITripConverter {
         for(Trip trip : trips){
             TripResponseDTO temp = mapper.map(trip,TripResponseDTO.class);
             temp.setDriver(mapper.map(users.RetrieveByID(trip.getDriver().getUserID()),UserDTO.class));
+            temp.setPassengers(ExtractPassengers(apps.RetrieveByTripID(trip.getTripID())));
             output.add(temp);
         }
         return output;
+    }
+
+    private List<UserDTO> ExtractPassengers(List<TripApplication> apps){
+        List<UserDTO> passengers = new ArrayList<>();
+        for(TripApplication app : apps){
+            if(app.getStatus().equals(ApplicationStatus.ACCEPTED)){
+                passengers.add(mapper.map(users.RetrieveByID(app.getApplicant().getUserID()),UserDTO.class));
+            }
+        }
+        return passengers;
     }
 }

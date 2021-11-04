@@ -4,6 +4,7 @@ import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.interfaces.converter.ITripConverter;
+import nl.fontys.withdrive.interfaces.data.IApplicationData;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import nl.fontys.withdrive.interfaces.service.ITripManager;

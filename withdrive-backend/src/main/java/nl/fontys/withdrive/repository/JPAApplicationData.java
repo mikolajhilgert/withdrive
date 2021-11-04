@@ -49,11 +49,26 @@ public class JPAApplicationData implements IApplicationData {
 
     @Override
     public void Update(TripApplication application) {
-
+        TripApplication toUpdate = RetrieveByUserIDAndTripID(application.getApplicant().getUserID(),application.getTrip().getTripID());
+        toUpdate.setApplicant(application.getApplicant());
+        toUpdate.setTrip(application.getTrip());
+        toUpdate.setStatus(application.getStatus());
+        toUpdate.setText(application.getText());
+        db.save(toUpdate);
     }
 
     @Override
     public void Delete(UUID id) {
 
+    }
+
+    @Override
+    public TripApplication RetrieveByUserIDAndTripID(UUID uID, UUID tID) {
+        for(TripApplication app: RetrieveByTripID(tID)){
+            if(app.getApplicant().getUserID().equals(uID)){
+                return app;
+            }
+        }
+        return null;
     }
 }

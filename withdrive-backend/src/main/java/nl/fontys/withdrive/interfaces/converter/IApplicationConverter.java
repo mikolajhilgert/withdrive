@@ -11,5 +11,6 @@ import java.util.List;
 
 public interface IApplicationConverter {
     TripApplication RequestDTOToEntity(ApplicationRequestDTO application);
+    ApplicationRequestDTO EntityToRequestDTO(TripApplication application);
     List<ApplicationResponseDTO> ListEntityToResponseDTO(List<TripApplication> applications);
 }

@@ -1,7 +1,7 @@
-package nl.fontys.withdrive.controllers;
+package nl.fontys.withdrive.controller;
 
-import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.interfaces.services.IUserManager;
+import nl.fontys.withdrive.dto.user.UserDTO;
+import nl.fontys.withdrive.interfaces.service.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,16 +23,16 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> GetAllClients(){
+    public ResponseEntity<List<UserDTO>> GetAllUsers(){
         List<UserDTO> list = this.users.RetrieveAll();
         if(list.size()>0)
             return ResponseEntity.ok().body(list);
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("{clientNumber}")
-    public ResponseEntity<UserDTO> GetClientByNumber(@PathVariable(value = "clientNumber") UUID number){
-        UserDTO user = this.users.RetrieveByNumber(number);
+    @GetMapping("{userID}")
+    public ResponseEntity<UserDTO> GetUserByNumber(@PathVariable(value = "userID") UUID number){
+        UserDTO user = this.users.RetrieveByID(number);
         if(user!=null){
             return ResponseEntity.ok().body(user);
         }
@@ -47,21 +47,25 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<UserDTO> CreateClient(@RequestBody UserDTO user) {
+    public ResponseEntity<UserDTO> CreateUser(@RequestBody UserDTO user) {
+//        if(user.getUserID() == null){
+//            user.setUserID(UUID.randomUUID());
+//        }
+        System.out.println(user.getUserID());
         if (!this.users.Add(user)){
-            String entity =  "Student with student number " + user.getClientNumber() + " already exists.";
+            String entity =  "Student with student number " + user.getUserID() + " already exists.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);
         } else {
-            String url = "user" + "/" + user.getClientNumber(); // url of the created student
+            String url = "user" + "/" + user.getUserID(); // url of the created student
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);
         }
     }
 
     @PutMapping()
-    public ResponseEntity<UserDTO> UpdateClient(@RequestBody UserDTO user){
+    public ResponseEntity<UserDTO> UpdateUser(@RequestBody UserDTO user){
         if(this.users.Update(user)){
-            String url = "user" + "/" + user.getClientNumber(); // url of the created student
+            String url = "user" + "/" + user.getUserID(); // url of the created student
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);
         }
@@ -70,9 +74,9 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("{clientNumber}")
-    public ResponseEntity<UserDTO> DeleteClient(@PathVariable UUID clientNumber) {
-        if (this.users.Delete(clientNumber)) {
+    @DeleteMapping("{userID}")
+    public ResponseEntity<UserDTO> DeleteUser(@PathVariable UUID number) {
+        if (this.users.Delete(number)) {
             return ResponseEntity.noContent().build();
         } else {
             return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);

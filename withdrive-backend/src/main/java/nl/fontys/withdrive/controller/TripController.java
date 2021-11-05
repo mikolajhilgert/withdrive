@@ -1,10 +1,9 @@
-package nl.fontys.withdrive.controllers;
+package nl.fontys.withdrive.controller;
 
-import nl.fontys.withdrive.dto.TripDTO;
-import nl.fontys.withdrive.dto.UserDTO;
-import nl.fontys.withdrive.dto.viewmodels.TripVM;
-import nl.fontys.withdrive.interfaces.services.ITripManager;
-import nl.fontys.withdrive.interfaces.services.IUserManager;
+import nl.fontys.withdrive.dto.trip.TripRequestDTO;
+import nl.fontys.withdrive.dto.trip.TripResponseDTO;
+import nl.fontys.withdrive.dto.user.UserDTO;
+import nl.fontys.withdrive.interfaces.service.ITripManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,29 +25,28 @@ public class TripController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TripDTO>> GetAllClients(){
-        List<TripDTO> list = this.trips.RetrieveAll();
+    public ResponseEntity<List<TripResponseDTO>> GetAllClients(){
+        List<TripResponseDTO> list = this.trips.RetrieveAll();
         if(list.size()>0)
             return ResponseEntity.ok().body(list);
         return ResponseEntity.notFound().build();
     }
 
     @GetMapping("{tripNumber}")
-    public ResponseEntity<TripDTO> GetTripByID(@PathVariable(value = "tripNumber") UUID number){
-        TripDTO user = this.trips.RetrieveByNumber(number);
-        if(user!=null){
-            return ResponseEntity.ok().body(user);
+    public ResponseEntity<TripResponseDTO> GetTripByID(@PathVariable(value = "tripNumber") UUID number){
+        TripResponseDTO trip = this.trips.RetrieveByNumber(number);
+        if(trip!=null){
+            return ResponseEntity.ok().body(trip);
         }
         //return ResponseEntity.notFound().build();
         return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);
     }
 
     @PostMapping()
-    public ResponseEntity<TripVM> CreateTrip(@RequestBody TripVM trip) {
-        //System.out.println(trip.getTripID());
-        if(trip.getTripID() == null){
-            trip.setTripID(UUID.randomUUID());
-        }
+    public ResponseEntity<TripRequestDTO> CreateTrip(@RequestBody TripRequestDTO trip) {
+//        if(trip.getTripID() == null){
+//            trip.setTripID(UUID.randomUUID());
+//        }
         if (!this.trips.Add(trip)){
             String entity =  "Trip with TripID " + trip.getTripID() + " already exists, or you tried to apply to your own trip.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);
@@ -60,7 +58,7 @@ public class TripController {
     }
 
     @PutMapping()
-    public ResponseEntity<TripVM> UpdateTrip(@RequestBody TripVM trip){
+    public ResponseEntity<TripRequestDTO> UpdateTrip(@RequestBody TripRequestDTO trip){
         if(this.trips.Update(trip)){
             String url = "trip" + "/" + trip.getTripID(); // url of the edited trip
             URI uri = URI.create(url);

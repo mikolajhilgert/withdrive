@@ -21,7 +21,7 @@ function UserList(){
         {userItems.map(
             user=> 
             <div key={user.clientNumber}>
-            <div>Client UUID:⠀{user.clientNumber}</div>
+            <div>Client UUID:⠀{user.userID}</div>
             <div>Email:⠀{user.email}</div>
             {/* <div>Last name:⠀{user.password}</div> */}
             <br></br>

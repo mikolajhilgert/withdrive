@@ -18,13 +18,11 @@ import java.util.UUID;
 @Service
 public class TripManager implements ITripManager {
     private final ITripData saved;
-    private final IUserData users;
     private final ITripConverter tripConverter;
 
     @Autowired
     public TripManager(ITripData saved, IUserData users, ITripConverter tripConverter){
         this.saved = saved;
-        this.users = users;
         this.tripConverter = tripConverter;
     }
 

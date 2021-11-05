@@ -92,7 +92,6 @@ public class UserServiceTest {
     @Test
     public void deleteUserByIDTest()
     {
-
         User user = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
         when(db.RetrieveByID(testID)).thenReturn(user);
         service.Delete(testID);

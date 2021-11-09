@@ -49,4 +49,14 @@ public class JPAUserData implements IUserData {
     public void Delete(UUID number) {
         db.deleteById(number);
     }
+
+    @Override
+    public List<User> RetrieveUsersByTripID(UUID trip) {
+        return db.getPassangerUserByTripID(trip.toString());
+    }
+
+    @Override
+    public List<User> GetDrivers() {
+        return db.getDrivers();
+    }
 }

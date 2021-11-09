@@ -16,4 +16,6 @@ public interface IUserData {
 
     void Delete(UUID number);
 
+    List<User> RetrieveUsersByTripID(UUID trip);
+    List<User> GetDrivers();
 }

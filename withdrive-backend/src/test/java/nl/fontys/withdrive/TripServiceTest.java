@@ -59,7 +59,7 @@ public class TripServiceTest {
 
     @BeforeEach
     public void setUp()  {
-        converter = new TripConverter(new ModelMapper(),userData,appData);
+        converter = new TripConverter(new ModelMapper(),userData);
         service = new TripManager(db,userData,converter);
         User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
         User user = new User(userID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);

@@ -12,5 +12,5 @@ import java.util.UUID;
 
 public interface IJPAApplicationData extends JpaRepository<TripApplication, UUID> {
     TripApplication getTripApplicationByApplicantAndTrip(User user, Trip trip);
-    //TripApplication getTripApplicationByApplicantAndTrip(User user, Trip trip);
+
 }

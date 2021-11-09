@@ -42,8 +42,8 @@ public class UserServiceTest {
     public void getAllUsersTest()
     {
         List<User> users = List.of(
-                new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null),
-                new User(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null,null)
+                new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null),
+                new User(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null,null,null)
         );
         when(db.RetrieveAll()).thenReturn(users);
 
@@ -56,7 +56,7 @@ public class UserServiceTest {
     @Test
     public void getUserByIDTest()
     {
-        User user = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
+        User user = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null);
         when(db.RetrieveByID(testID)).thenReturn(user);
 
         UserDTO toCheck = service.RetrieveByID(testID);
@@ -92,7 +92,7 @@ public class UserServiceTest {
     @Test
     public void deleteUserByIDTest()
     {
-        User user = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
+        User user = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null);
         when(db.RetrieveByID(testID)).thenReturn(user);
         service.Delete(testID);
 

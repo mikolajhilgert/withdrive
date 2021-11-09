@@ -33,7 +33,7 @@ public class UserConverterTest {
     public void convertUserDTOToEntityTest()
     {
         UserDTO start = new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password");
-        User wantedResult = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
+        User wantedResult = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null);
 
         User toTest = converter.DTOToEntity(start);
 
@@ -49,7 +49,7 @@ public class UserConverterTest {
     @Test
     public void convertUserEntityToDTOTest()
     {
-        User start = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
+        User start = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null);
         UserDTO wantedResult = new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password");
 
 
@@ -68,8 +68,8 @@ public class UserConverterTest {
     public void convertListUserEntityToDTOTest()
     {
         List<User> start = List.of(
-                new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null),
-                new User(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null,null)
+                new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null),
+                new User(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null,null,null)
         );
 
         List<UserDTO> wantedResult = List.of(

@@ -5,14 +5,12 @@ import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
+
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Table(name="users")
 public class User {
     @Id
@@ -26,6 +24,9 @@ public class User {
     private @Getter @Setter String gender;
     private @Getter @Setter String phoneNumber;
     private @Getter @Setter String password;
+    @ManyToMany(fetch=FetchType.EAGER)
+    private @Getter @Setter Collection<Role> roles = new ArrayList<>();
+
 
     @OneToMany(
             mappedBy = "driver",
@@ -33,6 +34,7 @@ public class User {
     )
     @JsonIgnore
     private List<Trip> trips = new ArrayList<>();
+
 
     @OneToMany(mappedBy = "applicant")
     Set<TripApplication> application;

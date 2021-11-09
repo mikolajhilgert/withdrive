@@ -1,6 +1,8 @@
 package nl.fontys.withdrive.controller;
 
+import lombok.Data;
 import nl.fontys.withdrive.dto.user.UserDTO;
+import nl.fontys.withdrive.entity.Role;
 import nl.fontys.withdrive.interfaces.service.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,6 +64,13 @@ public class UserController {
         }
     }
 
+    @PostMapping("/role/create")
+    public ResponseEntity<Role>createRole(@RequestBody Role role){
+        String url = "user" + "/" + role.getName(); // url of the created student
+        URI uri = URI.create(url);
+        return ResponseEntity.created(uri).body(users.saveRole(role));
+    }
+
     @PutMapping()
     public ResponseEntity<UserDTO> UpdateUser(@RequestBody UserDTO user){
         if(this.users.Update(user)){
@@ -81,5 +90,18 @@ public class UserController {
         } else {
             return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping("/role")
+    public ResponseEntity<?>addRoleToUser(@RequestBody RoleToUserForm form){
+        String url = "user" + "/" + form.getRoleName(); // url of the created student
+        users.addRoleToUser(form.getEmail(),form.getRoleName());
+        return new ResponseEntity("Please provide a valid user number.", HttpStatus.FOUND);
+    }
+
+    @Data
+    class RoleToUserForm{
+        private String email;
+        private String roleName;
     }
 }

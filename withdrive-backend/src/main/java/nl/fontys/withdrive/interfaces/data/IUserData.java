@@ -1,5 +1,6 @@
 package nl.fontys.withdrive.interfaces.data;
 
+import nl.fontys.withdrive.entity.Role;
 import nl.fontys.withdrive.entity.User;
 
 import java.util.List;
@@ -12,10 +13,17 @@ public interface IUserData {
 
     User RetrieveByID(UUID number);
 
+    User retrieveByEmail(String email);
+
+    Role createRole(Role role);
+
+    void addRoleToUser(String email, String roleName);
+
     void Update(User client);
 
     void Delete(UUID number);
 
     List<User> RetrieveUsersByTripID(UUID trip);
+
     List<User> GetDrivers();
 }

@@ -35,7 +35,7 @@ public class ApplicationController {
             return ResponseEntity.ok().body(apps);
         }
         //return ResponseEntity.notFound().build();
-        return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);
+        return new ResponseEntity ("Please provide a valid user number.", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("u/{userID}")

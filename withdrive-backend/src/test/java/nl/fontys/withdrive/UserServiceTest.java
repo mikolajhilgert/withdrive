@@ -14,6 +14,8 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
@@ -35,7 +37,7 @@ public class UserServiceTest {
 
     @BeforeEach
     public void setUp()  {
-        service = new UserManager(db,converter);
+        service = new UserManager(db,converter, new BCryptPasswordEncoder());
     }
 
     @Test

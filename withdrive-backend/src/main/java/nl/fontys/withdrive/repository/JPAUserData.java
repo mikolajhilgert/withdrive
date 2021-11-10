@@ -8,12 +8,11 @@ import nl.fontys.withdrive.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+@Repository @Transactional
 public class JPAUserData implements IUserData {
     private final IJPAUserData db;
     private final IJPARoleData roles;
@@ -75,7 +74,7 @@ public class JPAUserData implements IUserData {
 
     @Override
     public List<User> RetrieveUsersByTripID(UUID trip) {
-        return db.getPassangerUserByTripID(trip.toString());
+        return db.getPassengerUserByTripID(trip.toString());
     }
 
     @Override

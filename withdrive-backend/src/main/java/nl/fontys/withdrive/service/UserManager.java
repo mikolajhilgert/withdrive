@@ -69,7 +69,7 @@ public class UserManager implements IUserManager, UserDetailsService {
 
     @Override
     public UserDTO retrieveByEmail(String email) {
-        return null;
+        return converter.EntityToDTO(this.saved.retrieveByEmail(email));
     }
 
     @Override

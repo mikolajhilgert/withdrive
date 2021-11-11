@@ -23,9 +23,12 @@ public class User {
     private @Getter @Setter String gender;
     private @Getter @Setter String phoneNumber;
     private @Getter @Setter String password;
+
     @ManyToMany(fetch=FetchType.EAGER)
     private @Getter @Setter Collection<Role> roles = new ArrayList<>();
 
+    @ManyToMany(fetch=FetchType.LAZY)
+    private @Getter @Setter Collection<Rating> ratings = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "driver",
@@ -34,13 +37,12 @@ public class User {
     @JsonIgnore
     private List<Trip> trips = new ArrayList<>();
 
-
     @OneToMany(mappedBy = "applicant")
     Set<TripApplication> application;
 
-    public User(UUID userID,String email, String firstName, String lastName,String dateOfBirth,String gender, String phoneNumber,String password){
-        this.userID = userID;
-    }
+//    public User(UUID userID,String email, String firstName, String lastName,String dateOfBirth,String gender, String phoneNumber,String password){
+//        this.userID = userID;
+//    }
 }
 
 

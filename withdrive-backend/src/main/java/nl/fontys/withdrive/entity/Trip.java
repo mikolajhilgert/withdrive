@@ -9,7 +9,6 @@ import nl.fontys.withdrive.enumeration.TripStatus;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 

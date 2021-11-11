@@ -40,8 +40,6 @@ public class UserManager implements IUserManager, UserDetailsService {
         if(user == null){
             log.error("User was not found in the database");
             throw new UsernameNotFoundException("User was not found in the database");
-        }else{
-            log.info("User has been found: {}",email);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {

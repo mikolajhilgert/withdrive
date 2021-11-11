@@ -17,6 +17,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+//@CrossOrigin(origins = "*")
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/trip/app")

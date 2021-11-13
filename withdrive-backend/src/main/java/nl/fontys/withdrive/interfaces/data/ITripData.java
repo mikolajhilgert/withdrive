@@ -17,4 +17,6 @@ public interface ITripData {
 
     void Delete(UUID number);
 
+    List<Trip> retrieveActiveTrips();
+
 }

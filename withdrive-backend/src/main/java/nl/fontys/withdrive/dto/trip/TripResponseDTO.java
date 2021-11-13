@@ -18,6 +18,7 @@ public class TripResponseDTO {
     private @Getter @Setter String origin;
     private @Getter @Setter String destination;
     private @Getter @Setter String description;
+    private @Getter @Setter String date;
     private @Getter @Setter UserDTO driver;
     private @Getter @Setter TripStatus status;
     private @Getter @Setter List<UserDTO> passengers = Collections.emptyList();

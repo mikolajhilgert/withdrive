@@ -51,6 +51,7 @@ public class UserManager implements IUserManager, UserDetailsService {
     @Override
     public boolean Add(UserDTO user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //addRoleToUser(user.getEmail(),"ROLE_USER");
         this.saved.Create(converter.DTOToEntity(user));
         return true;
     }

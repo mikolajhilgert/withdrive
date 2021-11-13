@@ -4,7 +4,7 @@ const Index = () => {
         return (
             <div>
                 <h3>Welcome to</h3>
-                <img src={withdriveLogo} height="45"></img>
+                <img src={withdriveLogo} height="40"></img>
                 <br></br><br></br>
             </div>
         );

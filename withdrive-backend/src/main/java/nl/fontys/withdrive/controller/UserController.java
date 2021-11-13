@@ -61,12 +61,12 @@ public class UserController {
         return new ResponseEntity(users.size(),HttpStatus.FOUND);
     }
 
-    @PostMapping()
+    @PostMapping("/register")
     public ResponseEntity<UserDTO> CreateUser(@RequestBody UserDTO user) {
 //        if(user.getUserID() == null){
 //            user.setUserID(UUID.randomUUID());
 //        }
-        System.out.println(user.getUserID());
+        System.out.println(user.getFirstName());
         if (!this.users.Add(user)){
             String entity =  "Student with student number " + user.getUserID() + " already exists.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);

@@ -14,8 +14,10 @@ const SignIn = () => {
             .then((responseData) => {
                 console.log(JSON.stringify(responseData));
                 localStorage.setItem("user", JSON.stringify(responseData));
-                History.push("/");
+                History.push("/view-trips");
                 window.location.reload();
+                this.email.value = "";
+                this.password.value = "";
             }).catch(err=>{setMsg("Error");})
         }
 

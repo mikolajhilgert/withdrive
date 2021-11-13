@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +26,10 @@ public class JPAUserData implements IUserData {
 
     @Override
     public void Create(User user) {
+        Role role = this.roles.findByName("ROLE_USER");
+        Collection<Role> temp = new ArrayList<>();
+        temp.add(role);
+        user.setRoles(temp);
         db.save(user);
     }
 

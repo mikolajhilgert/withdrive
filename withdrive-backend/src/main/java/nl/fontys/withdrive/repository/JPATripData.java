@@ -1,6 +1,7 @@
 package nl.fontys.withdrive.repository;
 
 import nl.fontys.withdrive.entity.Trip;
+import nl.fontys.withdrive.enumeration.TripStatus;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.jpa.IJPATripData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,10 @@ public class JPATripData implements ITripData {
     @Override
     public void Delete(UUID number) {
         db.deleteById(number);
+    }
+
+    @Override
+    public List<Trip> retrieveActiveTrips() {
+        return db.getTripsByStatus(TripStatus.AWAITING);
     }
 }

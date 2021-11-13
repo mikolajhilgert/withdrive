@@ -38,6 +38,11 @@ public class TripManager implements ITripManager {
     }
 
     @Override
+    public List<TripResponseDTO> retrieveActiveTrips() {
+        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTrips());
+    }
+
+    @Override
     public TripResponseDTO RetrieveByNumber(UUID number) {
         List<Trip> temp = new ArrayList<>();
         temp.add(saved.RetrieveByNumber(number));

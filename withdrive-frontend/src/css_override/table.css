@@ -21,7 +21,7 @@
 
 /*responsive*/
 
-@media(max-width: 500px){
+@media(max-width: 675px){
 	.table thead{
 		display: none;
 	}

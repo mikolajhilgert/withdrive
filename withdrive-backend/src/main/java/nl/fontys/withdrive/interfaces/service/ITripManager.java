@@ -12,6 +12,8 @@ public interface ITripManager {
 
     List<TripResponseDTO> RetrieveAll();
 
+    List<TripResponseDTO> retrieveActiveTrips();
+
     TripResponseDTO RetrieveByNumber(UUID number);
 
     boolean Update(TripRequestDTO trip);

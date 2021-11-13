@@ -25,8 +25,16 @@ public class TripController {
         this.trips = trips;
     }
 
-    @GetMapping
-    public ResponseEntity<List<TripResponseDTO>> GetAllClients(){
+    @GetMapping()
+    public ResponseEntity<List<TripResponseDTO>> getActiveTrips(){
+        List<TripResponseDTO> list = this.trips.retrieveActiveTrips();
+        if(list.size()>0)
+            return ResponseEntity.ok().body(list);
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<TripResponseDTO>> getAllTrips(){
         List<TripResponseDTO> list = this.trips.RetrieveAll();
         if(list.size()>0)
             return ResponseEntity.ok().body(list);

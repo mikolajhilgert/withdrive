@@ -1,8 +1,18 @@
 import { Navbar, Nav, Container,Button } from 'react-bootstrap';
 import withdriveLogoSmall from "../images/withdrive-w.png";
+import AuthService from "../services/AuthService";
+import { useState } from 'react';
+
+
 
 
 const Navigation = () =>{
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+const login = (userData) => {
+    const response = AuthService.getCurrentUser()
+ if(response === true)
+    setIsLoggedIn(response)
+   }
     return(
         <>
             <Navbar collapseOnSelect fixed="top" expand="sm" bg="light" variant="light">
@@ -10,6 +20,7 @@ const Navigation = () =>{
                     <Navbar.Toggle aria-controls='responsive-navbar-nav' /> 
                         <Navbar.Collapse id='responsive-navbar-nav'>
                             <Nav>
+                                {/* {isLoggedIn}<Nav.Link href='/'>withdrive</Nav.Link> */}
                                 <Navbar.Brand href="/">
                                     <img src={withdriveLogoSmall} width="30" height="30" className="d-inline-block align-top"></img>
                                 </Navbar.Brand>

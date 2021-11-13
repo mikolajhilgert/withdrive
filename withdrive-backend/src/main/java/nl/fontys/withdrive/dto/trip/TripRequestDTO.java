@@ -16,6 +16,7 @@ public class TripRequestDTO {
     private @Getter @Setter String origin;
     private @Getter @Setter String destination;
     private @Getter @Setter String description;
+    private @Getter @Setter String date;
     private @Getter @Setter UUID driver;
     private @Getter @Setter List<UUID> passengers;
     private @Getter @Setter TripStatus status = TripStatus.AWAITING;

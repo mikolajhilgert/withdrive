@@ -24,6 +24,7 @@ public class Trip{
     private @Getter @Setter String origin;
     private @Getter @Setter String destination;
     private @Getter @Setter String description;
+    private @Getter @Setter String date;
 
     @Enumerated(EnumType.STRING)
     private @Getter @Setter TripStatus status;

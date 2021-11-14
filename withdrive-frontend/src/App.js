@@ -10,6 +10,7 @@ import ViewTrips from "./pages/viewtrips";
 import ApiTest from "./pages/apitest";
 import NotFound from "./pages/notfound";
 import Nav from "./components/nav.component";
+import SignOut from "./pages/signout";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
                 <Route path="/sign-in" component={Login} />
                 <Route path="/sign-up" component={SignUp} />
                 <Route path="/view-trips" component={ViewTrips} />
-                <Route path="/api-test" component={ApiTest} />
+                <Route path="/sign-out" component={SignOut} />
                 <Route component={NotFound}/>
               </Switch>
             </div>

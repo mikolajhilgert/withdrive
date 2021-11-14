@@ -1,37 +1,50 @@
-import { Navbar, Nav, Container,Button } from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import withdriveLogoSmall from "../images/withdrive-w.png";
 import AuthService from "../services/AuthService";
-import { useState } from 'react';
+import { Fragment } from 'react';
 
+var isLoggedIn = false;
 
-
+if(AuthService.getCurrentUser() !== null){
+    isLoggedIn = true;
+}
 
 const Navigation = () =>{
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-const login = (userData) => {
-    const response = AuthService.getCurrentUser()
- if(response === true)
-    setIsLoggedIn(response)
-   }
+    let menu = '';
+
+    if(isLoggedIn === false){
+        menu = (
+            <Fragment>
+
+            <Nav.Link href='/view-trips'>View Rides</Nav.Link>
+            <Nav.Link href='/sign-in'>Login</Nav.Link>
+            <Nav.Link href='/sign-up'>Sign Up</Nav.Link>
+            </Fragment>
+        )
+    }else{
+        menu = (
+            <Fragment>
+            <Nav.Link href='/view-trips'>View Rides</Nav.Link>
+            <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
+            </Fragment>
+        )
+    }
+
     return(
         <>
             <Navbar collapseOnSelect fixed="top" expand="sm" bg="light" variant="light">
                 <Container>
                     <Navbar.Toggle aria-controls='responsive-navbar-nav' /> 
                         <Navbar.Collapse id='responsive-navbar-nav'>
-                            <Nav>
-                                {/* {isLoggedIn}<Nav.Link href='/'>withdrive</Nav.Link> */}
+                        <Nav
+                        className="me-auto my-2 my-lg-0"
+                        >
                                 <Navbar.Brand href="/">
-                                    <img src={withdriveLogoSmall} width="30" height="30" className="d-inline-block align-top"></img>
+                                    {/* <img src={withdriveLogoSmall} width="5" height="5" className="d-inline-block align-top"></img> */}
+                                    <Nav.Link href='/'>withdrive</Nav.Link>
                                 </Navbar.Brand>
-                                <Nav.Link href='/'>withdrive</Nav.Link>
-                                <Nav.Link href='/sign-in'>Login</Nav.Link>
-                                <Nav.Link href='/sign-up'>Sign Up</Nav.Link>
-                                {/* <Nav.Link href='/api-test'>Api Test</Nav.Link> */}
-                                <Nav.Link href='/view-trips'>View Rides</Nav.Link>
-                                {/* <Nav.Link href='/view-trips'><Button size="sm">Publish trip</Button></Nav.Link> */}
-                            </Nav>
-                            
+                        </Nav>
+                            <Nav>{menu}</Nav>
                     </Navbar.Collapse>  
                 </Container>
             </Navbar>

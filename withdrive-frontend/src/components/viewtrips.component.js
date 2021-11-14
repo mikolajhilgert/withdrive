@@ -17,8 +17,11 @@ function UserList(){
         });
     }    
 
+
+
     function buildTable(){
         var table = document.getElementById('content');
+        getAvailableTrips();
         for(var i = 0; i < trips.length; i++){
             var row = `
                 <tr>

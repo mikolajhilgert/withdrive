@@ -27,20 +27,20 @@ const SignIn = () => {
 
                 <div className="form-group">
                     <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" ref={email}/>
+                    <input type="email" className="form-control" placeholder="Enter email" ref={email} required/>
                 </div>
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" ref={password}/>
+                    <input type="password" className="form-control" placeholder="Enter password" ref={password} required/>
                 </div>
 
-                <div className="form-group">
+                {/* <div className="form-group">
                     <div className="custom-control custom-checkbox">
                         <input type="checkbox" className="custom-control-input" id="customCheck1" />
                         <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
                     </div>
-                </div>
+                </div> */}
                 
                 <br></br>
                 <button type="submit" className="btn btn-primary btn-block">Submit</button>

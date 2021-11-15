@@ -1,0 +1,18 @@
+/* .auth-inner {
+    width: 50%;
+} */
+
+.form-group{
+    width: 80%;
+    margin: auto;
+}
+
+@media(max-width: 675px){
+    .auth-inner {
+        width: 80%;
+    }
+
+    .form-group{
+        width: 100%;
+    }
+}

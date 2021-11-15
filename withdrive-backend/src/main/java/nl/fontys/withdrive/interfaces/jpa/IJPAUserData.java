@@ -12,6 +12,9 @@ public interface IJPAUserData extends JpaRepository<User, UUID> {
 
     User getUserByEmail(String email);
 
+    @Query(value = "select count(*) from users where email = ?1",nativeQuery = true)
+    int countUsersByEmail(String email);
+
     @Query(value = "SELECT users.* FROM users LEFT JOIN applications on users.id = applications.userid WHERE applications.tripID = ?1 AND applications.status = 'ACCEPTED'",nativeQuery = true)
     List<User> getPassengerUserByTripID(String id);
 

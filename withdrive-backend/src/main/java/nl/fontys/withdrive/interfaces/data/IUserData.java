@@ -26,4 +26,6 @@ public interface IUserData {
     List<User> RetrieveUsersByTripID(UUID trip);
 
     List<User> GetDrivers();
+
+    boolean existsByEmail(String email);
 }

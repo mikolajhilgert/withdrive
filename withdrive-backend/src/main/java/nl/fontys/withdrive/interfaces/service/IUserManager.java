@@ -23,4 +23,6 @@ public interface IUserManager {
     Role saveRole(Role role);
 
     void addRoleToUser(String email, String roleName);
+
+    boolean existsByEmail(String email);
 }

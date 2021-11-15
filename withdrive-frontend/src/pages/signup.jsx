@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css'
 import { useHistory } from "react-router";
 import AuthService from "../services/AuthService";
-import 'react-datepicker/dist/react-datepicker.css'
+
     const SignUp = () => {
         const [startDate, setStartDate] = useState(new Date());
 
@@ -17,18 +18,21 @@ import 'react-datepicker/dist/react-datepicker.css'
         const gender = React.useRef();
         const phonenum = React.useRef();
         const password = React.useRef();
+        const passwordCheck = React.useRef();
         const handleRegistration = e => {
             e.preventDefault();
-            console.log(email.current.value,firstname.current.value,lastname.current.value,useDate.toISOString().split('T')[0],gender.current.value,phonenum.current.value,password.current.value);
-            AuthService.register(email.current.value,firstname.current.value,lastname.current.value,useDate.toISOString().split('T')[0],gender.current.value,phonenum.current.value,password.current.value).then((response) => response.json())
-            .then((responseData) => {
-                console.log(JSON.stringify(responseData));
-                localStorage.setItem("user", JSON.stringify(responseData));
-                History.push("/");
-                window.location.reload();
-            }).catch(err=>{setMsg("Error");})
-            History.push("/sign-in");
-            window.location.reload();
+            if(password.current.value === passwordCheck.current.value){
+                //console.log(email.current.value,firstname.current.value,lastname.current.value,useDate.toISOString().split('T')[0],gender.current.value,phonenum.current.value,password.current.value);
+                AuthService.register(email.current.value,firstname.current.value,lastname.current.value,useDate.toISOString().split('T')[0],gender.current.value,phonenum.current.value,password.current.value)
+                .then(() => {
+                    console.log("move");
+                    History.push("/sign-in");
+                    window.location.reload();
+                    }).catch(err=>{setMsg("This email already exists. Perhaps login?");})
+
+            }else{
+                setMsg("Error: Passwords do not match");
+            }
         }
 
 
@@ -76,11 +80,18 @@ import 'react-datepicker/dist/react-datepicker.css'
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" required ref={password}/>
+                    <input type="password" className="form-control" placeholder="Enter password" required ref={password} maxLength="4" maxLength="14"/>
+                </div>
+                
+                <div className="form-group">
+                    <label>Repeat Password</label>
+                    <input type="password" className="form-control" placeholder="Enter password" required ref={passwordCheck} maxLength="4" maxLength="14"/>
                 </div>
                 <br></br>
                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
+                <h3>{msg}</h3>
             </form>
+            
         );
     }
 

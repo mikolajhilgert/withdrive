@@ -18,7 +18,6 @@ import axios from 'axios';
     }
 
     register(email,firstName,lastName,dateOfBirth,gender,phoneNumber,password){
-        // console.log(first_name);
         return axios.post(API_URL + "register", {
             email,
             firstName,

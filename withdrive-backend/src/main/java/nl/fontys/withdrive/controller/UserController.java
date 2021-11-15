@@ -63,14 +63,11 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> CreateUser(@RequestBody UserDTO user) {
-//        if(user.getUserID() == null){
-//            user.setUserID(UUID.randomUUID());
-//        }
-        System.out.println(user.getFirstName());
-        if (!this.users.Add(user)){
-            String entity =  "Student with student number " + user.getUserID() + " already exists.";
+        if (users.existsByEmail(user.getEmail())){
+            String entity =  "An user with the email:" + user.getEmail() + " already exists.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);
         } else {
+            users.Add(user);
             String url = "user" + "/" + user.getUserID(); // url of the created student
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);

@@ -11,6 +11,7 @@ import ApiTest from "./pages/apitest";
 import NotFound from "./pages/notfound";
 import Nav from "./components/nav.component";
 import SignOut from "./pages/signout";
+import CreateTrip from "./pages/createtrip";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/sign-in" component={Login} />
                 <Route path="/sign-up" component={SignUp} />
                 <Route path="/view-trips" component={ViewTrips} />
+                <Route path="/create-trip" component={CreateTrip} />
                 <Route path="/sign-out" component={SignOut} />
                 <Route component={NotFound}/>
               </Switch>

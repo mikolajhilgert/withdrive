@@ -15,8 +15,6 @@ const Navigation = () =>{
     if(isLoggedIn === false){
         menu = (
             <Fragment>
-
-            <Nav.Link href='/view-trips'>View Rides</Nav.Link>
             <Nav.Link href='/sign-in'>Login</Nav.Link>
             <Nav.Link href='/sign-up'>Sign Up</Nav.Link>
             </Fragment>
@@ -24,7 +22,7 @@ const Navigation = () =>{
     }else{
         menu = (
             <Fragment>
-            <Nav.Link href='/view-trips'>View Rides</Nav.Link>
+                <Nav.Link href='/create-trip'>Create Ride</Nav.Link>
             <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )
@@ -36,15 +34,16 @@ const Navigation = () =>{
                 <Container>
                     <Navbar.Toggle aria-controls='responsive-navbar-nav' /> 
                         <Navbar.Collapse id='responsive-navbar-nav'>
-                        <Nav
-                        className="me-auto my-2 my-lg-0"
-                        >
-                                <Navbar.Brand href="/">
-                                    {/* <img src={withdriveLogoSmall} width="5" height="5" className="d-inline-block align-top"></img> */}
-                                    <Nav.Link href='/'>withdrive</Nav.Link>
+                        <Nav className="me-auto my-2 my-lg-0">
+                                <Navbar.Brand href='/'>
+                                    <img src={withdriveLogoSmall} width="33" height="33" className="d-inline-block align-top"></img>
                                 </Navbar.Brand>
+                                <Nav.Link href='/'>withdrive</Nav.Link>
+                                <Nav.Link href='/view-trips'>View Rides</Nav.Link>
                         </Nav>
-                            <Nav>{menu}</Nav>
+                        <Nav>
+                            {menu}
+                        </Nav>
                     </Navbar.Collapse>  
                 </Container>
             </Navbar>

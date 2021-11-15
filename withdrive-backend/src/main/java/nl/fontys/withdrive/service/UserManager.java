@@ -93,5 +93,10 @@ public class UserManager implements IUserManager, UserDetailsService {
         saved.addRoleToUser(email,roleName);
     }
 
+    @Override
+    public boolean existsByEmail(String email) {
+        return saved.existsByEmail(email);
+    }
+
 
 }

@@ -87,4 +87,12 @@ public class JPAUserData implements IUserData {
     public List<User> GetDrivers() {
         return db.getDrivers();
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        if(db.countUsersByEmail(email) == 0){
+            return false;
+        }
+        return  true;
+    }
 }

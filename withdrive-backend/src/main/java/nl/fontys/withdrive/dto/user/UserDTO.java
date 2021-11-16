@@ -18,9 +18,13 @@ public class UserDTO {
     private @Getter @Setter UUID userID = UUID.randomUUID();
     private @Getter @Setter String email;
     private @Getter @Setter String firstName;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private @Getter @Setter String lastName;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private @Getter @Setter String dateOfBirth;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private @Getter @Setter String gender;
+
     private @Getter @Setter String phoneNumber;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private @Getter @Setter String password;

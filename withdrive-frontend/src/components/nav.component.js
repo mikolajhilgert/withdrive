@@ -23,7 +23,8 @@ const Navigation = () =>{
         menu = (
             <Fragment>
                 <Nav.Link href='/create-trip'>Create Ride</Nav.Link>
-            <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
+                <Nav.Link href='/my-trips'>My Rides</Nav.Link>
+                <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )
     }

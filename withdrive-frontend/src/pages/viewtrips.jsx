@@ -4,7 +4,11 @@ import TripTable from "../components/viewtrips.component"
 
 const Index = () => {
         return (
-            <TripTable></TripTable>
+        <div className="auth-wrapper">  
+            <div className="auth-inner">
+                <TripTable></TripTable>
+            </div>
+        </div>
         );
     }
 export default Index;

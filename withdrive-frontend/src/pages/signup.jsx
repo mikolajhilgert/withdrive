@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
 import { useHistory } from "react-router";
 import AuthService from "../services/AuthService";
+import moment from 'moment';
 
     const SignUp = () => {
         const [startDate, setStartDate] = useState(new Date());
@@ -19,11 +20,12 @@ import AuthService from "../services/AuthService";
         const phonenum = React.useRef();
         const password = React.useRef();
         const passwordCheck = React.useRef();
+
         const handleRegistration = e => {
             e.preventDefault();
             if(password.current.value === passwordCheck.current.value){
                 //console.log(email.current.value,firstname.current.value,lastname.current.value,useDate.toISOString().split('T')[0],gender.current.value,phonenum.current.value,password.current.value);
-                AuthService.register(email.current.value,firstname.current.value,lastname.current.value,useDate.toISOString().split('T')[0],gender.current.value,phonenum.current.value,password.current.value)
+                AuthService.register(email.current.value,firstname.current.value,lastname.current.value,moment(startDate).format("DD-MM-YYYY"),gender.current.value,phonenum.current.value,password.current.value)
                 .then(() => {
                     console.log("move");
                     History.push("/sign-in");
@@ -39,6 +41,8 @@ import AuthService from "../services/AuthService";
 
 
         return (
+        <div className="auth-wrapper">  
+            <div className="auth-inner">
             <form onSubmit={handleRegistration}>
                 <h3>Sign Up</h3>
 
@@ -91,7 +95,8 @@ import AuthService from "../services/AuthService";
                 <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                 <h3>{msg}</h3>
             </form>
-            
+            </div>
+        </div>
         );
     }
 

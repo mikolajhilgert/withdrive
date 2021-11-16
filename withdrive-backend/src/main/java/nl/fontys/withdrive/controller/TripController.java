@@ -3,10 +3,14 @@ package nl.fontys.withdrive.controller;
 import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
+import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.service.ITripManager;
+import nl.fontys.withdrive.interfaces.service.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -19,10 +23,12 @@ import java.util.UUID;
 @RequestMapping("/trip")
 public class TripController {
     private final ITripManager trips;
+    private final IUserManager users;
 
     @Autowired
-    public TripController(ITripManager trips){
+    public TripController(ITripManager trips, IUserManager users){
         this.trips = trips;
+        this.users= users;
     }
 
     @GetMapping()
@@ -53,9 +59,9 @@ public class TripController {
 
     @PostMapping()
     public ResponseEntity<TripRequestDTO> CreateTrip(@RequestBody TripRequestDTO trip) {
-//        if(trip.getTripID() == null){
-//            trip.setTripID(UUID.randomUUID());
-//        }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDTO loggedInUser = this.users.retrieveByEmail(authentication.getName());
+        trip.setDriver(loggedInUser.getUserID());
         if (!this.trips.Add(trip)){
             String entity =  "Trip with TripID " + trip.getTripID() + " already exists, or you tried to apply to your own trip.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);

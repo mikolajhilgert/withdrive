@@ -10,18 +10,22 @@ const SignIn = () => {
         const password = React.useRef();
         const handleLogin = e =>{
             e.preventDefault();
-            AuthService.login(email.current.value,password.current.value).then((response) => response.json())
-            .then((responseData) => {
-                console.log(JSON.stringify(responseData));
-                localStorage.setItem("user", JSON.stringify(responseData));
-                History.push("/view-trips");
-                window.location.reload();
-                this.email.value = "";
-                this.password.value = "";
-            }).catch(err=>{setMsg("Error");})
+            AuthService.login(email.current.value,password.current.value)
+                .then((response) => response.json())
+                .then((responseData) => {
+                    console.log(JSON.stringify(responseData));
+                    localStorage.setItem("user", JSON.stringify(responseData));
+                    History.push("/view-trips");
+                    window.location.reload();
+                    this.email.value = "";
+                    this.password.value = "";
+                })
+                .catch(err=>{setMsg("Error");})
         }
 
         return (
+        <div className="auth-wrapper">  
+            <div className="auth-inner">
             <form onSubmit={handleLogin}>
                 <h3>Sign In</h3>
 
@@ -34,13 +38,6 @@ const SignIn = () => {
                     <label>Password</label>
                     <input type="password" className="form-control" placeholder="Enter password" ref={password} required/>
                 </div>
-
-                {/* <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
-                </div> */}
                 
                 <br></br>
                 <button type="submit" className="btn btn-primary btn-block">Submit</button>
@@ -49,6 +46,8 @@ const SignIn = () => {
                 </p>
                 <h1>{msg}</h1>
             </form>
+            </div>
+        </div>
         );
     }
 export default SignIn;

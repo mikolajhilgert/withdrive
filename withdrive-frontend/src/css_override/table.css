@@ -11,8 +11,8 @@
 }
 
 .table th{
-	background-color: darkblue;
-	color:#ffffff;
+	background-color: rgb(204, 204, 255);
+	color:#000000;
 }
 
 .table tbody tr:nth-child(even){

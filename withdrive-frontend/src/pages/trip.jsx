@@ -54,7 +54,7 @@ return (
                     
                     {/* <div>A trip with <text dangerouslySetInnerHTML={{__html: tripDetails.date}}></text></div> */}
                     <h4>Trip map:</h4>
-                    <Map/>    
+                    <Map trip={trip} />    
         </div>
     </div>
 </>

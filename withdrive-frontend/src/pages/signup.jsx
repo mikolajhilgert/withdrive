@@ -27,7 +27,6 @@ import moment from 'moment';
                 //console.log(email.current.value,firstname.current.value,lastname.current.value,useDate.toISOString().split('T')[0],gender.current.value,phonenum.current.value,password.current.value);
                 AuthService.register(email.current.value,firstname.current.value,lastname.current.value,moment(startDate).format("DD-MM-YYYY"),gender.current.value,phonenum.current.value,password.current.value)
                 .then(() => {
-                    console.log("move");
                     History.push("/sign-in");
                     window.location.reload();
                     }).catch(err=>{setMsg("This email already exists. Perhaps login?");})

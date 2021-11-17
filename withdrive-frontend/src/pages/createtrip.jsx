@@ -1,4 +1,5 @@
-import React, { useState,useHistory } from 'react';
+import React, { useState } from 'react';
+import { useHistory } from "react-router";
 import cities from '../data/nl.json'
 import Select,{createFilter} from 'react-select';
 import '../css_override/largerForm.css';
@@ -9,12 +10,14 @@ import TripService from '../services/TripService';
 import CustomOption from '../components/selectFix.component';
 
 const CreateTrip = () => {
+const History =  useHistory();
 const [origin, setOrigin] = useState("");
 const [destination, setDestination] = useState("");
 const [startDate, setStartDate] = useState(new Date());
 
 const [msg, setMsg] = React.useState(null);
-// const History = useHistory();
+
+
 const plate = React.useRef();
 const details = React.useRef();
 const price = React.useRef();
@@ -27,19 +30,15 @@ const handleRegistration = e => {
             origin: origin.city,
             destination: destination.city,
             description: details.current.value,
-            date: moment(startDate).format('DD-MM-YYYY HH:mm'),
+            date: moment(startDate).format('YYYY-MM-DDTHH:mm'),
             licensePlate: plate.current.value,
             maxPassengers: max.current.value,
             pricePerPassenger: price.current.value,
         };
-        console.log(trip);
-        
-        TripService.postTrip(trip)
-        .then(() => {
-            // console.log("move");
-            // History.push("/sign-in");
-            window.location.reload();
-            }).catch(err=>{setMsg("Error");})
+        TripService.postTrip(trip);
+        alert("Your trip listing has been posted!");
+        History.push("/view-trips");
+        window.location.reload();
 
     }else{
         setMsg("Error: Details missing");

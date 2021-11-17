@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TripService from "../services/TripService";
 import '../css_override/table.css';
+import moment from 'moment';
 
 function UserList(){
     const [trips,setTrips] = useState([]);
@@ -23,7 +24,7 @@ function UserList(){
                 <tr>
                 <td data-label="Origin">${trips[i].origin}</td>
                 <td data-label="Destination">${trips[i].destination}</td>
-                <td data-label="Date">${trips[i].date}</td>
+                <td data-label="Date">${moment(trips[i].date).format('MMM. D, YYYY [at] h:mm A z')}</td>
                 <td data-label="Price">€${trips[i].pricePerPassenger} /pp</td>
                 <td data-label="Staus"><a href="trip/view/${trips[i].tripID}"><div><Button size="sm" >View More</Button></div></a></td>
                 </tr>

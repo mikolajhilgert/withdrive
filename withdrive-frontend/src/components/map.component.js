@@ -6,29 +6,27 @@ import markerend from "../images/marker_end.png";
 import "leaflet/dist/leaflet.css";
 import osm from "../data/maptiler";
 import places from "../data/nl.json"
-
-let center;
+import ChangeView from "./changeView.component"
 
 const markerEnd = new L.Icon({
     iconUrl: markerend,
     iconSize: [40, 40],
-    iconAnchor: [20, 38], //[left/right, top/bottom]
-    popupAnchor: [0, -0], //[left/right, top/bottom]
+    iconAnchor: [20, 38], 
+    popupAnchor: [0, -0], 
     });
     
     const markerStart = new L.Icon({
     iconUrl: markerstart,
     iconSize: [40, 40],
     
-    iconAnchor: [17, 20], //[left/right, top/bottom]
-    popupAnchor: [0, -20], //[left/right, top/bottom]
+    iconAnchor: [17, 20],
+    popupAnchor: [0, -20],
 });
+
 
 const Map = (props) =>{
     let startCoordinate = [0,0];
     let endCoordinate = [0,0];
-
-    const ZOOM_LEVEL = 7;
 
     places.map(result=>(result)).forEach(function(element) {
         if (element.city === props.trip.origin) {
@@ -39,22 +37,11 @@ const Map = (props) =>{
         }
     });
 
+    const center = {lat: (parseFloat(startCoordinate[0])+parseFloat(endCoordinate[0]))/2, lng: (parseFloat(startCoordinate[1])+parseFloat(endCoordinate[1]))/2};
 
-
-
-    // 
-    //const [center, setCenter] = useState({ lat: ((parseFloat(startCoordinate[0])+parseFloat(endCoordinate[0]))/2),lng: ((parseFloat(startCoordinate[1])+parseFloat(endCoordinate[1]))/2) });
-
-    // useEffect(() => {
-    //     center= { lat: ((parseFloat(startCoordinate[0])+parseFloat(endCoordinate[0]))/2),lng: ((parseFloat(startCoordinate[1])+parseFloat(endCoordinate[1]))/2) };
-    //   }, []);
-
-// const [center, setCenter] = useState({ lat: startCoordinate[0]-(startCoordinate[0]-endCoordinate[0]), lng: startCoordinate[1]-(startCoordinate[1]-endCoordinate[1]) });
-
-
-console.log(center);
     return(
-    <MapContainer className="form-control" center={{lat: 52.04309089702452, lng: 4.924968925921649}} zoom={ZOOM_LEVEL}>
+    <MapContainer className="form-control" center={{lat: 52.35498373438076, lng: 5.247254814000781}} zoom={7} maxZoom={11} minZoom={7}>
+        <ChangeView center={center} zoom={8} /> 
         <TileLayer url={osm.maptiler.url} attribution={osm.maptiler.attribution} />
         <Marker position={startCoordinate} icon={markerStart}>
             <Popup>{props.trip.origin}</Popup>
@@ -62,9 +49,7 @@ console.log(center);
         <Marker position={endCoordinate} icon={markerEnd}>
             <Popup>{props.trip.destination}</Popup>
         </Marker>
-        <Polyline positions={[    startCoordinate,
-    endCoordinate,]}></Polyline>
-        {/* pathOptions={{color:"lime"}} */}
+        <Polyline positions={[startCoordinate,endCoordinate,]}></Polyline>
     </MapContainer>
     )
 

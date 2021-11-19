@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import nl.fontys.withdrive.dto.RoleToUserForm;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Role;
 import nl.fontys.withdrive.interfaces.service.IUserManager;
@@ -142,11 +143,5 @@ public class UserController {
         }else{
             throw new RuntimeException("Refresh token not found");
         }
-    }
-
-    @Data
-    class RoleToUserForm{
-        private String email;
-        private String roleName;
     }
 }

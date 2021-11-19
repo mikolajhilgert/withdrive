@@ -8,15 +8,17 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import TripService from '../services/TripService';
 import CustomOption from '../components/selectFix.component';
+import IsAuthenticated from '../components/accessCheck.component';
+import AuthService from '../services/AuthService';
 
 const CreateTrip = () => {
+IsAuthenticated(AuthService.getCurrentUser());
 const History =  useHistory();
 const [origin, setOrigin] = useState("");
 const [destination, setDestination] = useState("");
 const [startDate, setStartDate] = useState(new Date());
 
 const [msg, setMsg] = React.useState(null);
-
 
 const plate = React.useRef();
 const details = React.useRef();
@@ -98,20 +100,12 @@ return (
                 <label>Max passengers:</label>
                 <input className="form-control" type="number" min="1" max="8" step="1" defaultValue="1" required ref={max}/>
             </div>
-            <br></br><br></br>
+            <br></br>
             <button type="submit" className="btn btn-primary btn-block form-control">Create trip</button>
             <h3>{msg}</h3>
         </form>
-
     </div>
 </div>
-
-
-/* <select>
-    <option selected disabled="true">--- Origin Selector ---</option>
-    {cities.map(result=>(<option text={result.city}></option>))}
-
-</select> */
 );
 }
 export default CreateTrip;

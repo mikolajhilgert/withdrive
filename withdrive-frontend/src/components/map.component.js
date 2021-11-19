@@ -40,7 +40,7 @@ const Map = (props) =>{
     const center = {lat: (parseFloat(startCoordinate[0])+parseFloat(endCoordinate[0]))/2, lng: (parseFloat(startCoordinate[1])+parseFloat(endCoordinate[1]))/2};
 
     return(
-    <MapContainer className="form-control" center={{lat: 52.35498373438076, lng: 5.247254814000781}} zoom={7} maxZoom={11} minZoom={7}>
+    <MapContainer className="form-control" center={{lat: 52.35498373438076, lng: 5.247254814000781}} zoom={8} maxZoom={11} minZoom={6}>
         <ChangeView center={center} zoom={8} /> 
         <TileLayer url={osm.maptiler.url} attribution={osm.maptiler.attribution} />
         <Marker position={startCoordinate} icon={markerStart}>

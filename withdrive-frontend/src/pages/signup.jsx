@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { useHistory } from "react-router";
 import AuthService from "../services/AuthService";
 import moment from 'moment';
+import VpnKey from '@material-ui/icons/VpnKey';
 
     const SignUp = () => {
         const [startDate, setStartDate] = useState(new Date());
@@ -43,7 +44,9 @@ import moment from 'moment';
         <div className="auth-wrapper">  
             <div className="auth-inner">
             <form onSubmit={handleRegistration}>
-                <h3>Sign Up</h3>
+            <center><VpnKey/></center>
+                <center><h3>Sign Up</h3></center>
+                <h4>                </h4>
 
                 <div className="form-group">
                     <label>First name</label>
@@ -89,9 +92,10 @@ import moment from 'moment';
                 <div className="form-group">
                     <label>Repeat Password</label>
                     <input type="password" className="form-control" placeholder="Enter password" required ref={passwordCheck} maxLength="4" maxLength="14"/>
+                    <br></br>
+                    <right><button type="submit" className="btn btn-primary btn-block">Sign Up</button></right>
                 </div>
                 <br></br>
-                <button type="submit" className="btn btn-primary btn-block">Sign Up</button>
                 <h3>{msg}</h3>
             </form>
             </div>

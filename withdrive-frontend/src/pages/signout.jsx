@@ -4,12 +4,12 @@ import AuthService from '../services/AuthService'
 
 const LogOut = () => {
     const History = useHistory();
-    alert("You will now be logged out!");
+    alert("You are now logged out!");
     AuthService.logout();
     History.push("/");
     window.location.reload();
     return(
-        <div>Redirecting you to the index page..</div>
+        <div></div>
     );
 
 }

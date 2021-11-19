@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { useHistory } from "react-router";
 import AuthService from "../services/AuthService";
-import { useEffect } from "react";
+import LockOutlinedIcon from '@material-ui/icons/LockOpen';
 
 const SignIn = () => {
         const [msg, setMsg] = React.useState(null);
@@ -27,8 +27,9 @@ const SignIn = () => {
         <div className="auth-wrapper">  
             <div className="auth-inner">
             <form onSubmit={handleLogin}>
-                <h3>Sign In</h3>
-
+                <center><LockOutlinedIcon/></center>
+                <h2><center>Sign In</center></h2>
+                <h4>              </h4>
                 <div className="form-group">
                     <label>Email address</label>
                     <input type="email" className="form-control" placeholder="Enter email" ref={email} required/>
@@ -40,7 +41,7 @@ const SignIn = () => {
                 </div>
                 
                 <br></br>
-                <button type="submit" className="btn btn-primary btn-block">Submit</button>
+                <div className="form-group"><button type="submit" className="btn btn-primary btn-block">Submit</button></div>
                 <p className="forgot-password text-right">
                     Forgot <a href="#">password?</a>
                 </p>

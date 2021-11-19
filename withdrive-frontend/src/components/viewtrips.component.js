@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import TripService from "../services/TripService";
 import '../css_override/table.css';
 import moment from 'moment';
+import DirectionsCar from '@material-ui/icons/DirectionsCar';
 
 function UserList(){
     const [trips,setTrips] = useState([]);
+
+    console.log(trips);
 
     useEffect(() => {
         getAvailableTrips()
@@ -38,6 +41,7 @@ function UserList(){
     return(
             <div>
                 <div>
+                <DirectionsCar/>
                 <h2>Upcoming trips:</h2>
                 <br></br>
                 </div>

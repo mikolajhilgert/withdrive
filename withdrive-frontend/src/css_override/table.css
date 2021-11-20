@@ -1,5 +1,5 @@
 .table{
-	width: 650px;
+	width: 700px;
 	border-collapse: collapse;
 }
 
@@ -33,12 +33,12 @@
 	.table tr{
 		margin-bottom:15px;
 	}
-	.table td{
+	/* .table td{
 		text-align: right;
 		padding-left: 50%;
 		text-align: right;
 		position: relative;
-	}
+	} */
 	.table td::before{
 		content: attr(data-label);
 		position: absolute;

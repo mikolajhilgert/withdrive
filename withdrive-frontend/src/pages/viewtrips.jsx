@@ -1,6 +1,5 @@
 import React from "react";
 import '../css_override/table.css';
-// import TripTable from "../components/viewtrips.component"
 import TripTable from "../components/alltrips.component"
 
 var selection = 'All';

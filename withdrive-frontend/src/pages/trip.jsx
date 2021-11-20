@@ -4,6 +4,7 @@ import Map from '../components/map.component'
 import moment from 'moment';
 import { Button } from "react-bootstrap";
 import NotFound from './notfound'
+import Rating from '@mui/material/Rating';
 
 let param = window.location.pathname;
 let id = param.split('/').pop();
@@ -18,6 +19,7 @@ const Trip = () => {
     }, [id])
 
     if(!trip) return <NotFound/>;
+
 return (
 <>
     <br></br>
@@ -38,12 +40,20 @@ return (
                             <td>{trip.description}</td>
                             </tr>
                             <tr>
-                            <td>Driver rating: ☆★★★★ <a href="reviews">Read reviews</a></td>
+                                <td>
+                                Driver rating:
+                                <br></br>
+                                <Rating name="read-only" value={3.45} precision={0.5} readOnly/>
+                                <br></br>
+                                <a href="reviews">Read reviews of the driver</a>
+                                </td>
+                            {/* <td>Driver rating: ☆★★★★ <a href="reviews">Read reviews</a></td> */}
                             </tr>
                         </tbody>
                     </table>
                     <h3><Button> Apply now!</Button></h3>
-                    <h4>Trip map:</h4>
+                    <br></br>
+                    {/* <h4>Map of the ride:</h4> */}
                     <Map trip={trip} />    
         </div>
     </div>

@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import Button from 'react-bootstrap/Button'
 import TripService from "../services/TripService";
 import moment from 'moment';
+import NotFound from '../pages/notfound';
 
 
 
@@ -49,8 +50,6 @@ export default function DataTable() {
         });
     }   
 
-    
-
     trips.map((trip) => {
         trip['id'] = trip.tripID
     })
@@ -63,12 +62,14 @@ export default function DataTable() {
         trip.maxPassengers = "0"+"/"+trip.maxPassengers
     })
 
+    if(!trips) return <NotFound/>;
+
   return (
     <div style={{ height: 650, width: 880 }}>
       <DataGrid
         // components={{
         // Toolbar: GridToolbar,
-        // }}
+        // }}        
         disableColumnFilter 
         density="comfortable"
         rows={trips}

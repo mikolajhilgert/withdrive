@@ -59,8 +59,7 @@ public class TripController {
 
     @PostMapping()
     public ResponseEntity<TripRequestDTO> CreateTrip(@RequestBody TripRequestDTO trip) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDTO loggedInUser = this.users.retrieveByEmail(authentication.getName());
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         trip.setDriver(loggedInUser.getUserID());
         if (!this.trips.Add(trip)){
             String entity =  "Trip with TripID " + trip.getTripID() + " already exists, or you tried to apply to your own trip.";
@@ -85,7 +84,7 @@ public class TripController {
     }
 
     @DeleteMapping("{tripNumber}")
-    public ResponseEntity<UserDTO> DeleteClient(@PathVariable UUID tripNumber) {
+    public ResponseEntity<?> DeleteTrip(@PathVariable UUID tripNumber) {
         if (this.trips.Delete(tripNumber)) {
             return ResponseEntity.noContent().build();
         } else {
@@ -93,5 +92,22 @@ public class TripController {
         }
     }
 
-
+    @GetMapping("/active")
+    public ResponseEntity<List<TripResponseDTO>> GetTripsByUser(){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<TripResponseDTO> trip = this.trips.retrieveTripsByUser(loggedInUser.getUserID());
+        if(trip!=null){
+            return ResponseEntity.ok().body(trip);
+        }
+        return new ResponseEntity("Please provide a valid number.", HttpStatus.NOT_FOUND);
+    }
+    @GetMapping("/active/driver")
+    public ResponseEntity<List<TripResponseDTO>> GetTripsByDriver() {
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<TripResponseDTO> trip = this.trips.retrieveTripsByDriver(loggedInUser.getUserID());
+        if(trip!=null){
+            return ResponseEntity.ok().body(trip);
+        }
+        return new ResponseEntity("Please provide a valid number.", HttpStatus.NOT_FOUND);
+    }
 }

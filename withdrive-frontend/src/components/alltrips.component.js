@@ -21,7 +21,7 @@ const columns = [
       return (
         <Button
           color="primary"
-          onClick={(event) => {
+          onClick={() => {
             handleClick(cellValues);
           }}
           >
@@ -52,24 +52,15 @@ export default function DataTable() {
 
     trips.map((trip) => {
         trip['id'] = trip.tripID
-    })
-
-    trips.map((trip) => {
         trip.date = moment(trip.date).format('MMM. D, YYYY [at] h:mm A z')
-    })
-
-    trips.map((trip) => {
         trip.maxPassengers = "0"+"/"+trip.maxPassengers
     })
 
     if(!trips) return <NotFound/>;
 
   return (
-    <div style={{ height: 650, width: 880 }}>
-      <DataGrid
-        // components={{
-        // Toolbar: GridToolbar,
-        // }}        
+    <div style={{ height: 650, width: 'flex' }}>
+      <DataGrid    
         disableColumnFilter 
         density="comfortable"
         rows={trips}

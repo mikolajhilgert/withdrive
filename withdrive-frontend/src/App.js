@@ -12,6 +12,9 @@ import NotFound from "./pages/notfound";
 import Nav from "./components/nav.component";
 import SignOut from "./pages/signout";
 import CreateTrip from "./pages/createtrip";
+import MyTrips from "./pages/mytrips";
+import DriverTrips from "./pages/drivertrips";
+import EditTrip from "./pages/editatrip";
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
           <Route path="/create-trip" component={CreateTrip} />
           <Route path="/sign-out" component={SignOut} />
           <Route path="/trip/view" component={ViewTrip} />
+          <Route path="/my-trips" component={MyTrips} />
+          <Route path="/driver-trips" component={DriverTrips} />
+          <Route path="/trip/edit" component={EditTrip} />
           <Route component={NotFound}/>
         </Switch>
       </Router>

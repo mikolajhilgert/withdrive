@@ -19,4 +19,7 @@ public interface ITripData {
 
     List<Trip> retrieveActiveTrips();
 
+    List<Trip> retrieveActiveTripsByUser(UUID id);
+
+    List<Trip> retrieveActiveTripsByDriver(UUID id);
 }

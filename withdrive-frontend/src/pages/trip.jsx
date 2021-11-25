@@ -6,8 +6,7 @@ import { Button } from "react-bootstrap";
 import NotFound from './notfound'
 import Rating from '@mui/material/Rating';
 
-let param = window.location.pathname;
-let id = param.split('/').pop();
+let id = window.location.pathname.split('/').pop();
 
 const Trip = () => {
     const [trip,setTrip] = useState(null);

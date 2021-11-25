@@ -43,6 +43,16 @@ public class TripManager implements ITripManager {
     }
 
     @Override
+    public List<TripResponseDTO> retrieveTripsByUser(UUID id) {
+        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTripsByUser(id));
+    }
+
+    @Override
+    public List<TripResponseDTO> retrieveTripsByDriver(UUID id) {
+        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTripsByDriver(id));
+    }
+
+    @Override
     public TripResponseDTO RetrieveByNumber(UUID number) {
         List<Trip> temp = new ArrayList<>();
         temp.add(saved.RetrieveByNumber(number));

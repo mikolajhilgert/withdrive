@@ -13,7 +13,6 @@ const SignIn = () => {
             AuthService.login(email.current.value,password.current.value)
                 .then((response) => response.json())
                 .then((responseData) => {
-                    console.log(JSON.stringify(responseData));
                     localStorage.setItem("user", JSON.stringify(responseData));
                     History.push("/view-trips");
                     window.location.reload();

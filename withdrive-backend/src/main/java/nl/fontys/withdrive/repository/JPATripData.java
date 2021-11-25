@@ -53,4 +53,14 @@ public class JPATripData implements ITripData {
     public List<Trip> retrieveActiveTrips() {
         return db.getTripsByStatus(TripStatus.AWAITING);
     }
+
+    @Override
+    public List<Trip> retrieveActiveTripsByUser(UUID id) {
+        return db.getActiveTripsByUser(id.toString());
+    }
+
+    @Override
+    public List<Trip> retrieveActiveTripsByDriver(UUID id) {
+        return db.getActiveTripsByDriver(id.toString());
+    }
 }

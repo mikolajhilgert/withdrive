@@ -11,10 +11,11 @@ import CustomOption from '../components/selectFix.component';
 import IsAuthenticated from '../components/accessCheck.component';
 import AuthService from '../services/AuthService';
 import NotFound from '../pages/notfound'
+import BackButton from '../components/backButton.component'
 
 let id = window.location.pathname.split('/').pop();
 
-const CreateTrip = () => {
+const EditTrip = () => {
 
     const [trip, setTrip] = useState();
     const [origin, setOrigin] = useState("");
@@ -25,12 +26,19 @@ const CreateTrip = () => {
             setTrip(response.data);
             setOrigin(cities.find(o => o.city === response.data.origin));
             setDestination(cities.find(o => o.city === response.data.destination));
+            
         });
     }, [id])
 
 
     IsAuthenticated(AuthService.getCurrentUser());
     const History = useHistory();
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(!open);
+    };
 
     const [startDate, setStartDate] = useState(new Date());
 
@@ -45,6 +53,7 @@ const CreateTrip = () => {
         e.preventDefault();
         if (origin.city != null && destination.city != null && startDate != new Date()) {
             const trip = {
+                tripID: id,
                 origin: origin.city,
                 destination: destination.city,
                 description: details.current.value,
@@ -53,13 +62,23 @@ const CreateTrip = () => {
                 maxPassengers: max.current.value,
                 pricePerPassenger: price.current.value,
             };
-            TripService.postTrip(trip);
-            alert("Your trip listing has been posted!");
-            History.push("/view-trips");
+            console.log(trip);
+            TripService.editTrip(trip);
+            alert("Your trip listing has been updated!");
+            History.push("/driver-trips");
             window.location.reload();
 
         } else {
             setMsg("Error: Details missing");
+        }
+    }
+
+    function handleDelete(){
+        var r = window.confirm("Are you sure you want to delete this trip?\nYou cannot undo this action!");
+        if (r == true) {
+            TripService.deleteTrip(id);
+            History.push("/driver-trips");
+            window.location.reload();
         }
     }
 
@@ -68,7 +87,9 @@ const CreateTrip = () => {
     return (
         <div className="auth-wrapper">
             <div className="auth-inner">
+            <BackButton />
                 <form onSubmit={handleRegistration}>
+                    
                     <h3>Edit ride</h3>
                     <div className="form-group">
                         <label>Date and time of the trip:</label>
@@ -123,11 +144,14 @@ const CreateTrip = () => {
                         <input className="form-control" type="number" min="1" max="8" step="1" defaultValue={trip.maxPassengers} required ref={max} />
                     </div>
                     <br></br>
-                    <button type="submit" className="btn btn-primary btn-block form-control">Create trip</button>
+                    <button type="submit" className="btn btn-success btn-block form-control">Edit trip</button>
                     <h3>{msg}</h3>
                 </form>
+                
+                <button onClick={handleDelete} className="btn btn-danger btn-block form-control">Delete trip</button>
+                {/* { open && (<div><Confirmation/></div>)} */}
             </div>
         </div>
     );
 }
-export default CreateTrip;
+export default EditTrip;

@@ -26,10 +26,10 @@ const columns = [
         <Preview color="primary"/>
         </IconButton>
         <IconButton aria-label="edit" onClick={()=>{handleClick(1,cellValues)}}>
-        <Applications color="delete"/>
+        <Applications/>
         </IconButton>
         <IconButton aria-label="edit" onClick={()=>{handleClick(2,cellValues)}}>
-          <Edit color="delete"/>
+          <Edit/>
         </IconButton>
         </div>
       );

@@ -10,10 +10,10 @@ const MyTrips = () => {
                 <Button size="lg" onClick={() => {
                     window.history.pushState({}, '', "driver-trips");
                     window.location.replace("driver-trips");}}>
-                    Driver view
+                    Driver view 🚕
                 </Button></h1>
                 <h4>                               </h4>
-                <h3>Your trips as a passenger:</h3>       
+                <h3>Your upcoming trips as a passenger:</h3>       
                 </div>
             </div>
       </div>

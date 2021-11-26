@@ -19,6 +19,16 @@ class TripService {
     postTrip(trip){
         axios.post(STATION_API_BASE_URL,trip,{headers: authHeader()});
     }
+
+    editTrip(trip){
+        axios.put(STATION_API_BASE_URL+'/update',trip,{headers: authHeader()});
+    }
+
+    deleteTrip(tripID){
+        axios.delete(STATION_API_BASE_URL+"/"+tripID,{headers: authHeader()})
+    }
+
+
 }
 
 export default new TripService()

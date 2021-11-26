@@ -86,12 +86,12 @@ import VpnKey from '@material-ui/icons/VpnKey';
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" required ref={password} maxLength="4" maxLength="14"/>
+                    <input type="password" className="form-control" minlength="6" maxLength="15" placeholder="Enter password" required ref={password} maxLength="4" maxLength="14"/>
                 </div>
                 
                 <div className="form-group">
                     <label>Repeat Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" required ref={passwordCheck} maxLength="4" maxLength="14"/>
+                    <input type="password" className="form-control" minlength="6" maxLength="15" placeholder="Enter password" required ref={passwordCheck} maxLength="4" maxLength="14"/>
                     <br></br>
                     <right><button type="submit" className="btn btn-primary btn-block">Sign Up</button></right>
                 </div>

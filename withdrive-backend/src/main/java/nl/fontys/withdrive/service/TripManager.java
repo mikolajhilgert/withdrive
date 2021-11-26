@@ -64,14 +64,17 @@ public class TripManager implements ITripManager {
 
     @Override
     public boolean Update(TripRequestDTO trip) {
-        saved.Create(tripConverter.RequestDTOToEntity(trip));
+        saved.Update(tripConverter.RequestDTOToEntity(trip));
         return true;
     }
 
     @Override
-    public boolean Delete(UUID number) {
-        saved.Delete(number);
-        return true;
+    public boolean Delete(UUID tripID, UUID userID) {
+        if(saved.RetrieveByNumber(tripID).getDriver().getUserID() == userID){
+            saved.Delete(tripID);
+            return true;
+        }
+        return false;
     }
 
 }

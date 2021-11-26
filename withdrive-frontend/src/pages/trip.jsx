@@ -5,6 +5,7 @@ import moment from 'moment';
 import { Button } from "react-bootstrap";
 import NotFound from './notfound'
 import Rating from '@mui/material/Rating';
+import BackButton from '../components/backButton.component'
 
 let id = window.location.pathname.split('/').pop();
 
@@ -24,6 +25,7 @@ return (
     <br></br>
     <div className="auth-wrapper"> 
         <div className="auth-inner">
+            <BackButton/>
                     <h3>Trip with {trip.driver.firstName} from {trip.origin} to {trip.destination}</h3>
                     <div><h3>For {moment(trip.date).format('MMM. D, YYYY [at] h:mm A z')}</h3></div>
                     <h3>                        </h3>

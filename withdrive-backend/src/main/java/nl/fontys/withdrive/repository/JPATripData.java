@@ -37,10 +37,14 @@ public class JPATripData implements ITripData {
     @Override
     public void Update(Trip trip) {
         Trip toUpdate = RetrieveByNumber(trip.getTripID());
+        toUpdate.setTripID(trip.getTripID());
         toUpdate.setDescription(trip.getDescription());
         toUpdate.setDestination(trip.getDestination());
+        toUpdate.setDate(trip.getDate());
+        toUpdate.setMaxPassengers(trip.getMaxPassengers());
+        toUpdate.setLicensePlate(trip.getLicensePlate());
+        toUpdate.setPricePerPassenger(trip.getPricePerPassenger());
         toUpdate.setOrigin(trip.getOrigin());
-        toUpdate.setDriver(trip.getDriver());
         db.save(toUpdate);
     }
 

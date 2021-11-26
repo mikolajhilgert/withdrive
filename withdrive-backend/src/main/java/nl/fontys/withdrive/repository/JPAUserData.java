@@ -63,6 +63,7 @@ public class JPAUserData implements IUserData {
     @Override
     public void Update(User user) {
         User toUpdate = RetrieveByID(user.getUserID());
+        toUpdate.setUserID(user.getUserID());
         toUpdate.setEmail(user.getEmail());
         toUpdate.setDateOfBirth(user.getDateOfBirth());
         toUpdate.setFirstName(user.getFirstName());

@@ -70,9 +70,10 @@ public class TripController {
             return new ResponseEntity(uri,HttpStatus.CREATED);
         }
     }
-
-    @PutMapping()
+    @PutMapping("/update")
     public ResponseEntity<TripRequestDTO> UpdateTrip(@RequestBody TripRequestDTO trip){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        trip.setDriver(loggedInUser.getUserID());
         if(this.trips.Update(trip)){
             String url = "trip" + "/" + trip.getTripID(); // url of the edited trip
             URI uri = URI.create(url);
@@ -85,7 +86,8 @@ public class TripController {
 
     @DeleteMapping("{tripNumber}")
     public ResponseEntity<?> DeleteTrip(@PathVariable UUID tripNumber) {
-        if (this.trips.Delete(tripNumber)) {
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        if (this.trips.Delete(tripNumber,loggedInUser.getUserID())) {
             return ResponseEntity.noContent().build();
         } else {
             return new ResponseEntity("Please provide a valid trip number.", HttpStatus.NOT_FOUND);

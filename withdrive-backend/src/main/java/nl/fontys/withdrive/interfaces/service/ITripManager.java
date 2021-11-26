@@ -21,5 +21,5 @@ public interface ITripManager {
 
     boolean Update(TripRequestDTO trip);
 
-    boolean Delete(UUID number);
+    boolean Delete(UUID tripID,UUID userID);
 }

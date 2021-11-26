@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
-
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
   box-sizing: border-box;
 }
@@ -9,12 +10,12 @@ body {
   min-height: 100vh;
   display: flex;
   font-weight: 400;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6,label,span {
   font-weight: 500;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body, html, .App, #root, .auth-wrapper {
@@ -42,6 +43,13 @@ body, html, .App, #root, .auth-wrapper {
   padding: 40px 55px 45px 55px;
   border-radius: 15px;
   transition: all .3s;
+}
+
+.landing {
+  padding-top: 3%;
+  padding-left: 15%;
+  padding-right: 15%;
+  flex-direction: column;
 }
 
 .login{
@@ -77,6 +85,27 @@ body, html, .App, #root, .auth-wrapper {
   color: #167bff;
 }
 
+.post-container {
+  margin: 20px 20px 0 0;  
+  overflow: auto
+}
+.post-thumb {
+  float: left
+}
+.post-thumb img {
+  padding-right: 30px;
+  display: block
+}
+.post-content {
+  margin-left: 210px
+}
+.post-text {
+  font-size: 130%;
+  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Fira Sans', sans-serif; */
+  /* font-family: 'M PLUS 1 Code', sans-serif; */
+}
+
 @media(max-width: 675px){
   body, html, .App, #root, .auth-wrapper {
     width: 100%;
@@ -98,5 +127,12 @@ body, html, .App, #root, .auth-wrapper {
     margin: 0;
     line-height: 1;
     padding-bottom: 0px;
+  }
+
+  .landing {
+    padding-top: 20%;
+    padding-left: 0%;
+    padding-right: 0%;
+    flex-direction: column;
   }
 }

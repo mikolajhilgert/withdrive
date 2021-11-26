@@ -107,7 +107,7 @@ public class TripServiceTest {
         service.Update(new TripRequestDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),trip.getDate(),trip.getLicensePlate(),trip.getMaxPassengers(),trip.getPricePerPassenger(),userData.RetrieveByID(driverID).getUserID(), new ArrayList<>(),trip.getStatus()));
 
         ArgumentCaptor<Trip> UserArgumentCaptor = ArgumentCaptor.forClass(Trip.class);
-        verify(db).Create(UserArgumentCaptor.capture());
+        verify(db).Update(UserArgumentCaptor.capture());
         Trip finalResult = UserArgumentCaptor.getValue();
         Assertions.assertEquals(finalResult.getTripID(),trip.getTripID());
         Assertions.assertEquals(finalResult.getOrigin(),trip.getOrigin());
@@ -115,7 +115,9 @@ public class TripServiceTest {
     @Test
     public void deleteTripByIDTest()
     {
-        service.Delete(tripID);
+        service.Add(new TripRequestDTO(UUID.randomUUID(),"Eindhoven","Venlo","Quick trip","19/11/2021","AL-125-GG",2,2.5,userData.RetrieveByID(driverID).getUserID(),null,TripStatus.AWAITING));
+
+        service.Delete(tripID,driverID);
 
         verify(db).Delete(tripID);
     }

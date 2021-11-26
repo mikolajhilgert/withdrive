@@ -7,26 +7,32 @@ import Index from "./pages";
 import Login from "./pages/signin";
 import SignUp from "./pages/signup";
 import ViewTrips from "./pages/viewtrips";
-import ApiTest from "./pages/apitest";
+import ViewTrip from "./pages/trip";
 import NotFound from "./pages/notfound";
 import Nav from "./components/nav.component";
+import SignOut from "./pages/signout";
+import CreateTrip from "./pages/createtrip";
+import MyTrips from "./pages/mytrips";
+import DriverTrips from "./pages/drivertrips";
+import EditTrip from "./pages/editatrip";
 
 function App() {
   return (
     <Router>
       <Nav/>
-      <div className="auth-wrapper">  
-            <div className="auth-inner">
-              <Switch>
-                <Route exact path='/' component={Index} />
-                <Route path="/sign-in" component={Login} />
-                <Route path="/sign-up" component={SignUp} />
-                <Route path="/view-trips" component={ViewTrips} />
-                <Route path="/api-test" component={ApiTest} />
-                <Route component={NotFound}/>
-              </Switch>
-            </div>
-          </div>
+        <Switch>
+          <Route exact path='/' component={Index} />
+          <Route path="/sign-in" component={Login} />
+          <Route path="/sign-up" component={SignUp} />
+          <Route path="/view-trips" component={ViewTrips} />
+          <Route path="/create-trip" component={CreateTrip} />
+          <Route path="/sign-out" component={SignOut} />
+          <Route path="/trip/view" component={ViewTrip} />
+          <Route path="/my-trips" component={MyTrips} />
+          <Route path="/driver-trips" component={DriverTrips} />
+          <Route path="/trip/edit" component={EditTrip} />
+          <Route component={NotFound}/>
+        </Switch>
       </Router>
   );
 }

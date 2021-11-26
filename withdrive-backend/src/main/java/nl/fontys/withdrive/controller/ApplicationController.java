@@ -17,6 +17,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
+//@CrossOrigin(origins = "*")
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/trip/app")
@@ -35,7 +36,7 @@ public class ApplicationController {
             return ResponseEntity.ok().body(apps);
         }
         //return ResponseEntity.notFound().build();
-        return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);
+        return new ResponseEntity ("Please provide a valid user number.", HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("u/{userID}")

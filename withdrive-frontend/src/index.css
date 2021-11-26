@@ -1,19 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
-
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1+Code&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 * {
   box-sizing: border-box;
 }
 body {
-  background: #012255 !important;
+  /* background: #f5f5f5 !important; */
+  background: linear-gradient(-45deg, #f5f5f5, #b1e0ff) !important;
   min-height: 100vh;
   display: flex;
   font-weight: 400;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6,label,span {
   font-weight: 500;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 body, html, .App, #root, .auth-wrapper {
@@ -43,6 +45,17 @@ body, html, .App, #root, .auth-wrapper {
   transition: all .3s;
 }
 
+.landing {
+  padding-top: 3%;
+  padding-left: 15%;
+  padding-right: 15%;
+  flex-direction: column;
+}
+
+.login{
+  width: 50%;
+}
+
 .auth-wrapper .form-control:focus {
   border-color: #167bff;
   box-shadow: none;
@@ -70,4 +83,56 @@ body, html, .App, #root, .auth-wrapper {
 
 .forgot-password a {
   color: #167bff;
+}
+
+.post-container {
+  margin: 20px 20px 0 0;  
+  overflow: auto
+}
+.post-thumb {
+  float: left
+}
+.post-thumb img {
+  padding-right: 30px;
+  display: block
+}
+.post-content {
+  margin-left: 210px
+}
+.post-text {
+  font-size: 130%;
+  font-family: 'Roboto', sans-serif;
+  /* font-family: 'Fira Sans', sans-serif; */
+  /* font-family: 'M PLUS 1 Code', sans-serif; */
+}
+
+@media(max-width: 675px){
+  body, html, .App, #root, .auth-wrapper {
+    width: 100%;
+    height: 104%;
+  }
+
+  .auth-inner {
+    width: 80%;
+    margin: auto;
+    background: #ffffff;
+    box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+    padding: 10px 10px 10px 10px;
+    border-radius: 15px;
+    transition: all .3s;
+  }
+
+  .auth-wrapper h3 {
+    text-align: center;
+    margin: 0;
+    line-height: 1;
+    padding-bottom: 0px;
+  }
+
+  .landing {
+    padding-top: 20%;
+    padding-left: 0%;
+    padding-right: 0%;
+    flex-direction: column;
+  }
 }

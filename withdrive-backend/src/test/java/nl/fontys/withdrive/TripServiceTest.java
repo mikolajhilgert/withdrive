@@ -61,11 +61,11 @@ public class TripServiceTest {
     public void setUp()  {
         converter = new TripConverter(new ModelMapper(),userData);
         service = new TripManager(db,userData,converter);
-        User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
-        User user = new User(userID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
+        User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null);
+        User user = new User(userID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null);
         List<Trip> trips = List.of(
-                new Trip(tripID,"Eindhoven","Venlo","Quick trip", TripStatus.AWAITING,null,driver),
-                new Trip(tripID2,"Venlo","Eindhoven","Quick trip", TripStatus.AWAITING,null,driver)
+                new Trip(tripID,"Eindhoven","Venlo","Quick trip","19/11/2021","AL-125-GG",2,2.5,TripStatus.AWAITING,null,driver),
+                new Trip(tripID2,"Venlo","Eindhoven","Quick trip","19/11/2021","AL-125-GG",2,2.5, TripStatus.AWAITING,null,driver)
         );
         TripApplication tripApplication = new TripApplication(new TripApplicationKEY(),user,trips.get(0),ApplicationStatus.PENDING,"test");
 
@@ -92,7 +92,7 @@ public class TripServiceTest {
     }
     @Test
     public void addTripTest(){
-        TripRequestDTO trip = new TripRequestDTO(UUID.randomUUID(),"Eindhoven","Venlo","Quick trip",userData.RetrieveByID(driverID).getUserID(),new ArrayList<>(), TripStatus.AWAITING);
+        TripRequestDTO trip = new TripRequestDTO(UUID.randomUUID(),"Eindhoven","Venlo","Quick trip","19/11/2021","AL-125-GG",2,2.5,userData.RetrieveByID(driverID).getUserID(),null,TripStatus.AWAITING);
         service.Add(trip);
 
         ArgumentCaptor<Trip> UserArgumentCaptor = ArgumentCaptor.forClass(Trip.class);
@@ -104,10 +104,10 @@ public class TripServiceTest {
     public void editTripTest(){
         Trip trip = db.RetrieveByNumber(tripID);
         trip.setOrigin("test");
-        service.Update(new TripRequestDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),userData.RetrieveByID(driverID).getUserID(), new ArrayList<>(),trip.getStatus()));
+        service.Update(new TripRequestDTO(trip.getTripID(),trip.getOrigin(),trip.getDestination(),trip.getDescription(),trip.getDate(),trip.getLicensePlate(),trip.getMaxPassengers(),trip.getPricePerPassenger(),userData.RetrieveByID(driverID).getUserID(), new ArrayList<>(),trip.getStatus()));
 
         ArgumentCaptor<Trip> UserArgumentCaptor = ArgumentCaptor.forClass(Trip.class);
-        verify(db).Create(UserArgumentCaptor.capture());
+        verify(db).Update(UserArgumentCaptor.capture());
         Trip finalResult = UserArgumentCaptor.getValue();
         Assertions.assertEquals(finalResult.getTripID(),trip.getTripID());
         Assertions.assertEquals(finalResult.getOrigin(),trip.getOrigin());
@@ -115,7 +115,9 @@ public class TripServiceTest {
     @Test
     public void deleteTripByIDTest()
     {
-        service.Delete(tripID);
+        service.Add(new TripRequestDTO(UUID.randomUUID(),"Eindhoven","Venlo","Quick trip","19/11/2021","AL-125-GG",2,2.5,userData.RetrieveByID(driverID).getUserID(),null,TripStatus.AWAITING));
+
+        service.Delete(tripID,driverID);
 
         verify(db).Delete(tripID);
     }

@@ -19,9 +19,7 @@ public class TripApplication {
     @ManyToOne
     @MapsId("userID")
     @JoinColumn(name = "userID")
-    private @Getter
-    @Setter
-    User applicant;
+    private @Getter @Setter User applicant;
 
     @ManyToOne
     @MapsId("tripID")

@@ -1,6 +1,5 @@
 package nl.fontys.withdrive.converter;
 
-import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationRequestDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;

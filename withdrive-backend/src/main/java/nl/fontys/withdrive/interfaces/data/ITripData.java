@@ -17,4 +17,9 @@ public interface ITripData {
 
     void Delete(UUID number);
 
+    List<Trip> retrieveActiveTrips();
+
+    List<Trip> retrieveActiveTripsByUser(UUID id);
+
+    List<Trip> retrieveActiveTripsByDriver(UUID id);
 }

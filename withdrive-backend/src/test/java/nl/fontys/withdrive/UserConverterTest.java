@@ -32,8 +32,8 @@ public class UserConverterTest {
     @Test
     public void convertUserDTOToEntityTest()
     {
-        UserDTO start = new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password");
-        User wantedResult = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
+        UserDTO start = new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null);
+        User wantedResult = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null);
 
         User toTest = converter.DTOToEntity(start);
 
@@ -49,8 +49,8 @@ public class UserConverterTest {
     @Test
     public void convertUserEntityToDTOTest()
     {
-        User start = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null);
-        UserDTO wantedResult = new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password");
+        User start = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null);
+        UserDTO wantedResult = new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null);
 
 
         UserDTO toTest = converter.EntityToDTO(start);
@@ -68,13 +68,13 @@ public class UserConverterTest {
     public void convertListUserEntityToDTOTest()
     {
         List<User> start = List.of(
-                new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null),
-                new User(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null,null)
+                new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null),
+                new User(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null,null,null,null)
         );
 
         List<UserDTO> wantedResult = List.of(
-                new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password"),
-                new UserDTO(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello")
+                new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null),
+                new UserDTO(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null)
         );
 
         List<UserDTO> toTest = converter.ListEntityToDTO(start);

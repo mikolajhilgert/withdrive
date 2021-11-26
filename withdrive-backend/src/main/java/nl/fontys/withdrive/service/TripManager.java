@@ -38,6 +38,21 @@ public class TripManager implements ITripManager {
     }
 
     @Override
+    public List<TripResponseDTO> retrieveActiveTrips() {
+        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTrips());
+    }
+
+    @Override
+    public List<TripResponseDTO> retrieveTripsByUser(UUID id) {
+        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTripsByUser(id));
+    }
+
+    @Override
+    public List<TripResponseDTO> retrieveTripsByDriver(UUID id) {
+        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTripsByDriver(id));
+    }
+
+    @Override
     public TripResponseDTO RetrieveByNumber(UUID number) {
         List<Trip> temp = new ArrayList<>();
         temp.add(saved.RetrieveByNumber(number));
@@ -49,14 +64,17 @@ public class TripManager implements ITripManager {
 
     @Override
     public boolean Update(TripRequestDTO trip) {
-        saved.Create(tripConverter.RequestDTOToEntity(trip));
+        saved.Update(tripConverter.RequestDTOToEntity(trip));
         return true;
     }
 
     @Override
-    public boolean Delete(UUID number) {
-        saved.Delete(number);
-        return true;
+    public boolean Delete(UUID tripID, UUID userID) {
+        if(saved.RetrieveByNumber(tripID).getDriver().getUserID() == userID){
+            saved.Delete(tripID);
+            return true;
+        }
+        return false;
     }
 
 }

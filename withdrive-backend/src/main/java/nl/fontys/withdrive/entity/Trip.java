@@ -9,7 +9,6 @@ import nl.fontys.withdrive.enumeration.TripStatus;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -25,6 +24,10 @@ public class Trip{
     private @Getter @Setter String origin;
     private @Getter @Setter String destination;
     private @Getter @Setter String description;
+    private @Getter @Setter String date;
+    private @Getter @Setter String licensePlate;
+    private @Getter @Setter int maxPassengers;
+    private @Getter @Setter double pricePerPassenger;
 
     @Enumerated(EnumType.STRING)
     private @Getter @Setter TripStatus status;

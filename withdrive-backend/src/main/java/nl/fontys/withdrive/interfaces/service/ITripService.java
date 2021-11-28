@@ -7,7 +7,7 @@ import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import java.util.List;
 import java.util.UUID;
 
-public interface ITripManager {
+public interface ITripService {
     boolean Add(TripRequestDTO trip);
 
     List<TripResponseDTO> RetrieveAll();

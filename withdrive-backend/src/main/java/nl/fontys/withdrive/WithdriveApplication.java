@@ -2,15 +2,13 @@ package nl.fontys.withdrive;
 
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Role;
-import nl.fontys.withdrive.service.UserManager;
+import nl.fontys.withdrive.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
@@ -32,7 +30,7 @@ public class WithdriveApplication {
     }
 
     @Bean
-    CommandLineRunner run(UserManager userService){
+    CommandLineRunner run(UserService userService){
         return args -> {
           userService.saveRole(new Role(UUID.fromString("81b83fb2-0727-4404-8cf2-1f73feeb2980"),"ROLE_DEFAULT"));
           userService.saveRole(new Role(UUID.fromString("90d87f90-f1a3-4e92-863d-5468247dcb14"),"ROLE_USER"));

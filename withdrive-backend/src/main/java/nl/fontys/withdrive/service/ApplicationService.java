@@ -6,7 +6,7 @@ import nl.fontys.withdrive.entity.TripApplication;
 import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import nl.fontys.withdrive.interfaces.converter.IApplicationConverter;
 import nl.fontys.withdrive.interfaces.data.IApplicationData;
-import nl.fontys.withdrive.interfaces.service.IApplicationManager;
+import nl.fontys.withdrive.interfaces.service.IApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ApplicationManager implements IApplicationManager {
+public class ApplicationService implements IApplicationService {
     private final IApplicationData saved;
     private final IApplicationConverter applicationConverter;
 
     @Autowired
-    public ApplicationManager(IApplicationData saved, IApplicationConverter applicationConverter){
+    public ApplicationService(IApplicationData saved, IApplicationConverter applicationConverter){
         this.saved = saved;
         this.applicationConverter = applicationConverter;
     }

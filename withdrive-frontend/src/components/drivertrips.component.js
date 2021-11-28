@@ -12,13 +12,13 @@ import Preview from '@material-ui/icons/Pageview';
 
 
 const columns = [
-  { field: 'date', headerName: 'Date', width: 200 },
-  { field: 'origin', headerName: 'From', width: 150 },
-  { field: 'destination', headerName: 'To', width: 150 },
-  { field: 'maxPassengers', headerName: 'Capacity', width: 90 },
+  { field: 'date', headerName: 'Date', flex:1 },
+  { field: 'origin', headerName: 'From', flex:1 },
+  { field: 'destination', headerName: 'To', flex:1 },
+  { field: 'maxPassengers', headerName: 'Capacity',flex:1 },
   {
     field: "Actions",
-    width: 145, 
+    flex:1,
     renderCell: (cellValues) => {
       return (
         <div>

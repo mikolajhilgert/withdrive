@@ -4,24 +4,14 @@ import nl.fontys.withdrive.converter.UserConverter;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.converter.IUserConverter;
-import nl.fontys.withdrive.interfaces.data.IUserData;
-import nl.fontys.withdrive.interfaces.service.IUserManager;
-import nl.fontys.withdrive.service.UserManager;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 
 public class UserConverterTest {

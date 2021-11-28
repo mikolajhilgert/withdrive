@@ -5,8 +5,8 @@ import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.converter.IUserConverter;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import nl.fontys.withdrive.dto.user.UserDTO;
-import nl.fontys.withdrive.interfaces.service.IUserManager;
-import nl.fontys.withdrive.service.UserManager;
+import nl.fontys.withdrive.interfaces.service.IUserService;
+import nl.fontys.withdrive.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
@@ -30,14 +29,14 @@ public class UserServiceTest {
     // https://javacodehouse.com/blog/mockito-tutorial/
     @Mock
     IUserData db;
-    IUserManager service;
+    IUserService service;
     IUserConverter converter = new UserConverter(new ModelMapper());
     UUID testID = UUID.randomUUID();
     UUID testID2 = UUID.randomUUID();
 
     @BeforeEach
     public void setUp()  {
-        service = new UserManager(db,converter, new BCryptPasswordEncoder());
+        service = new UserService(db,converter, new BCryptPasswordEncoder());
     }
 
     @Test

@@ -1,22 +1,23 @@
 import * as React from 'react';
-import { DataGrid,GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useEffect, useState, useRef } from "react";
 import Button from 'react-bootstrap/Button'
 import TripService from "../services/TripService";
 import moment from 'moment';
 import NotFound from '../pages/notfound';
+import Select from '../components/citySelect.component'
 
 
 
 const columns = [
-    { field: 'date', headerName: 'Date', width: 200 },
-  { field: 'origin', headerName: 'From', width: 150 },
-  { field: 'destination', headerName: 'To', width: 150 },
-  { field: 'pricePerPassenger', headerName: 'Price', width: 120 },
-  { field: 'maxPassengers', headerName: 'Passengers', width: 120 },
+  { field: 'date', headerName: 'Date', flex: 1},
+  { field: 'origin', headerName: 'From',flex: 1 },
+  { field: 'destination', headerName: 'To', flex: 1 },
+  { field: 'pricePerPassenger', headerName: 'Price', flex: 1 },
+  { field: 'maxPassengers', headerName: 'Passengers', flex: 1},
   {
     field: "Apply",
-    width: 120, 
+    flex: 1,
     renderCell: (cellValues) => {
       return (
         <Button
@@ -24,53 +25,64 @@ const columns = [
           onClick={() => {
             handleClick(cellValues);
           }}
-          >
-          Apply now!
+        >
+          View details
         </Button>
       );
     }
   },
-  ];
+];
 
-  function handleClick(selected){
-    window.history.pushState({}, '', "/trip/view/"+selected.row.tripID);
-    window.location.replace("/trip/view/"+selected.row.tripID);
+function handleClick(selected) {
+  window.history.pushState({}, '', "/trip/view/" + selected.row.tripID);
+  window.location.replace("/trip/view/" + selected.row.tripID);
 }
 
 export default function DataTable() {
-    const [trips,setTrips] = useState([]);
+  const [trips, setTrips] = useState([]);
+  const [city, setCity] = useState([]);
+  useEffect(() => {
+    getAvailableTrips()
+  }, [])
 
-    useEffect(() => {
-        getAvailableTrips()
-    }, [])
+  const getAvailableTrips = () => {
+    TripService.getTrips().then((response) => {
+      setTrips(response.data);
+    });
+  }
 
-    const getAvailableTrips = () => {
-        TripService.getTrips().then((response) => {
-            setTrips(response.data);
-        });
-    }   
+  const setSearch = (data) => {
+    setCity(data);
+  }
 
-    trips.map((trip) => {
-        trip['id'] = trip.tripID
-        trip.date = moment(trip.date).format('MMM. D, YYYY [at] h:mm A z')
-        trip.maxPassengers = "0"+"/"+trip.maxPassengers
-    })
+  trips.map((trip) => {
+    trip['id'] = trip.tripID
+    trip.date = moment(trip.date).format('LLLL')
+    trip.maxPassengers = "0" + "/" + trip.maxPassengers
+  })
 
-    if(!trips) return <NotFound/>;
+  if (!trips) return <NotFound />;
 
   return (
-    <div style={{ height: 650, width: 'flex' }}>
-      <DataGrid    
-        disableColumnFilter 
-        density="comfortable"
-        rows={trips}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[8]}
-        disableColumnSelector
-        disableMultipleSelection={true}
-        disableSelectionOnClick={true}
-      />
+    <div>
+      <br></br>
+      <center>
+      <Select setCity={setSearch} clear={true} text="Select to see trips originating from a specific city" />
+      </center>
+      <br></br>
+      <div style={{ height: 600, width: 'flex' }}>
+        <DataGrid
+          disableColumnFilter
+          density="comfortable"
+          rows={trips}
+          columns={columns}
+          pageSize={5}
+          rowsPerPageOptions={[8]}
+          disableColumnSelector
+          disableMultipleSelection={true}
+          disableSelectionOnClick={true}
+        />
+      </div>
     </div>
   );
 }

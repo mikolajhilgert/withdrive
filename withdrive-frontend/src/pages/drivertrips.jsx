@@ -1,10 +1,11 @@
 import DriverTrips from '../components/drivertrips.component'
 import Button from 'react-bootstrap/Button'
 import BackButton from '../components/backButton.component'
+import form from '../modules/innerPage.module.css'
 const MyTrips = () => {
     return(
-        <div className="auth-wrapper">  
-            <div className="auth-inner">
+        <div className={form.authwrapper}>  
+            <div className={form.authinner_table}>
                 <BackButton />
                 <div>
                 <h4>                               </h4>

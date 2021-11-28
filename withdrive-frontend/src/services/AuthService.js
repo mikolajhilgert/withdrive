@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from './AuthHeader';
     const API_URL = "http://localhost:8080/user/";
 
     class AuthService {
@@ -31,6 +32,10 @@ import axios from 'axios';
 
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));;
+    }
+
+    checkToken(){
+        axios.get(API_URL + "check",{headers: authHeader()}).catch(localStorage.removeItem("user"));
     }
 }
 

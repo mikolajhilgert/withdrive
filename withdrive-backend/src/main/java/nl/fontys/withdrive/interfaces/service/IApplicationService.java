@@ -8,7 +8,7 @@ import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import java.util.List;
 import java.util.UUID;
 
-public interface IApplicationManager {
+public interface IApplicationService {
     void Add(ApplicationRequestDTO application);
 
     List<ApplicationResponseDTO> RetrieveByTripID(UUID id);

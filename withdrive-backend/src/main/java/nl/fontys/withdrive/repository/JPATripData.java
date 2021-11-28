@@ -67,4 +67,9 @@ public class JPATripData implements ITripData {
     public List<Trip> retrieveActiveTripsByDriver(UUID id) {
         return db.getActiveTripsByDriver(id.toString());
     }
+
+    @Override
+    public List<Trip> retrieveActiveTripsByOrigin(String origin) {
+        return db.getTripsByOriginAndStatusIs(origin,"AWAITING");
+    }
 }

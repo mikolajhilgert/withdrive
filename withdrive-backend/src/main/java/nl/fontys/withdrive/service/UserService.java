@@ -6,7 +6,7 @@ import nl.fontys.withdrive.entity.Role;
 import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.converter.IUserConverter;
 import nl.fontys.withdrive.interfaces.data.IUserData;
-import nl.fontys.withdrive.interfaces.service.IUserManager;
+import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,13 +22,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Service @Transactional @Slf4j
-public class UserManager implements IUserManager, UserDetailsService {
+public class UserService implements IUserService, UserDetailsService {
     private final IUserData saved;
     private final IUserConverter converter;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserManager(IUserData saved, IUserConverter converter, PasswordEncoder passwordEncoder){
+    public UserService(IUserData saved, IUserConverter converter, PasswordEncoder passwordEncoder){
         this.saved = saved;
         this.converter = converter;
         this.passwordEncoder = passwordEncoder;

@@ -13,6 +13,7 @@ import java.util.UUID;
 public interface IJPATripData extends JpaRepository<Trip, UUID> {
     Trip getFirstByTripID(UUID ID);
     List<Trip> getTripsByStatus(TripStatus status);
+    List<Trip> getTripsByOriginAndStatusIs(String origin,String status);
     @Query(value = "select t.* from trips as t left outer join applications as ap on t.id = ap.tripid where t.status=\"AWAITING\" and ap.userid = ?1",nativeQuery = true)
     List<Trip> getActiveTripsByUser(String ID);
     @Query(value = "select t.* from trips as t left outer join applications as ap on t.id = ap.tripid where t.status=\"AWAITING\" and t.driver_id = ?1",nativeQuery = true)

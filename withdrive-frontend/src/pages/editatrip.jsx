@@ -2,7 +2,6 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { useHistory } from "react-router";
 import cities from '../data/nl.json'
 import Select, { createFilter } from 'react-select';
-import '../css_override/largerForm.css';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
@@ -13,7 +12,11 @@ import AuthService from '../services/AuthService';
 import NotFound from '../pages/notfound'
 import BackButton from '../components/backButton.component'
 
+import form from '../modules/innerPage.module.css'
+import text from '../modules/text.module.css'
+
 let id = window.location.pathname.split('/').pop();
+
 
 const EditTrip = () => {
 
@@ -75,7 +78,7 @@ const EditTrip = () => {
 
     function handleDelete(){
         var r = window.confirm("Are you sure you want to delete this trip?\nYou cannot undo this action!");
-        if (r == true) {
+        if (r === true) {
             TripService.deleteTrip(id);
             History.push("/driver-trips");
             window.location.reload();
@@ -85,8 +88,8 @@ const EditTrip = () => {
 
     if (!trip) return <NotFound/>;
     return (
-        <div className="auth-wrapper">
-            <div className="auth-inner">
+<div className={form.authwrapper}>
+    <div className={form.authinner_big}>
             <BackButton />
                 <form onSubmit={handleRegistration}>
                     

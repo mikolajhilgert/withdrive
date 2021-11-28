@@ -3,6 +3,9 @@ import { useHistory } from "react-router";
 import AuthService from "../services/AuthService";
 import LockOutlinedIcon from '@material-ui/icons/LockOpen';
 
+import form from '../modules/innerPage.module.css'
+import text from '../modules/text.module.css'
+
 const SignIn = () => {
         const [msg, setMsg] = React.useState(null);
         const History = useHistory();
@@ -23,8 +26,8 @@ const SignIn = () => {
         }
 
         return (
-        <div className="auth-wrapper">  
-            <div className="auth-inner">
+        <div className={form.authwrapper}>  
+            <div className={form.authinner_form}>
             <form onSubmit={handleLogin}>
                 <center><LockOutlinedIcon/></center>
                 <h2><center>Sign In</center></h2>
@@ -41,8 +44,9 @@ const SignIn = () => {
                 
                 <br></br>
                 <div className="form-group"><button type="submit" className="btn btn-primary btn-block">Submit</button></div>
-                <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                <br></br>
+                <p className={text.right+" form-group"}>
+                    <a href="#">Forgotten password?</a>
                 </p>
                 <h1>{msg}</h1>
             </form>

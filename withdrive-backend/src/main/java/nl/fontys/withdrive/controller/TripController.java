@@ -3,13 +3,11 @@ package nl.fontys.withdrive.controller;
 import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
-import nl.fontys.withdrive.entity.User;
-import nl.fontys.withdrive.interfaces.service.ITripManager;
-import nl.fontys.withdrive.interfaces.service.IUserManager;
+import nl.fontys.withdrive.interfaces.service.ITripService;
+import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +20,11 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/trip")
 public class TripController {
-    private final ITripManager trips;
-    private final IUserManager users;
+    private final ITripService trips;
+    private final IUserService users;
 
     @Autowired
-    public TripController(ITripManager trips, IUserManager users){
+    public TripController(ITripService trips, IUserService users){
         this.trips = trips;
         this.users= users;
     }

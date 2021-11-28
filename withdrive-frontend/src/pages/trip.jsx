@@ -7,6 +7,10 @@ import NotFound from './notfound'
 import Rating from '@mui/material/Rating';
 import BackButton from '../components/backButton.component'
 
+
+import form from '../modules/innerPage.module.css'
+import text from '../modules/text.module.css'
+
 let id = window.location.pathname.split('/').pop();
 
 const Trip = () => {
@@ -23,12 +27,11 @@ const Trip = () => {
 return (
 <>
     <br></br>
-    <div className="auth-wrapper"> 
-        <div className="auth-inner">
+    <div className={form.authwrapper}> 
+        <div className={form.authinner_trip}>
             <BackButton/>
                     <h3>Trip with {trip.driver.firstName} from {trip.origin} to {trip.destination}</h3>
                     <div><h3>For {moment(trip.date).format('MMM. D, YYYY [at] h:mm A z')}</h3></div>
-                    <h3>                        </h3>
                     <table className="table">
                         <tbody>
                             <tr>
@@ -48,11 +51,10 @@ return (
                                 <br></br>
                                 <a href="reviews">Read reviews of the driver</a>
                                 </td>
-                            {/* <td>Driver rating: ☆★★★★ <a href="reviews">Read reviews</a></td> */}
                             </tr>
                         </tbody>
                     </table>
-                    <h3><Button> Apply now!</Button></h3>
+                    <center><h3><Button> Apply now!</Button></h3></center>
                     <br></br>
                     {/* <h4>Map of the ride:</h4> */}
                     <Map trip={trip} />    

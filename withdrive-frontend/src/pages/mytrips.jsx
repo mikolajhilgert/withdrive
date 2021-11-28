@@ -1,10 +1,13 @@
 import DriverTrips from '../components/drivertrips.component'
 import { useHistory } from 'react-router';
 import Button from 'react-bootstrap/Button'
+
+import form from '../modules/innerPage.module.css'
+
 const MyTrips = () => {
     return(
-        <div className="auth-wrapper">  
-            <div className="auth-inner">
+        <div className={form.authwrapper}>  
+            <div className={form.authinner_table}>
                 <div>
                     <h1>
                 <Button size="lg" onClick={() => {

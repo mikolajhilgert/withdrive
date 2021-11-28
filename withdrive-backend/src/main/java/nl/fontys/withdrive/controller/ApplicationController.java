@@ -1,19 +1,14 @@
 package nl.fontys.withdrive.controller;
 
-import nl.fontys.withdrive.dto.trip.TripRequestDTO;
-import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationRequestDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationResponseDTO;
-import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.enumeration.ApplicationStatus;
-import nl.fontys.withdrive.interfaces.service.IApplicationManager;
-import nl.fontys.withdrive.interfaces.service.ITripManager;
+import nl.fontys.withdrive.interfaces.service.IApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,10 +17,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/trip/app")
 public class ApplicationController {
-    private final IApplicationManager applications;
+    private final IApplicationService applications;
 
     @Autowired
-    public ApplicationController(IApplicationManager applications){
+    public ApplicationController(IApplicationService applications){
         this.applications = applications;
     }
 

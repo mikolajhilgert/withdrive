@@ -4,10 +4,9 @@ import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.interfaces.converter.ITripConverter;
-import nl.fontys.withdrive.interfaces.data.IApplicationData;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
-import nl.fontys.withdrive.interfaces.service.ITripManager;
+import nl.fontys.withdrive.interfaces.service.ITripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +15,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class TripManager implements ITripManager {
+public class TripService implements ITripService {
     private final ITripData saved;
     private final ITripConverter tripConverter;
 
     @Autowired
-    public TripManager(ITripData saved, IUserData users, ITripConverter tripConverter){
+    public TripService(ITripData saved, IUserData users, ITripConverter tripConverter){
         this.saved = saved;
         this.tripConverter = tripConverter;
     }

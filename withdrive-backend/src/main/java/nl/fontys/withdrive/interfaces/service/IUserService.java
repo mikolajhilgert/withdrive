@@ -7,7 +7,7 @@ import nl.fontys.withdrive.entity.User;
 import java.util.List;
 import java.util.UUID;
 
-public interface IUserManager {
+public interface IUserService {
     boolean Add(UserDTO user);
 
     List<UserDTO> RetrieveAll();

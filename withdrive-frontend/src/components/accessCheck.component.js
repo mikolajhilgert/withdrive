@@ -20,6 +20,6 @@ function IsAuthenticated() {
         window.history.pushState({}, '', "/not-found");
         window.location.reload();
     }
-    console.log("hello");
+    // console.log("hello");
 }
 export default IsAuthenticated;

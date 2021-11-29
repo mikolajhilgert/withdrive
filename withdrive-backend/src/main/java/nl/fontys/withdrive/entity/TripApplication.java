@@ -29,5 +29,6 @@ public class TripApplication {
 
     @Enumerated(EnumType.STRING)
     private @Getter @Setter ApplicationStatus status;
+    @Lob
     private @Getter @Setter String text;
 }

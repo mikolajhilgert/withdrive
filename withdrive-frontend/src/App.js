@@ -16,6 +16,7 @@ import MyTrips from "./pages/mytrips";
 import DriverTrips from "./pages/drivertrips";
 import EditTrip from "./pages/editatrip";
 import ApplyTrip from "./pages/apply";
+import ViewTripApps from "./pages/viewApps"
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route path="/driver-trips" component={DriverTrips} />
           <Route path="/trip/edit" component={EditTrip} />
           <Route path="/trip/apply" component={ApplyTrip} />
+          <Route path="/trip/apps" component={ViewTripApps} />
           <Route component={NotFound}/>
         </Switch>
       </Router>

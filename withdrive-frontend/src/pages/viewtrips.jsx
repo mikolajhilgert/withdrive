@@ -4,8 +4,6 @@ import form from '../modules/innerPage.module.css'
 import text from '../modules/text.module.css'
 import moment from 'moment'
 
-var selection = 'All';
-
 const Index = () => {
         return (
         <div className={form.authwrapper}>  

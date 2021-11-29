@@ -2,11 +2,14 @@ package nl.fontys.withdrive.controller;
 
 import nl.fontys.withdrive.dto.tripApplication.ApplicationRequestDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationResponseDTO;
+import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import nl.fontys.withdrive.interfaces.service.IApplicationService;
+import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,10 +21,12 @@ import java.util.UUID;
 @RequestMapping("/trip/app")
 public class ApplicationController {
     private final IApplicationService applications;
+    private final IUserService users;
 
     @Autowired
-    public ApplicationController(IApplicationService applications){
+    public ApplicationController(IApplicationService applications,IUserService users){
         this.applications = applications;
+        this.users = users;
     }
 
     @GetMapping("t/{tripID}")
@@ -36,6 +41,7 @@ public class ApplicationController {
 
     @GetMapping("u/{userID}")
     public ResponseEntity<List<ApplicationResponseDTO>> GetAppByUser(@PathVariable(value = "userID") UUID id){
+
         List<ApplicationResponseDTO> apps = this.applications.RetrieveByUserID(id);
         if(apps!=null){
             return ResponseEntity.ok().body(apps);
@@ -46,7 +52,8 @@ public class ApplicationController {
 
     @PostMapping()
     public ResponseEntity<ApplicationRequestDTO> MakeApplication(@RequestBody ApplicationRequestDTO app) {
-        applications.Add(app);
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        applications.Add(app,loggedInUser.getUserID());
         String text = "Your application for trip " + app.getTrip() + " has been submitted!";
         return new ResponseEntity(text,HttpStatus.CREATED);
     }

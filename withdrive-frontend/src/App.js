@@ -15,6 +15,7 @@ import CreateTrip from "./pages/createtrip";
 import MyTrips from "./pages/mytrips";
 import DriverTrips from "./pages/drivertrips";
 import EditTrip from "./pages/editatrip";
+import ApplyTrip from "./pages/apply";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/my-trips" component={MyTrips} />
           <Route path="/driver-trips" component={DriverTrips} />
           <Route path="/trip/edit" component={EditTrip} />
+          <Route path="/trip/apply" component={ApplyTrip} />
           <Route component={NotFound}/>
         </Switch>
       </Router>

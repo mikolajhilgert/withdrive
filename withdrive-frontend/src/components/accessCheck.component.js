@@ -1,11 +1,25 @@
-import { useHistory } from "react-router";
 import AuthService from "../services/AuthService";
-
-function IsAuthenticated(authentication) {
-    const History =  useHistory();
-    if(authentication === null){
-        History.push("/not-found");
+function IsAuthenticated() {
+    if(AuthService.getCurrentUser() !== null){
+        if(AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")){
+            AuthService.checkTokenAdmin().then(response=>{
+                if(response===false){
+                    window.history.pushState({}, '', "/not-found");
+                    window.location.reload();
+                }
+            })
+        }else{
+            AuthService.checkToken().then(response=>{
+                if(response===false){
+                    window.history.pushState({}, '', "/sign-out");
+                    window.location.reload();
+                }
+            })
+        }
+    }else{
+        window.history.pushState({}, '', "/not-found");
         window.location.reload();
     }
+    console.log("hello");
 }
 export default IsAuthenticated;

@@ -1,10 +1,14 @@
 import DriverTrips from '../components/drivertrips.component'
 import { useHistory } from 'react-router';
 import Button from 'react-bootstrap/Button'
+import IsAuthenticated from '../components/accessCheck.component';
 
 import form from '../modules/innerPage.module.css'
 
 const MyTrips = () => {
+    
+IsAuthenticated();
+
     return(
         <div className={form.authwrapper}>  
             <div className={form.authinner_table}>

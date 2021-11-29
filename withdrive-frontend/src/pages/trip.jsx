@@ -7,9 +7,7 @@ import NotFound from './notfound'
 import Rating from '@mui/material/Rating';
 import BackButton from '../components/backButton.component'
 
-
 import form from '../modules/innerPage.module.css'
-import text from '../modules/text.module.css'
 
 let id = window.location.pathname.split('/').pop();
 
@@ -54,7 +52,7 @@ return (
                             </tr>
                         </tbody>
                     </table>
-                    <center><h3><Button> Apply now!</Button></h3></center>
+                    <center><h3><Button onClick={()=>{window.history.pushState({}, '', "/trip/apply/"+id);window.location.reload();}}> Apply now!</Button></h3></center>
                     <br></br>
                     {/* <h4>Map of the ride:</h4> */}
                     <Map trip={trip} />    

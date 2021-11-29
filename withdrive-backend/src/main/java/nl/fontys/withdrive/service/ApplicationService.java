@@ -2,6 +2,7 @@ package nl.fontys.withdrive.service;
 
 import nl.fontys.withdrive.dto.tripApplication.ApplicationRequestDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationResponseDTO;
+import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.TripApplication;
 import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import nl.fontys.withdrive.interfaces.converter.IApplicationConverter;
@@ -25,9 +26,13 @@ public class ApplicationService implements IApplicationService {
     }
 
     @Override
-    public void Add(ApplicationRequestDTO application) {
+    public void Add(ApplicationRequestDTO application, UUID user) {
         if(application.getStatus().equals(ApplicationStatus.PENDING)){
-            saved.Create(applicationConverter.RequestDTOToEntity(application));
+            application.setUser(user);
+            TripApplication app = applicationConverter.RequestDTOToEntity(application);
+            if(app.getTrip().getDriver().getUserID() != user){
+                saved.Create(app);
+            }
         }
     }
 

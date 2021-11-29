@@ -48,7 +48,7 @@
 
 @media(max-width: 675px) {
 
-    .authinner_form .authinner_table .authinner_big{
+    .authinner_form, .authinner_table, .authinner_big{
         width: 80%;
         margin: auto;
         background: #ffffff;

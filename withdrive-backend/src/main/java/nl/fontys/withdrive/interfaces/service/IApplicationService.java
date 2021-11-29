@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface IApplicationService {
-    void Add(ApplicationRequestDTO application);
+    void Add(ApplicationRequestDTO application, UUID user);
 
     List<ApplicationResponseDTO> RetrieveByTripID(UUID id);
 

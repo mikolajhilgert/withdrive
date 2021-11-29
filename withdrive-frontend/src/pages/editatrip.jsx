@@ -15,10 +15,12 @@ import BackButton from '../components/backButton.component'
 import form from '../modules/innerPage.module.css'
 import text from '../modules/text.module.css'
 
+
 let id = window.location.pathname.split('/').pop();
 
-
 const EditTrip = () => {
+
+    IsAuthenticated();
 
     const [trip, setTrip] = useState();
     const [origin, setOrigin] = useState("");
@@ -29,7 +31,7 @@ const EditTrip = () => {
             setTrip(response.data);
             setOrigin(cities.find(o => o.city === response.data.origin));
             setDestination(cities.find(o => o.city === response.data.destination));
-            
+
         });
     }, [id])
 
@@ -65,7 +67,6 @@ const EditTrip = () => {
                 maxPassengers: max.current.value,
                 pricePerPassenger: price.current.value,
             };
-            console.log(trip);
             TripService.editTrip(trip);
             alert("Your trip listing has been updated!");
             History.push("/driver-trips");

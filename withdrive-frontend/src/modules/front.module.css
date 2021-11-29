@@ -31,7 +31,8 @@
 
 .postthumb img {
     padding-right: 30px;
-    display: block
+    display: block;
+    height: 500px;
 }
 
 @media(max-width: 675px) {
@@ -39,5 +40,11 @@
         text-align: center;
         margin: 0;
         line-height: 1;
+    }
+
+    .postthumb img {
+        padding-right: 0px;
+        display: block;
+        height: 160px;
     }
 }

@@ -31,7 +31,6 @@ const SignIn = () => {
             <form onSubmit={handleLogin}>
                 <center><LockOutlinedIcon/></center>
                 <h2><center>Sign In</center></h2>
-                <h4>              </h4>
                 <div className="form-group">
                     <label>Email address</label>
                     <input type="email" className="form-control" placeholder="Enter email" ref={email} required/>

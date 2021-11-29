@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+import IsAuthenticated from '../components/accessCheck.component';
 import { useHistory } from "react-router";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import TripService from '../services/TripService';
-import IsAuthenticated from '../components/accessCheck.component';
+
 import CitySelect from '../components/citySelect.component'
-import AuthService from '../services/AuthService';
 
 import form from '../modules/innerPage.module.css'
 import text from '../modules/text.module.css'
 
+
+
 const CreateTrip = () => {
-IsAuthenticated(AuthService.getCurrentUser());
+
+IsAuthenticated();
+
 const History =  useHistory();
 const [origin, setOrigin] = useState("");
 const [destination, setDestination] = useState("");

@@ -6,11 +6,12 @@ import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.jpa.IJPATripData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+@Repository @Transactional
 public class JPATripData implements ITripData {
     private final IJPATripData db;
 
@@ -55,7 +56,7 @@ public class JPATripData implements ITripData {
 
     @Override
     public List<Trip> retrieveActiveTrips() {
-        return db.getTripsByStatus(TripStatus.AWAITING);
+        return db.getTripsByStatus(TripStatus.OPEN);
     }
 
     @Override
@@ -69,7 +70,22 @@ public class JPATripData implements ITripData {
     }
 
     @Override
+    public List<Trip> retrieveTripsByUser(UUID id) {
+        return db.getTripsByUser(id.toString());
+    }
+
+    @Override
+    public List<Trip> retrieveTripsByDriver(UUID id) {
+        return db.getTripsByDriver(id.toString());
+    }
+
+    @Override
     public List<Trip> retrieveActiveTripsByOrigin(String origin) {
-        return db.getTripsByOriginAndStatusIs(origin,"AWAITING");
+        return db.getTripsByOriginAndStatusIs(origin,TripStatus.OPEN);
+    }
+
+    @Override
+    public void lockTrip(UUID id) {
+        db.lockTrip(id);
     }
 }

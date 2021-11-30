@@ -22,5 +22,5 @@ public class TripRequestDTO {
     private @Getter @Setter double pricePerPassenger;
     private @Getter @Setter UUID driver;
     private @Getter @Setter List<UUID> passengers;
-    private @Getter @Setter TripStatus status = TripStatus.AWAITING;
+    private @Getter @Setter TripStatus status = TripStatus.OPEN;
 }

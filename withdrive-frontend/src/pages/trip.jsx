@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,Fragment } from "react";
 import TripService from '../services/TripService';
 import Map from '../components/map.component'
 import moment from 'moment';
@@ -22,6 +22,14 @@ const Trip = () => {
 
     if(!trip) return <NotFound/>;
 
+function showButton(actual,max){
+    if(actual<max){
+        return(<Button onClick={()=>{window.history.pushState({}, '', "/trip/apply/"+id);window.location.reload();}}> Apply now!</Button>)
+    }else{
+        return("Trip is full!")
+    }
+}
+
 return (
 <>
     <br></br>
@@ -36,7 +44,7 @@ return (
                             <td>Price: €{trip.pricePerPassenger}</td>
                             </tr>
                             <tr>
-                            <td>Available seats: 2/{trip.maxPassengers}</td>
+                            <td>Available seats: {trip.passengers.length}/{trip.maxPassengers}</td>
                             </tr>
                             <tr>
                             <td>{trip.description}</td>
@@ -52,7 +60,8 @@ return (
                             </tr>
                         </tbody>
                     </table>
-                    <center><h3><Button onClick={()=>{window.history.pushState({}, '', "/trip/apply/"+id);window.location.reload();}}> Apply now!</Button></h3></center>
+                    
+                    <center><h3>{showButton(trip.passengers.length,trip.maxPassengers)}</h3></center>
                     <br></br>
                     {/* <h4>Map of the ride:</h4> */}
                     <Map trip={trip} />    

@@ -11,6 +11,16 @@ class TripService {
     getActiveTripsByDriver(){
         return axios.get(STATION_API_BASE_URL+"/active/driver",{headers: authHeader()});
     }
+    getActiveTripsByUser(){
+        return axios.get(STATION_API_BASE_URL+"/active",{headers: authHeader()});
+    }
+
+    getAllTripsByDriver(){
+        return axios.get(STATION_API_BASE_URL+"/alld",{headers: authHeader()});
+    }
+    getAllTripsByUser(){
+        return axios.get(STATION_API_BASE_URL+"/allu",{headers: authHeader()});
+    }
 
     getTrip(tripID){
         return axios.get(STATION_API_BASE_URL+"/"+tripID);

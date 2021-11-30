@@ -2,16 +2,22 @@ package nl.fontys.withdrive;
 
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Role;
+import nl.fontys.withdrive.enumeration.TripStatus;
+import nl.fontys.withdrive.service.TripService;
 import nl.fontys.withdrive.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.UUID;
 
+@EnableScheduling
 @SpringBootApplication
 public class WithdriveApplication {
 
@@ -43,5 +49,7 @@ public class WithdriveApplication {
           userService.addRoleToUser("admin@withdrive.com","ROLE_ADMIN");
         };
     }
+
+
 
 }

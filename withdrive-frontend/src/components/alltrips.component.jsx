@@ -5,32 +5,17 @@ import Button from 'react-bootstrap/Button'
 import TripService from "../services/TripService";
 import moment from 'moment';
 import NotFound from '../pages/notfound';
-import Select from '../components/citySelect.component'
+import Select from './citySelect.component'
 
 
 
 const columns = [
-  { field: 'date', headerName: 'Date', flex: 1},
+  { field: 'date', headerName: 'Date', width: "300"},
   { field: 'origin', headerName: 'From',flex: 1 },
   { field: 'destination', headerName: 'To', flex: 1 },
   { field: 'pricePerPassenger', headerName: 'Price', flex: 1 },
   { field: 'maxPassengers', headerName: 'Passengers', flex: 1},
-  {
-    field: "Apply",
-    flex: 1,
-    renderCell: (cellValues) => {
-      return (
-        <Button
-          color="primary"
-          onClick={() => {
-            handleClick(cellValues);
-          }}
-        >
-          View details
-        </Button>
-      );
-    }
-  },
+  { field: "Apply",flex: 1,renderCell: (cellValues) => {return (<Button color="primary" onClick={() => { handleClick(cellValues); }} >View details</Button>);}},
 ];
 
 function handleClick(selected) {
@@ -58,7 +43,7 @@ export default function DataTable() {
   trips.map((trip) => {
     trip['id'] = trip.tripID
     trip.date = moment(trip.date).format('LLLL')
-    trip.maxPassengers = "0" + "/" + trip.maxPassengers
+    trip.maxPassengers = trip.passengers.length + "/" + trip.maxPassengers
   })
 
   if (!trips) return <NotFound />;

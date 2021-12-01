@@ -39,10 +39,21 @@ public class ApplicationController {
         return new ResponseEntity ("Please provide a valid user number.", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("u/{userID}")
-    public ResponseEntity<List<ApplicationResponseDTO>> GetAppByUser(@PathVariable(value = "userID") UUID id){
+    @GetMapping("u")
+    public ResponseEntity<List<ApplicationResponseDTO>> GetAppByUser(){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<ApplicationResponseDTO> apps = this.applications.RetrieveByUserID(loggedInUser.getUserID());
+        if(apps!=null){
+            return ResponseEntity.ok().body(apps);
+        }
+        //return ResponseEntity.notFound().build();
+        return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);
+    }
 
-        List<ApplicationResponseDTO> apps = this.applications.RetrieveByUserID(id);
+    @GetMapping("u/active")
+    public ResponseEntity<List<ApplicationResponseDTO>> GetActiveAppByUser(){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<ApplicationResponseDTO> apps = this.applications.RetrieveActiveByUserID(loggedInUser.getUserID());
         if(apps!=null){
             return ResponseEntity.ok().body(apps);
         }

@@ -16,14 +16,19 @@ public interface IJPATripData extends JpaRepository<Trip, UUID> {
     Trip getFirstByTripID(UUID ID);
     List<Trip> getTripsByStatus(TripStatus status);
     List<Trip> getTripsByOriginAndStatusIs(String origin,TripStatus status);
-    @Query(value = "select t.* from trips as t left outer join applications as ap on t.id = ap.tripid where t.status=\"OPEN\" and ap.userid = ?1",nativeQuery = true)
+
+    @Query(value = "select t.* from trips as t inner join applications as ap on t.id = ap.tripid where t.status=\"OPEN\" and ap.userid = ?1",nativeQuery = true)
     List<Trip> getActiveTripsByUser(String ID);
-    @Query(value = "select t.* from trips as t left outer join applications as ap on t.id = ap.tripid where t.status=\"OPEN\" and t.driver_id = ?1",nativeQuery = true)
+
+    @Query(value = "select t.* from trips as t where t.status=\"OPEN\" and t.driver_id = ?1",nativeQuery = true)
     List<Trip> getActiveTripsByDriver(String ID);
-    @Query(value = "select t.* from trips as t left outer join applications as ap on t.id = ap.tripid and ap.userid = ?1",nativeQuery = true)
+
+    @Query(value = "select t.* from trips as t inner join applications as ap on t.id = ap.tripid and ap.userid = ?1 where t.status=\"LOCKED\"",nativeQuery = true)
     List<Trip> getTripsByUser(String ID);
-    @Query(value = "select t.* from trips as t left outer join applications as ap on t.id = ap.tripid and t.driver_id = ?1",nativeQuery = true)
+
+    @Query(value = "select t.* from trips as t where t.driver_id = ?1 and t.status=\"LOCKED\"",nativeQuery = true)
     List<Trip> getTripsByDriver(String ID);
+
     @Modifying
     @Query("update Trip as t set t.status = 'LOCKED' where t.tripID = ?1")
     void lockTrip(UUID id);

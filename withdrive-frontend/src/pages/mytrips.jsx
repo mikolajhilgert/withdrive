@@ -1,26 +1,35 @@
-import DriverTrips from '../components/drivertrips.component'
-import { useHistory } from 'react-router';
-import Button from 'react-bootstrap/Button'
+import React, { useState } from 'react'
+import Switch from '@mui/material/Switch';
 import IsAuthenticated from '../components/accessCheck.component';
-
+import BackButton from '../components/backButton.component'
 import form from '../modules/innerPage.module.css'
+import UserTrips from '../components/usertrips.component'
+import UserAllTrips from '../components/userAllTrips.component'
+
+
 
 const MyTrips = () => {
-    
-IsAuthenticated();
+    const [select, setSelect] = useState(false);
+    IsAuthenticated();
+    const handleToggle = () => {
+        setSelect(!select);
+    }
+
+    function Table() {
+        if (select) {
+            return <UserAllTrips/>
+        }
+        return <UserTrips/>
+    }
 
     return(
         <div className={form.authwrapper}>  
             <div className={form.authinner_table}>
-                <div>
-                    <h1>
-                <Button size="lg" onClick={() => {
-                    window.history.pushState({}, '', "driver-trips");
-                    window.location.replace("driver-trips");}}>
-                    Driver view 🚕
-                </Button></h1>
-                <h4>                               </h4>
-                <h3>Your upcoming trips as a passenger:</h3>       
+            <BackButton />
+            <div>
+                <h3>Your trips as a passenger:</h3>
+                    All trips<Switch onClick={() => handleToggle()} defaultChecked /> Upcoming trips
+                    <Table />
                 </div>
             </div>
       </div>

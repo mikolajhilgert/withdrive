@@ -114,8 +114,8 @@ const Navigation = () => {
                                             onKeyDown={handleListKeyDown}
                                         >
                                             <a className={text.hide} href='/create-trip'><MenuItem onClick={handleClose}>Create Ride</MenuItem></a>
-                                            <a className={text.hide} href='/driver-trips'><MenuItem onClick={handleClose}>My Rides</MenuItem></a>
-                                            <a className={text.hide} href='/my-trips'><MenuItem onClick={handleClose}>Driver Rides</MenuItem></a>
+                                            <a className={text.hide} href='/my-trips'><MenuItem onClick={handleClose}>My Rides</MenuItem></a>
+                                            <a className={text.hide} href='/driver-trips'><MenuItem onClick={handleClose}>Driver Rides</MenuItem></a>
                                         </MenuList>
                                     </ClickAwayListener>
                                 </Paper>
@@ -125,7 +125,8 @@ const Navigation = () => {
                 </div>
                 {/* <Nav.Link href='/create-trip'>Create Ride</Nav.Link>
                 <Nav.Link href='/driver-trips'>Driver Rides</Nav.Link>
-                <Nav.Link href='/my-trips'>My Rides</Nav.Link> */}
+                 */}
+                <Nav.Link href='/my-profile'>My Profile</Nav.Link>
                 <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )

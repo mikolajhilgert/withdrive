@@ -13,7 +13,7 @@ import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite'
 
 
 const columns = [
-  { field: 'date', headerName: 'Date', flex: 1 , minWidth: 250},
+  { field: 'date', headerName: 'Date', flex: 1 , minWidth: 300},
   { field: 'origin', headerName: 'From', flex: 1 , minWidth: 150},
   { field: 'destination', headerName: 'To', flex: 1 , minWidth: 150},
   { field: 'maxPassengers', headerName: 'Capacity', flex: 1 , minWidth: 150},

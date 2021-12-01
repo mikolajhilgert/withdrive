@@ -16,6 +16,12 @@ class ApplicationService {
     rejectApp(reject){
         axios.post(STATION_API_BASE_URL+"/reject",reject,{headers: authHeader()});
     }
+    getActiveAppsByUser(){
+        return axios.get(STATION_API_BASE_URL+"/u/active",{headers: authHeader()});
+    }
+    getAllAppsByUser(){
+        return axios.get(STATION_API_BASE_URL+"/u",{headers: authHeader()});
+    }
 }
 
 export default new ApplicationService()

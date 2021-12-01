@@ -5,12 +5,15 @@ import nl.fontys.withdrive.dto.tripApplication.ApplicationResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.TripApplication;
 import nl.fontys.withdrive.enumeration.ApplicationStatus;
+import nl.fontys.withdrive.enumeration.TripStatus;
 import nl.fontys.withdrive.interfaces.converter.IApplicationConverter;
 import nl.fontys.withdrive.interfaces.data.IApplicationData;
 import nl.fontys.withdrive.interfaces.service.IApplicationService;
+import nl.fontys.withdrive.interfaces.service.ITripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,7 +46,24 @@ public class ApplicationService implements IApplicationService {
 
     @Override
     public List<ApplicationResponseDTO> RetrieveByUserID(UUID id) {
-        return applicationConverter.ListEntityToResponseDTO(saved.RetrieveByUserID(id));
+        List<ApplicationResponseDTO> temp = new ArrayList<>();
+        for(ApplicationResponseDTO app : applicationConverter.ListEntityToResponseDTO(saved.RetrieveByUserID(id))){
+            if(app.getTrip().getStatus() == TripStatus.LOCKED){
+                temp.add(app);
+            }
+        }
+        return temp;
+    }
+
+    @Override
+    public List<ApplicationResponseDTO> RetrieveActiveByUserID(UUID id) {
+        List<ApplicationResponseDTO> temp = new ArrayList<>();
+        for(ApplicationResponseDTO app : applicationConverter.ListEntityToResponseDTO(saved.RetrieveByUserID(id))){
+            if(app.getTrip().getStatus() == TripStatus.OPEN){
+                temp.add(app);
+            }
+        }
+        return temp;
     }
 
     @Override

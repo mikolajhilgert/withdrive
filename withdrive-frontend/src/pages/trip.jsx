@@ -44,7 +44,7 @@ return (
                             <td>Price: €{trip.pricePerPassenger}</td>
                             </tr>
                             <tr>
-                            <td>Available seats: {trip.passengers.length}/{trip.maxPassengers}</td>
+                            <td>Available seats: {trip.maxPassengers-trip.passengers.length}/{trip.maxPassengers}</td>
                             </tr>
                             <tr>
                             <td>{trip.description}</td>

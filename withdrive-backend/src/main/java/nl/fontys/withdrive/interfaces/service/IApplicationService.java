@@ -15,6 +15,8 @@ public interface IApplicationService {
 
     List<ApplicationResponseDTO> RetrieveByUserID(UUID id);
 
+    List<ApplicationResponseDTO> RetrieveActiveByUserID(UUID id);
+
     ApplicationRequestDTO RetrieveByUserIDAndTripID(UUID uID, UUID tID);
 
     void RespondToApplication(ApplicationRequestDTO application, ApplicationStatus status);

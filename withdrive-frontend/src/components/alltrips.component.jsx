@@ -10,11 +10,11 @@ import Select from './citySelect.component'
 
 
 const columns = [
-  { field: 'date', headerName: 'Date', width: "300"},
+  { field: 'date', headerName: 'Date', width: "320"},
   { field: 'origin', headerName: 'From',flex: 1 },
   { field: 'destination', headerName: 'To', flex: 1 },
   { field: 'pricePerPassenger', headerName: 'Price', flex: 1 },
-  { field: 'maxPassengers', headerName: 'Passengers', flex: 1},
+  { field: 'maxPassengers', headerName: 'Available seats', flex: 1},
   { field: "Apply",flex: 1,renderCell: (cellValues) => {return (<Button color="primary" onClick={() => { handleClick(cellValues); }} >View details</Button>);}},
 ];
 
@@ -43,7 +43,7 @@ export default function DataTable() {
   trips.map((trip) => {
     trip['id'] = trip.tripID
     trip.date = moment(trip.date).format('LLLL')
-    trip.maxPassengers = trip.passengers.length + "/" + trip.maxPassengers
+    trip.maxPassengers = trip.maxPassengers-trip.passengers.length + "/" + trip.maxPassengers
   })
 
   if (!trips) return <NotFound />;

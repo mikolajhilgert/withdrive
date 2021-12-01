@@ -35,15 +35,8 @@ import authHeader from './AuthHeader';
     }
 
     checkToken(){
-        const check = () => {
-            return axios.get(API_URL + "check",{headers: authHeader()}).then(response => {return true}).catch(error => {return false;});
-        }
-        return check();
-    }
-
-    checkTokenAdmin(){
-        const check = () => {
-            return axios.get(API_URL + "check/admin",{headers: authHeader()}).then(response => {return true}).catch(error => {return false;});
+        async function check(){
+            return await axios.get(API_URL + "check",{headers: authHeader()}).then(response => {return true}).catch(error => {return false;});
         }
         return check();
     }

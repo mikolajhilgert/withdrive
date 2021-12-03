@@ -43,8 +43,8 @@ public class WithdriveApplication {
           userService.saveRole(new Role(UUID.fromString("a5c7c167-7fe0-4f2b-867a-55e3c0aeb5ab"),"ROLE_ADMIN"));
 
           userService.Add(new UserDTO(UUID.fromString("7d013b4a-8061-45d9-b0f4-47897e219901"),"admin@withdrive.com","John","Doe","10-02-1990","Male","+420606058797","password",null));
-          userService.Add(new UserDTO(UUID.fromString("d1ec1b55-3297-445e-be4f-a31ddc342ad7"),"user@withdrive.com","John","Doe","10-02-1990","Male","+420606058797","password",null));
-          userService.Add(new UserDTO(UUID.fromString("c88ec1bb-974b-48bf-9306-ff3fa7827e80"),"user1@withdrive.com","John","Doe","10-02-1990","Male","+420606058797","password",null));
+          userService.Add(new UserDTO(UUID.fromString("d1ec1b55-3297-445e-be4f-a31ddc342ad7"),"driver@withdrive.com","John","Doe","10-02-1990","Male","+420606058797","password",null));
+          userService.Add(new UserDTO(UUID.fromString("c88ec1bb-974b-48bf-9306-ff3fa7827e80"),"passenger@withdrive.com","John","Doe","10-02-1990","Male","+420606058797","password",null));
 
           userService.addRoleToUser("admin@withdrive.com","ROLE_ADMIN");
         };

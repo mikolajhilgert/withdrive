@@ -23,7 +23,6 @@ function UserList(){
             <div key={user.clientNumber}>
             <div>Client UUID:⠀{user.userID}</div>
             <div>Email:⠀{user.email}</div>
-            {/* <div>Last name:⠀{user.password}</div> */}
             <br></br>
             </div>
         )}

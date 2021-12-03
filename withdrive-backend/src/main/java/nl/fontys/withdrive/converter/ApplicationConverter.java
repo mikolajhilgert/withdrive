@@ -22,7 +22,7 @@ public class ApplicationConverter implements IApplicationConverter {
     private final ITripData trips;
 
 
-    public ApplicationConverter(ModelMapper mapper, IUserData users, ITripData trips, IApplicationData apps){
+    public ApplicationConverter(ModelMapper mapper, IUserData users, ITripData trips){
         this.mapper = mapper;
         this.users = users;
         this.trips = trips;

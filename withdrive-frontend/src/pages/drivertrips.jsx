@@ -26,13 +26,9 @@ const MyTrips = () => {
             <div className={form.authinner_table}>
                 <BackButton />
                 <div>
-                    <h3>Upcoming driver trips:</h3>
-                    {/* All trips<Switch onClick={() => handleToggle()} defaultChecked /> Upcoming trips */}
-                    <DriverTrips />
-                    <br></br><br></br>
-                    <h3>Past driver trips:</h3>
-                    <DriverAllTrips />
-                    {/* <Table /> */}
+                    <h3>Driver trips:</h3>
+                    All trips<Switch onClick={() => handleToggle()} defaultChecked /> Upcoming trips
+                    <Table />
                 </div>
                 <br></br>
             </div>

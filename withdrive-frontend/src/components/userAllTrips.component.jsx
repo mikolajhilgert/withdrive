@@ -16,38 +16,42 @@ import ApplicationService from '../services/ApplicationService';
 
 
 
-const columns = [
-    { field: 'date', headerName: 'Date', flex: 1, minWidth: 300 },
-    { field: 'origin', headerName: 'From', flex: 1, minWidth: 150 },
-    { field: 'destination', headerName: 'To', flex: 1, minWidth: 150 },
-    {
-        field: "Action",
-        flex: 1, minWidth: 220,
-        renderCell: (cellValues) => {
-            return (
-                <div>
-                    <IconButton aria-label="view" onClick={() => { handleClick(0, cellValues) }}>
-                        <Preview color="primary" />
-                    </IconButton>
-                    <IconButton aria-label="view" onClick={() => { handleClick(0, cellValues) }}>
-                        <Star color="primary" />
-                    </IconButton>
-                </div>
-            );
-        }
-    },
-];
 
-function handleClick(selected) {
-    Popup.alert(selected.row.text);
-}
+export default function DriverTable(props) {
 
-export default function DriverTable() {
+    function handleClick(selected) {
+        props.rating();
+        // Popup.alert(selected.row.text);
+    }
+
+    const columns = [
+        { field: 'date', headerName: 'Date', flex: 1, minWidth: 300 },
+        { field: 'origin', headerName: 'From', flex: 1, minWidth: 150 },
+        { field: 'destination', headerName: 'To', flex: 1, minWidth: 150 },
+        {
+            field: "Action",
+            flex: 1, minWidth: 220,
+            renderCell: (cellValues) => {
+                return (
+                    <div>
+                        <IconButton aria-label="view" onClick={() => { handleClick(cellValues) }}>
+                            <Preview color="primary" />
+                        </IconButton>
+                        <IconButton aria-label="view" onClick={() => { handleClick( cellValues) }}>
+                            <Star color="primary" />
+                        </IconButton>
+                    </div>
+                );
+            }
+        },
+    ];
+
     const [apps, setApps] = useState([]);
 
     useEffect(() => {
         getAvailableTrips()
     }, [])
+
 
     const getAvailableTrips = () => {
         ApplicationService.getAllAppsByUser().then((response) => {
@@ -63,7 +67,7 @@ export default function DriverTable() {
     })
 
     if (!apps) return <NotFound />;
-
+    
     return (
         <div style={{ height: 600, width: 'flex' }}>
             <DataGrid

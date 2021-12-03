@@ -27,8 +27,11 @@ public class User {
     @ManyToMany(fetch=FetchType.EAGER)
     private @Getter @Setter Collection<Role> roles = new ArrayList<>();
 
-    @ManyToMany(fetch=FetchType.LAZY)
-    private @Getter @Setter Collection<Rating> ratings = new ArrayList<>();
+//    @ManyToMany(fetch=FetchType.LAZY)
+//    private @Getter @Setter Collection<Rating> givenRatings = new ArrayList<>();
+
+//    @ManyToMany(fetch=FetchType.LAZY)
+//    private @Getter @Setter Collection<Rating> ratings = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "driver",
@@ -40,9 +43,12 @@ public class User {
     @OneToMany(mappedBy = "applicant")
     Set<TripApplication> application;
 
-//    public User(UUID userID,String email, String firstName, String lastName,String dateOfBirth,String gender, String phoneNumber,String password){
-//        this.userID = userID;
-//    }
+    @OneToMany(mappedBy = "user")
+    Set<Rating> rater;
+
+    @OneToMany(mappedBy = "rater")
+    Set<Rating> user;
+
 }
 
 

@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import nl.fontys.withdrive.enumeration.TripStatus;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -35,6 +36,13 @@ public class Trip{
     @OneToMany(mappedBy = "trip")
     Set<TripApplication> application;
 
+    @OneToMany(mappedBy = "trip")
+    Set<Rating> trip;
+
     @ManyToOne
     private @Getter @Setter User driver;
+
+//    @OneToMany
+//    private @Getter @Setter
+//    Collection<Rating> ratings = new ArrayList<>();
 }

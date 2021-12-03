@@ -81,13 +81,16 @@ const Navigation = () => {
     } else {
         menu = (
             <Fragment>
+                <Nav.Link href='/my-profile'>My Profile</Nav.Link>
                 <div>
+                    
                     <Nav.Link
                         ref={anchorRef}
 
                         onClick={handleToggle}
                     >
                         Ride Navigator
+                        
                     </Nav.Link>
                     <Popper
                         open={open}
@@ -126,7 +129,7 @@ const Navigation = () => {
                 {/* <Nav.Link href='/create-trip'>Create Ride</Nav.Link>
                 <Nav.Link href='/driver-trips'>Driver Rides</Nav.Link>
                  */}
-                <Nav.Link href='/my-profile'>My Profile</Nav.Link>
+                
                 <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )

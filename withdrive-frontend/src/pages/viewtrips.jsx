@@ -9,7 +9,6 @@ const Index = () => {
         <div className={form.authwrapper}>  
             <div className={form.authinner_table}>
                 <h1 className={text.center}>Today is {moment(new Date()).format("LLLL")}</h1>
-            {/* <h3>{selection} upcoming trips:</h3> */}
             <TripTable/>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useHistory } from "react-router";
 import cities from '../data/nl.json'
 import Select, { createFilter } from 'react-select';
@@ -13,8 +13,6 @@ import NotFound from '../pages/notfound'
 import BackButton from '../components/backButton.component'
 
 import form from '../modules/innerPage.module.css'
-import text from '../modules/text.module.css'
-
 
 let id = window.location.pathname.split('/').pop();
 
@@ -56,7 +54,7 @@ const EditTrip = () => {
     
     const handleRegistration = e => {
         e.preventDefault();
-        if (origin.city != null && destination.city != null && startDate != new Date()) {
+        if (origin.city !== null && destination.city !== null && startDate !== new Date()) {
             const trip = {
                 tripID: id,
                 origin: origin.city,

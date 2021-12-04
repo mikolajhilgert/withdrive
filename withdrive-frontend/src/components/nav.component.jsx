@@ -2,7 +2,6 @@ import { Navbar, Nav, Container } from 'react-bootstrap';
 import withdriveLogoSmall from "../images/withdrive-w.png";
 import AuthService from "../services/AuthService";
 import { Fragment } from 'react';
-import Button from '@mui/material/Button';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
@@ -10,7 +9,6 @@ import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import React from 'react';
-import {useHistory} from 'react-router'
 import text from '../modules/text.module.css'
 
 var isLoggedIn = 0;
@@ -24,7 +22,6 @@ if (AuthService.getCurrentUser() !== null && AuthService.getCurrentUser().roles.
 const Navigation = () => {
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
-    const History =  useHistory();
 
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);

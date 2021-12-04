@@ -23,8 +23,6 @@ const Item = () => {
 
     return (
         <>
-        
-        {/* () => history.goBack() */}
         <IconButton aria-label="delete" onClick={handleClickOpen}>
             <ArrowBackIos/>
         </IconButton>

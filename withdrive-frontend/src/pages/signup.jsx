@@ -36,9 +36,6 @@ import form from '../modules/innerPage.module.css'
             }
         }
 
-
-
-
         return (
         <div className={form.authwrapper}>  
             <div className={form.authinner_form}>

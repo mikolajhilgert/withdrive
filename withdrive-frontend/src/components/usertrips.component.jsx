@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { useEffect, useState, useRef } from "react";
+import { DataGrid } from '@mui/x-data-grid';
+import { useEffect, useState } from "react";
 import moment from 'moment';
 import NotFound from '../pages/notfound';
 import { IconButton } from '@mui/material';
@@ -9,10 +9,6 @@ import Popup from 'react-popup';
 import '../data/popup.css'
 import Button from 'react-bootstrap/Button'
 import ApplicationService from '../services/ApplicationService';
-import { BrandingWatermarkOutlined } from '@material-ui/icons';
-
-
-
 
 const columns = [
     { field: 'status', headerName: 'Status', flex: 1, minWidth: 150 },
@@ -89,7 +85,6 @@ export default function DriverTable() {
                 rows={apps}
                 columns={columns}
                 pageSize={5}
-                rowsPerPageOptions={[5]}
                 disableColumnSelector
                 disableMultipleSelection={true}
                 disableSelectionOnClick={true}

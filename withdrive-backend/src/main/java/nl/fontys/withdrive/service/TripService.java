@@ -13,6 +13,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +94,7 @@ public class TripService implements ITripService {
     @Scheduled(fixedDelay = 1800000)
     private void tryLockTrips(){
         for (Trip x : saved.retrieveActiveTrips()){
-            if(LocalDate.parse(x.getDate().replace("T"," "), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).isEqual(LocalDate.now())){
+            if(LocalDateTime.parse(x.getDate().replace("T"," "), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")).isEqual(LocalDateTime.now())){
                 saved.lockTrip(x.getTripID());
             }
         }

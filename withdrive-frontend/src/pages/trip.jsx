@@ -1,4 +1,4 @@
-import React, { useState,useEffect,Fragment } from "react";
+import React, { useState} from "react";
 import TripService from '../services/TripService';
 import Map from '../components/map.component'
 import moment from 'moment';
@@ -14,7 +14,7 @@ let id = window.location.pathname.split('/').pop();
 const Trip = () => {
     const [trip,setTrip] = useState(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         TripService.getTrip(id).then((response) => {
             setTrip(response.data);
         });
@@ -63,7 +63,6 @@ return (
                     
                     <center><h3>{showButton(trip.passengers.length,trip.maxPassengers)}</h3></center>
                     <br></br>
-                    {/* <h4>Map of the ride:</h4> */}
                     <Map trip={trip} />    
         </div>
     </div>

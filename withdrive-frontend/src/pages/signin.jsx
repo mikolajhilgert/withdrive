@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { useHistory } from "react-router";
 import AuthService from "../services/AuthService";
 import LockOutlinedIcon from '@material-ui/icons/LockOpen';

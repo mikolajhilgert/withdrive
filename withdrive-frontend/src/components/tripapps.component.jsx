@@ -5,7 +5,6 @@ import moment from 'moment';
 import NotFound from '../pages/notfound';
 import ApplicationService from '../services/ApplicationService';
 import Button from 'react-bootstrap/Button'
-import Dialog from './dialogApplication.component'
 import Popup from 'react-popup';
 import '../data/popup.css'
 
@@ -105,7 +104,6 @@ export default function AppTable() {
         rows={apps}
         columns={columns}
         pageSize={5}
-        rowsPerPageOptions={[5]}
         disableColumnSelector
         disableMultipleSelection={true}
         disableSelectionOnClick={true}

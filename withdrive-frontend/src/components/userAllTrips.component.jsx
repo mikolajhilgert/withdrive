@@ -1,17 +1,12 @@
-import React, {Fragment} from 'react';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { useEffect, useState, useRef } from "react";
-import TripService from "../services/TripService";
+import React from 'react';
+import { DataGrid} from '@mui/x-data-grid';
+import { useEffect, useState} from "react";
 import moment from 'moment';
 import NotFound from '../pages/notfound';
 import { IconButton } from '@mui/material';
-import Edit from '@material-ui/icons/Edit';
-import Applications from '@material-ui/icons/Assignment';
 import Preview from '@material-ui/icons/Pageview';
 import Star from '@material-ui/icons/Star';
-import Popup from 'react-popup';
 import '../data/popup.css'
-import Button from 'react-bootstrap/Button'
 import ApplicationService from '../services/ApplicationService';
 
 
@@ -19,9 +14,14 @@ import ApplicationService from '../services/ApplicationService';
 
 export default function DriverTable(props) {
 
-    function handleClick(selected) {
-        props.rating();
-        // Popup.alert(selected.row.text);
+    function handleClick(mode, selected) {
+        switch(mode){
+            case 0:
+                break;
+            default:
+                props.rating(selected.id);
+                break;
+        }
     }
 
     const columns = [
@@ -34,10 +34,10 @@ export default function DriverTable(props) {
             renderCell: (cellValues) => {
                 return (
                     <div>
-                        <IconButton aria-label="view" onClick={() => { handleClick(cellValues) }}>
+                        <IconButton aria-label="view" onClick={() => { handleClick(0,cellValues) }}>
                             <Preview color="primary" />
                         </IconButton>
-                        <IconButton aria-label="view" onClick={() => { handleClick( cellValues) }}>
+                        <IconButton aria-label="view" onClick={() => { handleClick(1,cellValues) }}>
                             <Star color="primary" />
                         </IconButton>
                     </div>
@@ -75,7 +75,6 @@ export default function DriverTable(props) {
                 rows={apps}
                 columns={columns}
                 pageSize={5}
-                rowsPerPageOptions={[5]}
                 disableColumnSelector
                 disableMultipleSelection={true}
                 disableSelectionOnClick={true}

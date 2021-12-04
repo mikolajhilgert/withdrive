@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { useEffect, useState, useRef } from "react";
+import { DataGrid } from '@mui/x-data-grid';
+import { useEffect, useState } from "react";
 import TripService from "../services/TripService";
 import moment from 'moment';
 import NotFound from '../pages/notfound';
@@ -85,7 +85,6 @@ export default function DriverTable() {
         rows={trips}
         columns={columns}
         pageSize={5}
-        rowsPerPageOptions={[5]}
         disableColumnSelector
         disableMultipleSelection={true}
         disableSelectionOnClick={true}

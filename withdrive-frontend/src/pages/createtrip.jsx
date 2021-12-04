@@ -31,7 +31,7 @@ const max = React.useRef();
 
 const handleRegistration = e => {
     e.preventDefault();
-    if(origin != null && destination != null && startDate != new Date()){
+    if(origin !== null && destination !== null && startDate !== new Date()){
         const trip = {
             origin: origin,
             destination: destination,

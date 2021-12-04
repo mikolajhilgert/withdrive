@@ -1,10 +1,8 @@
-import React,{useState} from 'react'
+import React from 'react'
 import TripApps from '../components/tripapps.component'
-import Button from 'react-bootstrap/Button'
 import BackButton from '../components/backButton.component'
 import form from '../modules/innerPage.module.css'
 import IsAuthenticated from '../components/accessCheck.component';
-import Dialog from '../components/dialogApplication.component'
 
 
 

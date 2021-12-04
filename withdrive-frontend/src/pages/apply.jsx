@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import IsAuthenticated from '../components/accessCheck.component';
 import { useHistory } from "react-router";
 import 'react-datepicker/dist/react-datepicker.css';
-import TripService from '../services/TripService';
 
 import form from '../modules/innerPage.module.css'
 import text from '../modules/text.module.css'
@@ -12,7 +11,7 @@ let id = window.location.pathname.split('/').pop();
 
 const CreateTrip = () => {
 
-    IsAuthenticated();
+IsAuthenticated();
 
 const History =  useHistory();
 const app = React.useRef();

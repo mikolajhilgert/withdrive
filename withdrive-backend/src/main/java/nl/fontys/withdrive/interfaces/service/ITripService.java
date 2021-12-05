@@ -16,6 +16,7 @@ public interface ITripService {
     List<TripResponseDTO> retrieveActiveTrips();
 
     List<TripResponseDTO> retrieveActiveTripsByUser(UUID id);
+    List<TripResponseDTO> retrieveActiveTripsByOrigin(String origin);
     List<TripResponseDTO> retrieveActiveTripsByDriver(UUID id);
 
     List<TripResponseDTO> retrieveTripsByUser(UUID id);

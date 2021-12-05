@@ -70,9 +70,9 @@ const Navigation = () => {
     } else if (isLoggedIn === 1) {
         menu = (
             <Fragment>
-                <Nav.Link href='/sign-in'>View Users</Nav.Link>
-                <Nav.Link href='/sign-up'>View Complaints</Nav.Link>
-
+                <Nav.Link href='/view-users'>View Users</Nav.Link>
+                <Nav.Link href='/view-complaints'>View Complaints</Nav.Link>
+                <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )
     } else {
@@ -122,11 +122,7 @@ const Navigation = () => {
                             </Grow>
                         )}
                     </Popper>
-                </div>
-                {/* <Nav.Link href='/create-trip'>Create Ride</Nav.Link>
-                <Nav.Link href='/driver-trips'>Driver Rides</Nav.Link>
-                 */}
-                
+                </div>                
                 <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )

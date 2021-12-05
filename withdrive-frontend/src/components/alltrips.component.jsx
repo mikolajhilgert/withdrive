@@ -25,7 +25,6 @@ function handleClick(selected) {
 
 export default function DataTable() {
   const [trips, setTrips] = useState([]);
-  const [city, setCity] = useState([]);
   useEffect(() => {
     getAvailableTrips()
   }, [])
@@ -37,7 +36,15 @@ export default function DataTable() {
   }
 
   const setSearch = (data) => {
-    setCity(data);
+    if(data !== ""){
+      TripService.getTripsByOrigin(data).then((response) => {
+        setTrips(response.data);
+      });
+    }else{
+      TripService.getTrips().then((response) => {
+        setTrips(response.data);
+      });
+    }
   }
 
   trips.map((trip) => {

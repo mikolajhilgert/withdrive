@@ -20,7 +20,6 @@ IsAuthenticated();
                 <TripApps/>
                 </div>
                 <br></br>
-                {/* /<Dialog text={"xddd"}/> */}
             </div>
         </div>
     );

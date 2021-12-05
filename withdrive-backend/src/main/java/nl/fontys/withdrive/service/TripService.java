@@ -52,6 +52,11 @@ public class TripService implements ITripService {
     }
 
     @Override
+    public List<TripResponseDTO> retrieveActiveTripsByOrigin(String origin) {
+        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTripsByOrigin(origin));
+    }
+
+    @Override
     public List<TripResponseDTO> retrieveActiveTripsByDriver(UUID id) {
         return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTripsByDriver(id));
     }

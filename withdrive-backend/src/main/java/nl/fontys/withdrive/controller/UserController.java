@@ -114,6 +114,11 @@ public class UserController {
         return ResponseEntity.ok().body("");
     }
 
+    @GetMapping("/admin")
+    public ResponseEntity<?>checkTokenStatusAdmin(){
+        return ResponseEntity.ok().body("");
+    }
+
     @GetMapping("/token/refresh")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorisationHeader = request.getHeader(AUTHORIZATION);

@@ -1,11 +1,13 @@
 import React, { useState} from "react";
 import TripService from '../services/TripService';
+import ReviewService from "../services/ReviewService";
 import Map from '../components/map.component'
 import moment from 'moment';
 import { Button } from "react-bootstrap";
 import NotFound from './notfound'
 import Rating from '@mui/material/Rating';
 import BackButton from '../components/backButton.component'
+import AuthService from "../services/AuthService";
 
 import form from '../modules/innerPage.module.css'
 
@@ -13,18 +15,34 @@ let id = window.location.pathname.split('/').pop();
 
 const Trip = () => {
     const [trip,setTrip] = useState(null);
+    const [rating,setRating] = useState(0);
 
     React.useEffect(() => {
         TripService.getTrip(id).then((response) => {
             setTrip(response.data);
+            
         });
+
     }, [id])
+
+    if(trip !== null){
+        ReviewService.getAverageRating(trip.driver.userID).then((response) => {
+            setRating(response.data);
+        });
+    }
 
     if(!trip) return <NotFound/>;
 
 function showButton(actual,max){
     if(actual<max){
-        return(<Button onClick={()=>{window.history.pushState({}, '', "/trip/apply/"+id);window.location.reload();}}> Apply now!</Button>)
+        return(<Button onClick={()=>{
+            if(AuthService.getCurrentUser() !== null){
+                window.history.pushState({}, '', "/trip/apply/"+id);window.location.reload();
+            }else{
+                window.history.pushState({}, '', "/sign-in");window.location.reload();
+            }
+            
+        }}> Apply now!</Button>)
     }else{
         return("Trip is full!")
     }
@@ -53,7 +71,7 @@ return (
                                 <td>
                                 Driver rating:
                                 <br></br>
-                                <Rating name="read-only" value={3.45} precision={0.5} readOnly/>
+                                <Rating name="read-only" value={rating} precision={0.5} readOnly/>
                                 <br></br>
                                 <a href="reviews">Read reviews of the driver</a>
                                 </td>

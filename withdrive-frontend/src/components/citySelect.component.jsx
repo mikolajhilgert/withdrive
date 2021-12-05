@@ -12,6 +12,7 @@ const CitySelect = (props) =>{
             props.setCity(data.city);
         }else{
             setCity("");
+            props.setCity("");
         }
     }
 

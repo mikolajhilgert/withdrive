@@ -1,0 +1,15 @@
+sat
+(
+  (define-fun I () Int
+    9)
+  (define-fun T () Int
+    2)
+  (define-fun D () Int
+    1)
+  (define-fun O () Int
+    0)
+  (define-fun Output () Int
+    200)
+  (define-fun Input () Int
+    200)
+)

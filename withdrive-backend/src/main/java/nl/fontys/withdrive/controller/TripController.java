@@ -1,5 +1,6 @@
 package nl.fontys.withdrive.controller;
 
+import nl.fontys.withdrive.dto.rating.RatingDTO;
 import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
@@ -101,6 +102,16 @@ public class TripController {
         }
         return new ResponseEntity("Please provide a valid number.", HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/active/{origin}")
+    public ResponseEntity<List<TripResponseDTO>> GetActiveTripsByOrigin(@PathVariable String origin){
+        List<TripResponseDTO> trips = this.trips.retrieveActiveTripsByOrigin(origin);
+        if(trips!=null){
+            return ResponseEntity.ok().body(trips);
+        }
+        return new ResponseEntity("Please provide a valid number.", HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/active/driver")
     public ResponseEntity<List<TripResponseDTO>> GetActiveTripsByDriver() {
         UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());

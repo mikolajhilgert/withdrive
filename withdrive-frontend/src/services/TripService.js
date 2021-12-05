@@ -1,41 +1,45 @@
 import axios from 'axios';
 import authHeader from './AuthHeader';
 
-const STATION_API_BASE_URL = "http://localhost:8080/trip";
+const API_BASE_URL = "http://localhost:8080/trip";
 
 class TripService {
     getTrips(){
-        return axios.get(STATION_API_BASE_URL);
+        return axios.get(API_BASE_URL);
+    }
+
+    getTripsByOrigin(origin){
+        return axios.get(API_BASE_URL+"/active/"+origin);
     }
 
     getActiveTripsByDriver(){
-        return axios.get(STATION_API_BASE_URL+"/active/driver",{headers: authHeader()});
+        return axios.get(API_BASE_URL+"/active/driver",{headers: authHeader()});
     }
     getActiveTripsByUser(){
-        return axios.get(STATION_API_BASE_URL+"/active",{headers: authHeader()});
+        return axios.get(API_BASE_URL+"/active",{headers: authHeader()});
     }
 
     getAllTripsByDriver(){
-        return axios.get(STATION_API_BASE_URL+"/alld",{headers: authHeader()});
+        return axios.get(API_BASE_URL+"/alld",{headers: authHeader()});
     }
     getAllTripsByUser(){
-        return axios.get(STATION_API_BASE_URL+"/allu",{headers: authHeader()});
+        return axios.get(API_BASE_URL+"/allu",{headers: authHeader()});
     }
 
     getTrip(tripID){
-        return axios.get(STATION_API_BASE_URL+"/"+tripID);
+        return axios.get(API_BASE_URL+"/"+tripID);
     }
 
     postTrip(trip){
-        axios.post(STATION_API_BASE_URL,trip,{headers: authHeader()});
+        axios.post(API_BASE_URL,trip,{headers: authHeader()});
     }
 
     editTrip(trip){
-        axios.put(STATION_API_BASE_URL+'/update',trip,{headers: authHeader()});
+        axios.put(API_BASE_URL+'/update',trip,{headers: authHeader()});
     }
 
     deleteTrip(tripID){
-        axios.delete(STATION_API_BASE_URL+"/"+tripID,{headers: authHeader()})
+        axios.delete(API_BASE_URL+"/"+tripID,{headers: authHeader()})
     }
 
 

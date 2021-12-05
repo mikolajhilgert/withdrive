@@ -40,6 +40,13 @@ import authHeader from './AuthHeader';
         }
         return check();
     }
+
+    checkTokenAdmin(){
+        async function check(){
+            return await axios.get(API_URL + "admin",{headers: authHeader()}).then(response => {return true}).catch(error => {return false;});
+        }
+        return check();
+    }
 }
 
     export default new AuthService();

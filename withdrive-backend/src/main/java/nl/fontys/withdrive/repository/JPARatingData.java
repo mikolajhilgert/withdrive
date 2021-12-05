@@ -32,7 +32,7 @@ public class JPARatingData implements IRatingData {
 
     @Override
     public float averageRatingUser(UUID user) {
-        return 0;
+        return db.averageRatingUser(user.toString());
     }
 
     @Override

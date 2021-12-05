@@ -8,8 +8,11 @@ import nl.fontys.withdrive.interfaces.service.ITripService;
 import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -33,6 +36,11 @@ public class RatingController {
         rating.setRater(loggedInUser.getUserID());
         rating.setUser(trips.RetrieveByNumber(rating.getTrip()).getDriver().getUserID());
         ratings.add(rating);
+    }
+
+    @GetMapping("avg/{userID}")
+    public float getRatingsByUser(@PathVariable UUID userID) {
+        return ratings.averageRatingUser(userID);
     }
 
     @GetMapping("/by/user")

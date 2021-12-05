@@ -8,6 +8,10 @@ class ReviewService {
     postRating(review){
         return axios.post(API_BASE_URL,review,{headers: authHeader()});
     }
+
+    getAverageRating(userID){
+        return axios.get(API_BASE_URL+"/avg/"+userID);
+    }
 }
 
 export default new ReviewService()

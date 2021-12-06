@@ -2,10 +2,10 @@ import React from "react";
 import form from '../../modules/innerPage.module.css'
 import text from '../../modules/text.module.css'
 import IsAuthenticated from '../../components/accessCheck.component';
-import NotFound from "../notfound";
 
 const ViewUsers = () => {
-    IsAuthenticated("admin")
+    IsAuthenticated("admin");
+
         return (
         <div className={form.authwrapper}>  
             <div className={form.authinner_table}>

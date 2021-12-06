@@ -18,6 +18,7 @@ import EditTrip from "./pages/editatrip";
 import ApplyTrip from "./pages/apply";
 import ViewTripApps from "./pages/viewApps"
 import AdminViewUsers from "./pages/admin/viewusers"
+import AdminSendAlerts from "./pages/admin/sendalert"
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path="/trip/apply" component={ApplyTrip} />
           <Route path="/trip/apps" component={ViewTripApps} />
           <Route path="/view-users" component={AdminViewUsers} />
+          <Route path="/send-alerts" component={AdminSendAlerts} />
           <Route component={NotFound}/>
         </Switch>
       </Router>

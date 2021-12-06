@@ -42,7 +42,4 @@ public class Trip{
     @ManyToOne
     private @Getter @Setter User driver;
 
-//    @OneToMany
-//    private @Getter @Setter
-//    Collection<Rating> ratings = new ArrayList<>();
 }

@@ -16,7 +16,7 @@ function IsAuthenticated(userType) {
             case "admin":
                 AuthService.checkTokenAdmin().then(response => {
                     if (response === false) {
-                        notFound();
+                        out();
                     }
                 })
             default:

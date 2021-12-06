@@ -10,6 +10,10 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
 import React from 'react';
 import text from '../modules/text.module.css'
+import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
+import { store } from 'react-notifications-component';
+
 
 var isLoggedIn = 0;
 
@@ -18,8 +22,51 @@ if (AuthService.getCurrentUser() !== null && AuthService.getCurrentUser().roles.
 } else if (AuthService.getCurrentUser() !== null) {
     isLoggedIn = 2;
 }
-
+const ENDPOINT = "http://localhost:8080/ws";
 const Navigation = () => {
+
+    window.onbeforeunload = function () {
+        stompClient.close();
+    };
+
+    const [stompClient, setStompClient] = React.useState(null);
+    React.useEffect(() => {
+        // use SockJS as the websocket client
+        const socket = SockJS(ENDPOINT);
+        // Set stomp to use websockets
+        const stompClient = Stomp.over(socket);
+        // connect to the backend
+        stompClient.connect({}, () => {
+            // subscribe to the backend
+            stompClient.subscribe('/topic/greetings', (data) => {
+
+                console.log(data);
+                onMessageReceived(data);
+            });
+        });
+        // maintain the client for sending and receiving
+        setStompClient(stompClient);
+    }, []);
+
+    function onMessageReceived(data) {
+        const result = JSON.parse(data.body);
+        store.addNotification({
+            title: "Alert from the admin:",
+            message: result.content,
+            type: "info",
+            insert: "top",
+            container: "top-left",
+            animationIn: ["animate__animated", "animate__fadeIn"],
+            animationOut: ["animate__animated", "animate__fadeOut"],
+            dismiss: {
+                duration: 5000,
+                onScreen: true
+            }
+        });
+
+    };
+
+
     const [open, setOpen] = React.useState(false);
     const anchorRef = React.useRef(null);
 
@@ -29,7 +76,7 @@ const Navigation = () => {
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            
+
             console.log(anchorRef.current.contains(event.target));
             return;
         }
@@ -80,14 +127,14 @@ const Navigation = () => {
             <Fragment>
                 <Nav.Link href='/my-profile'>My Profile</Nav.Link>
                 <div>
-                    
+
                     <Nav.Link
                         ref={anchorRef}
 
                         onClick={handleToggle}
                     >
                         Ride Navigator
-                        
+
                     </Nav.Link>
                     <Popper
                         open={open}
@@ -122,7 +169,7 @@ const Navigation = () => {
                             </Grow>
                         )}
                     </Popper>
-                </div>                
+                </div>
                 <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )

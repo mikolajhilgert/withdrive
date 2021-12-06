@@ -19,6 +19,7 @@ import ApplyTrip from "./pages/apply";
 import ViewTripApps from "./pages/viewApps"
 import AdminViewUsers from "./pages/admin/viewusers"
 import AdminSendAlerts from "./pages/admin/sendalert"
+import MyProfile from "./pages/myprofile"
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/trip/apps" component={ViewTripApps} />
           <Route path="/view-users" component={AdminViewUsers} />
           <Route path="/send-alerts" component={AdminSendAlerts} />
+          <Route path="/my-profile" component={MyProfile} />
           <Route component={NotFound}/>
         </Switch>
       </Router>

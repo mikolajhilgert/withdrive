@@ -8,8 +8,6 @@ import { IconButton } from '@mui/material';
 import Edit from '@material-ui/icons/Edit';
 import Applications from '@material-ui/icons/Assignment';
 import Preview from '@material-ui/icons/Pageview';
-import Popup from 'react-popup';
-import '../data/popup.css'
 
 
 
@@ -88,9 +86,6 @@ export default function DriverTable() {
         disableColumnSelector
         disableMultipleSelection={true}
         disableSelectionOnClick={true}
-        onCellDoubleClick={(params) => {
-          Popup.alert(params.value)
-        }}
       />
     </div>
   );

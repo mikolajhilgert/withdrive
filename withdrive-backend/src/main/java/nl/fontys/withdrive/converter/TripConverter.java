@@ -2,11 +2,9 @@ package nl.fontys.withdrive.converter;
 
 import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
-import nl.fontys.withdrive.dto.user.UserDTO;
-import nl.fontys.withdrive.dto.user.UserViewDTO;
+import nl.fontys.withdrive.dto.user.UserMiniDTO;
 import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.interfaces.converter.ITripConverter;
-import nl.fontys.withdrive.interfaces.data.IApplicationData;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -36,7 +34,7 @@ public class TripConverter implements ITripConverter {
     @Override
     public TripResponseDTO EntityToResponseDTO(Trip trip) {
         TripResponseDTO output = mapper.map(trip,TripResponseDTO.class);
-        output.setDriver(mapper.map(users.RetrieveByID(trip.getDriver().getUserID()), UserViewDTO.class));
+        output.setDriver(mapper.map(users.RetrieveByID(trip.getDriver().getUserID()), UserMiniDTO.class));
         output.setPassengers(ExtractPassengers(trip));
         return output;
     }
@@ -44,10 +42,10 @@ public class TripConverter implements ITripConverter {
     @Override
     public List<TripResponseDTO> ListEntityToResponseDTO(List<Trip> trips) {
         List<TripResponseDTO> output = new ArrayList<>();
-        List<UserViewDTO> drivers = users.GetDrivers().stream().map(x->mapper.map(x,UserViewDTO.class)).collect(Collectors.toList());
+        List<UserMiniDTO> drivers = users.GetDrivers().stream().map(x->mapper.map(x, UserMiniDTO.class)).collect(Collectors.toList());
         for(Trip trip : trips){
             TripResponseDTO temp = mapper.map(trip,TripResponseDTO.class);
-            for(UserViewDTO driver : drivers){
+            for(UserMiniDTO driver : drivers){
                 if(driver.getUserID() == trip.getTripID()){
                     temp.setDriver(driver);
                     break;
@@ -59,9 +57,9 @@ public class TripConverter implements ITripConverter {
         return output;
     }
 
-    private List<UserViewDTO> ExtractPassengers(Trip trip){
-        List<UserViewDTO> pass;
-        pass = users.RetrieveUsersByTripID(trip.getTripID()).stream().map(x->mapper.map(x,UserViewDTO.class)).collect(Collectors.toList());
+    private List<UserMiniDTO> ExtractPassengers(Trip trip){
+        List<UserMiniDTO> pass;
+        pass = users.RetrieveUsersByTripID(trip.getTripID()).stream().map(x->mapper.map(x, UserMiniDTO.class)).collect(Collectors.toList());
         return pass;
     }
 }

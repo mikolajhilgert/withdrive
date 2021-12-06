@@ -1,7 +1,7 @@
 package nl.fontys.withdrive.controller;
 
-import nl.fontys.withdrive.dto.Greeting;
-import nl.fontys.withdrive.dto.HelloMessage;
+import nl.fontys.withdrive.dto.alert.Greeting;
+import nl.fontys.withdrive.dto.alert.HelloMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;

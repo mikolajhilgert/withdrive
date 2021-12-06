@@ -22,8 +22,8 @@
         top: 15px;
         right: 20px;
         padding: 0;
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
         cursor: pointer;
         outline: none;
         text-align: center;
@@ -86,10 +86,10 @@
     }
 
     .mm-popup__box {
-        width: 350px;
+        width: 550px;
         position: fixed;
         top: 10%;
-        left: 50%;
+        left: 45%;
         margin-left: -175px;
         background: #fff;
         box-shadow: 0px 5px 20px 0px rgba(126,137,140,0.20);
@@ -97,6 +97,8 @@
         border: 1px solid #B8C8CC;
         overflow: hidden;
         z-index: 1001;
+        overflow-wrap: break-word;
+
     }
 
         .mm-popup__box__header {
@@ -115,7 +117,7 @@
         .mm-popup__box__body {
             padding: 20px;
             line-height: 1.4;
-            font-size: 14px;
+            font-size: auto;
             color: #454B4D;
             background: #fff;
             position: relative;

@@ -1,4 +1,4 @@
-package nl.fontys.withdrive.dto;
+package nl.fontys.withdrive.dto.alert;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

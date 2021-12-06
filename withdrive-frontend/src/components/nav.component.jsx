@@ -1,14 +1,13 @@
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import withdriveLogoSmall from "../images/withdrive-w.png";
 import AuthService from "../services/AuthService";
-import { Fragment } from 'react';
+import React,{ Fragment } from 'react';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import Grow from '@mui/material/Grow';
 import Paper from '@mui/material/Paper';
 import Popper from '@mui/material/Popper';
 import MenuItem from '@mui/material/MenuItem';
 import MenuList from '@mui/material/MenuList';
-import React from 'react';
 import text from '../modules/text.module.css'
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
@@ -25,11 +24,8 @@ if (AuthService.getCurrentUser() !== null && AuthService.getCurrentUser().roles.
 const ENDPOINT = "http://localhost:8080/ws";
 const Navigation = () => {
 
-    window.onbeforeunload = function () {
-        stompClient.close();
-    };
-
     const [stompClient, setStompClient] = React.useState(null);
+    
     React.useEffect(() => {
         // use SockJS as the websocket client
         const socket = SockJS(ENDPOINT);
@@ -51,7 +47,7 @@ const Navigation = () => {
     function onMessageReceived(data) {
         const result = JSON.parse(data.body);
         store.addNotification({
-            title: "Alert from the admin:",
+            title: "Message from the admin:",
             message: result.content,
             type: "info",
             insert: "top",
@@ -118,8 +114,9 @@ const Navigation = () => {
         menu = (
             <Fragment>
                 <Nav.Link href='/view-users'>View Users</Nav.Link>
-                <Nav.Link href='/view-complaints'>View Complaints</Nav.Link>
-                <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
+                <Nav.Link href='/send-alerts'>Send Alert</Nav.Link>
+                {/* <Nav.Link href='/view-complaints'>View Complaints</Nav.Link> */}
+                <Nav.Link onClick={()=>{stompClient.disconnect();}} href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )
     } else {
@@ -170,7 +167,7 @@ const Navigation = () => {
                         )}
                     </Popper>
                 </div>
-                <Nav.Link href='/sign-out'>Sign Out</Nav.Link>
+                <Nav.Link onClick={()=>{stompClient.disconnect();}} href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )
     }

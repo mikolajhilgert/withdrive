@@ -8,6 +8,7 @@ import NotFound from './notfound'
 import Rating from '@mui/material/Rating';
 import BackButton from '../components/backButton.component'
 import AuthService from "../services/AuthService";
+import Popup from 'react-popup';
 
 import form from '../modules/innerPage.module.css'
 
@@ -48,6 +49,10 @@ function showButton(actual,max){
     }
 }
 
+function showRatings(){
+    Popup.alert("Reviews:")
+}
+
 return (
 <>
     <br></br>
@@ -73,13 +78,15 @@ return (
                                 <br></br>
                                 <Rating name="read-only" value={rating} precision={0.5} readOnly/>
                                 <br></br>
-                                <a href="reviews">Read reviews of the driver</a>
+                                <button onClick={() => {showRatings()}}>See driver reviews</button>
+                                {/* <a href="" onClick={}>Read reviews of the driver</a> */}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     
                     <center><h3>{showButton(trip.passengers.length,trip.maxPassengers)}</h3></center>
+                    {/* <center><h3>{showButton(trip.passengers.length,trip.maxPassengers)}</h3></center> */}
                     <br></br>
                     <Map trip={trip} />    
         </div>

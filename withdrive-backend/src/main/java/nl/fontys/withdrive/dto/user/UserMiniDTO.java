@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserViewDTO {
+public class UserMiniDTO {
     private @Getter @Setter UUID userID;
     private @Getter @Setter String firstName;
     private @Getter @Setter String lastName;

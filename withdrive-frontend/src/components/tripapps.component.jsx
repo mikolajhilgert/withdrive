@@ -6,7 +6,7 @@ import NotFound from '../pages/notfound';
 import ApplicationService from '../services/ApplicationService';
 import Button from 'react-bootstrap/Button'
 import Popup from 'react-popup';
-import '../data/popup.css'
+import SkyLight from 'react-skylight';
 
 let id = window.location.pathname.split('/').pop();
 
@@ -67,6 +67,9 @@ const columns = [
         
       default:
         // alert(selected.row.text);
+        // <SkyLight hideOnOverlayClicked ref={ref => this.simpleDialog = ref} title="Hi, I'm a simple modal">
+        // {selected.row.text}
+        // </SkyLight>
         Popup.alert(selected.row.text);
         // <Dialog text={selected.row.text}/>
         break;

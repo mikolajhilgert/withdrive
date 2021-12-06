@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import nl.fontys.withdrive.dto.RoleToUserForm;
+import nl.fontys.withdrive.dto.user.RoleToUserForm;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Role;
 import nl.fontys.withdrive.interfaces.service.IUserService;
@@ -94,8 +94,8 @@ public class UserController {
     }
 
     @DeleteMapping("{userID}")
-    public ResponseEntity<UserDTO> DeleteUser(@PathVariable UUID number) {
-        if (this.users.Delete(number)) {
+    public ResponseEntity<?> deleteUser(@PathVariable UUID userID) {
+        if (this.users.Delete(userID)) {
             return ResponseEntity.noContent().build();
         } else {
             return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);

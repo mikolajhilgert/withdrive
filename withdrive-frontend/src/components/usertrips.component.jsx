@@ -6,7 +6,6 @@ import NotFound from '../pages/notfound';
 import { IconButton } from '@mui/material';
 import Preview from '@material-ui/icons/Pageview';
 import Popup from 'react-popup';
-import '../data/popup.css'
 import Button from 'react-bootstrap/Button'
 import ApplicationService from '../services/ApplicationService';
 

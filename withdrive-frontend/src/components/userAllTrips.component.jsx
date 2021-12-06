@@ -6,7 +6,6 @@ import NotFound from '../pages/notfound';
 import { IconButton } from '@mui/material';
 import Preview from '@material-ui/icons/Pageview';
 import Star from '@material-ui/icons/Star';
-import '../data/popup.css'
 import ApplicationService from '../services/ApplicationService';
 
 

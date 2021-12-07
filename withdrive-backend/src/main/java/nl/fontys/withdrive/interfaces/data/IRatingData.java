@@ -8,6 +8,6 @@ import java.util.UUID;
 public interface IRatingData {
     void add(Rating rating);
     Rating getRatingByUserAndTrip(UUID user, UUID trip);
-    float averageRatingUser(UUID user);
+    Float averageRatingUser(UUID user);
     List<Rating> getRatingsPerUser(UUID user);
 }

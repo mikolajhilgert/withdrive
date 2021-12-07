@@ -13,5 +13,5 @@ import java.util.UUID;
 public interface IJPARatingData extends JpaRepository<Rating, UUID> {
 //    Rating findByRaterAndTrip(User user, Trip trip);
     @Query(value = "SELECT AVG(rating) FROM ratings WHERE userid= :userID and type=\"PASSENGER\"",nativeQuery = true)
-    float averageRatingUser(@Param("userID") String userID);
+    Float averageRatingUser(@Param("userID") String userID);
 }

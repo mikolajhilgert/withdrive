@@ -2,6 +2,7 @@ package nl.fontys.withdrive.interfaces.data;
 
 
 import nl.fontys.withdrive.entity.Trip;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +19,8 @@ public interface ITripData {
     void Delete(UUID number);
 
     List<Trip> retrieveActiveTrips();
+
+    Page<Trip> retrieveActiveAsPage(Integer page);
 
     List<Trip> retrieveActiveTripsByUser(UUID id);
 

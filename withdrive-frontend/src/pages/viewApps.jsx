@@ -2,14 +2,14 @@ import React from 'react'
 import TripApps from '../components/tripapps.component'
 import BackButton from '../components/backButton.component'
 import form from '../modules/innerPage.module.css'
-import IsAuthenticated from '../components/accessCheck.component';
+
 
 
 
 const TripApplications = () => {
 
 
-IsAuthenticated();
+
 
     return(
         <div className={form.authwrapper}>  

@@ -5,6 +5,10 @@ import nl.fontys.withdrive.enumeration.TripStatus;
 import nl.fontys.withdrive.interfaces.data.ITripData;
 import nl.fontys.withdrive.interfaces.jpa.IJPATripData;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +16,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository @Transactional
-public class JPATripData implements ITripData {
+public class TripData implements ITripData {
     private final IJPATripData db;
 
     @Autowired
-    public JPATripData(IJPATripData db){
+    public TripData(IJPATripData db){
         this.db = db;
     }
 
@@ -57,6 +61,12 @@ public class JPATripData implements ITripData {
     @Override
     public List<Trip> retrieveActiveTrips() {
         return db.getTripsByStatus(TripStatus.OPEN);
+    }
+
+    @Override
+    public Page<Trip> retrieveActiveAsPage(Integer page) {
+        Pageable pageableRequest = PageRequest.of(page, 5);
+        return db.getActiveTripsPage(pageableRequest);
     }
 
     @Override

@@ -15,11 +15,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository @Transactional
-public class JPAUserData implements IUserData {
+public class UserData implements IUserData {
     private final IJPAUserData db;
     private final IJPARoleData roles;
     @Autowired
-    public JPAUserData(IJPAUserData db, IJPARoleData roles){
+    public UserData(IJPAUserData db, IJPARoleData roles){
         this.db = db;
         this.roles = roles;
     }
@@ -62,7 +62,11 @@ public class JPAUserData implements IUserData {
 
     @Override
     public void Update(User user) {
+
         User toUpdate = RetrieveByID(user.getUserID());
+        if(user.getPassword() != null){
+            toUpdate.setPassword(user.getPassword());
+        }
         toUpdate.setUserID(user.getUserID());
         toUpdate.setEmail(user.getEmail());
         toUpdate.setDateOfBirth(user.getDateOfBirth());
@@ -70,7 +74,7 @@ public class JPAUserData implements IUserData {
         toUpdate.setLastName(user.getLastName());
         toUpdate.setGender(user.getGender());
         toUpdate.setPhoneNumber(user.getPhoneNumber());
-        toUpdate.setPassword(user.getPassword());
+
         db.save(toUpdate);
     }
 

@@ -3,13 +3,13 @@ import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import form from '../../modules/innerPage.module.css'
 import Button from 'react-bootstrap/Button'
-import IsAuthenticated from '../../components/accessCheck.component';
+
 
 // Set the backend location
 const ENDPOINT = "http://localhost:8080/ws";
 
 function Alert() {
-    IsAuthenticated("admin");
+
 
     const [stompClient, setStompClient] = useState(null);
     const [msgToSend, setSendMessage] = useState("Enter your message here!");

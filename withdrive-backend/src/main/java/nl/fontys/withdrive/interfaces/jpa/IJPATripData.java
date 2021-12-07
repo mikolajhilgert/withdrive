@@ -2,6 +2,8 @@ package nl.fontys.withdrive.interfaces.jpa;
 
 import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.enumeration.TripStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,6 +15,9 @@ public interface IJPATripData extends JpaRepository<Trip, UUID> {
     Trip getFirstByTripID(UUID ID);
     List<Trip> getTripsByStatus(TripStatus status);
     List<Trip> getTripsByOriginAndStatusIs(String origin,TripStatus status);
+
+    @Query(value = "select t.* from trips t.status=\"OPEN\"",nativeQuery = true)
+    Page<Trip> getActiveTripsPage(Pageable pageable);
 
     @Query(value = "select t.* from trips as t inner join applications as ap on t.id = ap.tripid where t.status=\"OPEN\" and ap.userid = ?1",nativeQuery = true)
     List<Trip> getActiveTripsByUser(String ID);
@@ -29,7 +34,6 @@ public interface IJPATripData extends JpaRepository<Trip, UUID> {
     @Modifying
     @Query("update Trip as t set t.status = 'LOCKED' where t.tripID = ?1")
     void lockTrip(UUID id);
-
 
 //    @Modifying
 //    @Query("UPDATE trips SET status = 'LOCKED' WHERE id = ?1")

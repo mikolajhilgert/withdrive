@@ -13,16 +13,35 @@ class UserService {
         return axios.post(API_BASE_URL, User);
     }
 
+    updateUser(email,
+        firstName,
+        lastName,
+        dateOfBirth,
+        gender,
+        phoneNumber,
+        password){
+        return axios.put(API_BASE_URL,{
+            email,
+            firstName,
+            lastName,
+            dateOfBirth,
+            gender,
+            phoneNumber,
+            password
+        },
+            {headers: authHeader()});
+    }
+
     getUserById(UserID){
         return axios.get(API_BASE_URL + '/' + UserID);
     }
 
-    updateUser(User){
-        return axios.put(API_BASE_URL, User);
-    }
-
     deleteUser(UserID){
         return axios.delete(API_BASE_URL + '/' + UserID,{headers: authHeader()});
+    }
+
+    getCurrentDetails(){
+        return axios.get(API_BASE_URL+"/myDetails",{headers: authHeader()});
     }
 }
 

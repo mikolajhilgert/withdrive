@@ -25,6 +25,8 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.20'
     implementation ('org.springframework.boot:spring-boot-starter-websocket')
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.modelmapper:modelmapper:2.3.7'
@@ -38,6 +40,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-devtools:2.5.5'
     implementation 'org.springframework.boot:spring-boot-starter:2.5.5'
     implementation group: 'com.auth0', name: 'java-jwt', version: '3.18.2'
+    implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
 
     // add dependencies to H2 in-memory database and Java Persistency API
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

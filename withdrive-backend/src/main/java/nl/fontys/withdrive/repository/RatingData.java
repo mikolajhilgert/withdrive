@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository @Transactional
-public class JPARatingData implements IRatingData {
+public class RatingData implements IRatingData {
     private final IJPARatingData db;
 
     @Autowired
-    public JPARatingData(IJPARatingData db){
+    public RatingData(IJPARatingData db){
         this.db = db;
     }
 
@@ -31,7 +31,10 @@ public class JPARatingData implements IRatingData {
     }
 
     @Override
-    public float averageRatingUser(UUID user) {
+    public Float averageRatingUser(UUID user) {
+        if(db.averageRatingUser(user.toString())==null){
+            return 0.0f;
+        }
         return db.averageRatingUser(user.toString());
     }
 

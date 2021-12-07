@@ -115,7 +115,6 @@ const Navigation = () => {
             <Fragment>
                 <Nav.Link href='/view-users'>View Users</Nav.Link>
                 <Nav.Link href='/send-alerts'>Send Alert</Nav.Link>
-                {/* <Nav.Link href='/view-complaints'>View Complaints</Nav.Link> */}
                 <Nav.Link onClick={()=>{stompClient.disconnect();}} href='/sign-out'>Sign Out</Nav.Link>
             </Fragment>
         )
@@ -123,6 +122,7 @@ const Navigation = () => {
         menu = (
             <Fragment>
                 <Nav.Link href='/my-profile'>My Profile</Nav.Link>
+                <Nav.Link href='' onClick={()=>{window.location.href = "mailto:mail.withdrive@gmail.com?subject=Withdrive Contact";}}>Contact</Nav.Link>
                 <div>
 
                     <Nav.Link

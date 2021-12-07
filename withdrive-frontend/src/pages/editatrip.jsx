@@ -7,7 +7,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import TripService from '../services/TripService';
 import CustomOption from '../components/selectFix.component';
-import IsAuthenticated from '../components/accessCheck.component';
+
 import AuthService from '../services/AuthService';
 import NotFound from '../pages/notfound'
 import BackButton from '../components/backButton.component'
@@ -18,7 +18,7 @@ let id = window.location.pathname.split('/').pop();
 
 const EditTrip = () => {
 
-    IsAuthenticated();
+    
 
     const [trip, setTrip] = useState();
     const [origin, setOrigin] = useState("");
@@ -34,7 +34,6 @@ const EditTrip = () => {
     }, [id])
 
 
-    IsAuthenticated(AuthService.getCurrentUser());
     const History = useHistory();
 
     const [open, setOpen] = React.useState(false);

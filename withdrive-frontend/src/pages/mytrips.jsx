@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Switch from '@mui/material/Switch';
-import IsAuthenticated from '../components/accessCheck.component';
+
 import BackButton from '../components/backButton.component'
 import form from '../modules/innerPage.module.css'
 import UserTrips from '../components/usertrips.component'
@@ -26,7 +26,7 @@ const MyTrips = () => {
 
 
 
-    IsAuthenticated();
+    
     const handleToggle = () => {
         setSelect(!select);
     }

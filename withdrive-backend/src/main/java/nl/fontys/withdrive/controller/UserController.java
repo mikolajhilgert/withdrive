@@ -12,6 +12,7 @@ import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,6 +56,17 @@ public class UserController {
         return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
     }
 
+    @GetMapping("myDetails")
+    public ResponseEntity<UserDTO> GetUserDetails(){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        UserDTO user = this.users.RetrieveByID(loggedInUser.getUserID());
+        if(user!=null){
+            user.setPassword("");
+            return ResponseEntity.ok().body(user);
+        }
+        return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/count")
     public ResponseEntity<UserDTO> GetUserCount(){
         List<UserDTO> users = this.users.RetrieveAll();
@@ -83,13 +95,16 @@ public class UserController {
 
     @PutMapping()
     public ResponseEntity<UserDTO> UpdateUser(@RequestBody UserDTO user){
-        if(this.users.Update(user)){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        user.setUserID(loggedInUser.getUserID());
+        if (users.existsByEmail(user.getEmail()) && !Objects.equals(user.getEmail(), loggedInUser.getEmail())){
+            String entity =  "An user with the email:" + user.getEmail() + " already exists.";
+            return new ResponseEntity(entity,HttpStatus.CONFLICT);
+        } else {
+            this.users.Update(user);
             String url = "user" + "/" + user.getUserID(); // url of the created student
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);
-        }
-        else{
-            return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
         }
     }
 

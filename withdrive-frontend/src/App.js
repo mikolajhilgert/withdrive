@@ -1,7 +1,8 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect} from "react-router-dom";
+import AuthService from './services/AuthService';
 
 import Index from "./pages";
 import Login from "./pages/signin";
@@ -22,25 +23,53 @@ import AdminSendAlerts from "./pages/admin/sendalert"
 import MyProfile from "./pages/myprofile"
 
 function App() {
+  function requireAuth() {
+    let result = true;
+    AuthService.checkToken().then(response=> {
+      result=response;
+    })
+    if (AuthService.getCurrentUser()!==null && result===true ) {
+      return true;
+    }
+    else return false;
+  }
+
+  function requireAdminAuth(){
+    let result = true;
+    AuthService.checkTokenAdmin().then(response=> {
+      result=response;
+    })
+    if (AuthService.getCurrentUser()!==null && result===true ) {
+      if(AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")===true){
+        return true;
+      }
+      else return false;
+    }
+    else return false;
+  }
+  
   return (
     <Router>
       <Nav/>
         <Switch>
           <Route exact path='/' component={Index} />
-          <Route path="/sign-in" component={Login} />
-          <Route path="/sign-up" component={SignUp} />
           <Route path="/view-trips" component={ViewTrips} />
-          <Route path="/create-trip" component={CreateTrip} />
           <Route path="/sign-out" component={SignOut} />
           <Route path="/trip/view" component={ViewTrip} />
-          <Route path="/my-trips" component={MyTrips} />
-          <Route path="/driver-trips" component={DriverTrips} />
-          <Route path="/trip/edit" component={EditTrip} />
-          <Route path="/trip/apply" component={ApplyTrip} />
-          <Route path="/trip/apps" component={ViewTripApps} />
-          <Route path="/view-users" component={AdminViewUsers} />
-          <Route path="/send-alerts" component={AdminSendAlerts} />
-          <Route path="/my-profile" component={MyProfile} />
+          
+          <Route path="/sign-in"render={() => (requireAuth() ? (<Redirect to="/view-trips"/>) : (<Login/>))} />
+          <Route path="/sign-up" render={() => (requireAuth() ? (<Redirect to="/sign-in"/>) : (<SignUp/>))} />
+          <Route path="/create-trip" render={() => (requireAuth() ? (<CreateTrip/>) : (<NotFound/>))} />
+          <Route path="/my-trips" render={() => (requireAuth() ? (<MyTrips/>) : (<NotFound/>))} />
+          <Route path="/driver-trips" render={() => (requireAuth() ? (<DriverTrips/>) : (<NotFound/>))} />
+          <Route path="/trip/edit" render={() => (requireAuth() ? (<EditTrip/>) : (<NotFound/>))} />
+          <Route path="/trip/apply" render={() => (requireAuth() ? (<ApplyTrip/>) : (<NotFound/>))} />
+          <Route path="/trip/apps" render={() => (requireAuth() ? (<ViewTripApps/>) : (<NotFound/>))} />
+          <Route path="/my-profile" render={() => (requireAuth() ? (<MyProfile/>) : (<NotFound/>))} />
+
+          <Route path="/view-users" render={() => (requireAdminAuth() ? (<AdminViewUsers/>) : (<NotFound/>))} />
+          <Route path="/send-alerts" render={() => (requireAdminAuth() ? (<AdminSendAlerts/>) : (<NotFound/>))} />
+          
           <Route component={NotFound}/>
         </Switch>
       </Router>

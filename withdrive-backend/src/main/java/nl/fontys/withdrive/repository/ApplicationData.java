@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class JPAApplicationData implements IApplicationData {
+public class ApplicationData implements IApplicationData {
 
     private final IJPAApplicationData db;
 
     @Autowired
-    public JPAApplicationData(IJPAApplicationData db){
+    public ApplicationData(IJPAApplicationData db){
         this.db = db;
     }
 

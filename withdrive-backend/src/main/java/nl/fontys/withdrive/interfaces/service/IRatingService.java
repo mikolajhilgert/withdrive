@@ -9,6 +9,6 @@ import java.util.UUID;
 public interface IRatingService {
     void add(RatingDTO rating);
     RatingDTO getRatingByUserAndTrip(UUID user, UUID trip);
-    float averageRatingUser(UUID user);
+    Float averageRatingUser(UUID user);
     List<AnonymousRatingDTO> getRatingsPerUser(UUID user);
 }

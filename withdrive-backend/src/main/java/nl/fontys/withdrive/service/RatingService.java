@@ -35,7 +35,7 @@ public class RatingService implements IRatingService {
     }
 
     @Override
-    public float averageRatingUser(UUID user) {
+    public Float averageRatingUser(UUID user) {
         return saved.averageRatingUser(user);
     }
 

@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import IsAuthenticated from '../components/accessCheck.component';
+
 import { useHistory } from "react-router";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -15,7 +15,7 @@ import text from '../modules/text.module.css'
 
 const CreateTrip = () => {
 
-IsAuthenticated();
+
 
 const History =  useHistory();
 const [origin, setOrigin] = useState("");

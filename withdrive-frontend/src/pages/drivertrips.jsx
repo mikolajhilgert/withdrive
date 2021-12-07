@@ -4,11 +4,11 @@ import DriverTrips from '../components/drivertrips.component'
 import DriverAllTrips from '../components/driveralltrips.component'
 import BackButton from '../components/backButton.component'
 import form from '../modules/innerPage.module.css'
-import IsAuthenticated from '../components/accessCheck.component';
+
 
 const MyTrips = () => {
     const [select, setSelect] = useState(false);
-    IsAuthenticated();
+    
     const handleToggle = () => {
         setSelect(!select);
     }

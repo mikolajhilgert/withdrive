@@ -38,7 +38,7 @@ sonarqube:
     - main # or the name of your main branch
     
 integration:
-  stage: test
+  stage: integration
   script:
     -  cd CC:\Users\mikol\AppData\Roaming\npm
     -  ./newman run https://www.getpostman.com/collections/3694d3e77a13c6220724

@@ -18,6 +18,7 @@ import NotFound from './notfound';
         useEffect(() => {
             UserService.getCurrentDetails().then((response) => {
                 setUser(response.data);
+                console.log(response.data)
         })}, [])
         
         const [msg, setMsg] = React.useState(null);

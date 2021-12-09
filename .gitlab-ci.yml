@@ -40,5 +40,5 @@ sonarqube:
 integration:
   stage: integration
   script:
-    -  cd CC:\Users\mikol\AppData\Roaming\npm
+    -  cd C:\Users\mikol\AppData\Roaming\npm
     -  ./newman run https://www.getpostman.com/collections/3694d3e77a13c6220724

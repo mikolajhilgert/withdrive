@@ -14,7 +14,7 @@ const columns = [
   { field: 'origin', headerName: 'From',flex: 1 },
   { field: 'destination', headerName: 'To', flex: 1 },
   { field: 'pricePerPassenger', headerName: 'Price', flex: 1 },
-  { field: 'maxPassengers', headerName: 'Available seats', flex: 1},
+  { field: 'PassengerCount', headerName: 'Available seats', flex: 1},
   { field: "Apply",flex: 1,renderCell: (cellValues) => {return (<Button color="primary" onClick={() => { handleClick(cellValues); }} >View details</Button>);}},
 ];
 
@@ -25,13 +25,23 @@ function handleClick(selected) {
 
 export default function DataTable() {
   const [trips, setTrips] = useState([]);
-  useEffect(() => {
-    getAvailableTrips()
-  }, [])
+  const [page, setPage] = useState(0);
+  const [count, setCount] = useState(100);
 
-  const getAvailableTrips = () => {
-    TripService.getTrips().then((response) => {
+  useEffect(() => {
+    getAvailableTrips(page);
+    getAvailableTripCount();
+  }, [page])
+
+  const getAvailableTrips = async (page) => {
+    await TripService.getTrips(page).then((response) => {
       setTrips(response.data);
+    });
+  }
+
+  const getAvailableTripCount = async () => {
+    await TripService.getTripsCount().then((response) => {
+      setCount(response.data);
     });
   }
 
@@ -41,16 +51,14 @@ export default function DataTable() {
         setTrips(response.data);
       });
     }else{
-      TripService.getTrips().then((response) => {
-        setTrips(response.data);
-      });
+      getAvailableTrips(0);
     }
   }
 
   trips.map((trip) => {
     trip['id'] = trip.tripID
     trip.date = moment(trip.date).format('LLLL')
-    trip.maxPassengers = trip.maxPassengers-trip.passengers.length + "/" + trip.maxPassengers
+    trip.PassengerCount = trip.maxPassengers-trip.passengers.length
   })
 
   if (!trips) return <NotFound />;
@@ -64,14 +72,18 @@ export default function DataTable() {
       <br></br>
       <div style={{ height: 600, width: 'flex' }}>
         <DataGrid
+          pagination
           disableColumnFilter
           density="comfortable"
           rows={trips}
           columns={columns}
           pageSize={5}
+          rowCount={count}
           disableColumnSelector
           disableMultipleSelection={true}
           disableSelectionOnClick={true}
+          paginationMode="server"
+          onPageChange={(newPage) => {setPage(newPage)}}
         />
       </div>
     </div>

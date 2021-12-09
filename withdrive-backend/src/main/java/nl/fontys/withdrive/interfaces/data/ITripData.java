@@ -22,6 +22,8 @@ public interface ITripData {
 
     Page<Trip> retrieveActiveAsPage(Integer page);
 
+    Integer retrieveActiveTripsCount();
+
     List<Trip> retrieveActiveTripsByUser(UUID id);
 
     List<Trip> retrieveActiveTripsByDriver(UUID id);

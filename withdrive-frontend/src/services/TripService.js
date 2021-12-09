@@ -4,8 +4,12 @@ import authHeader from './AuthHeader';
 const API_BASE_URL = "http://localhost:8080/trip";
 
 class TripService {
-    getTrips(){
-        return axios.get(API_BASE_URL);
+    getTrips(page){
+        return axios.get(API_BASE_URL+"/allActive/"+page);
+    }
+
+    getTripsCount(){
+        return axios.get(API_BASE_URL+"/count");
     }
 
     getTripsByOrigin(origin){

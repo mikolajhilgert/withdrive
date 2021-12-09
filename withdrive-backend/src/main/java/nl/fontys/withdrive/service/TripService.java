@@ -42,8 +42,13 @@ public class TripService implements ITripService {
     }
 
     @Override
-    public List<TripResponseDTO> retrieveActiveTrips() {
-        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveTrips());
+    public List<TripResponseDTO> retrieveActiveTrips(Integer page) {
+        return tripConverter.ListEntityToResponseDTO(saved.retrieveActiveAsPage(page).getContent());
+    }
+
+    @Override
+    public Integer retrieveActiveTripsCount() {
+        return saved.retrieveActiveTripsCount();
     }
 
     @Override

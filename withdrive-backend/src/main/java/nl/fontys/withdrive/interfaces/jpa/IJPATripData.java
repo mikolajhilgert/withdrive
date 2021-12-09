@@ -16,8 +16,11 @@ public interface IJPATripData extends JpaRepository<Trip, UUID> {
     List<Trip> getTripsByStatus(TripStatus status);
     List<Trip> getTripsByOriginAndStatusIs(String origin,TripStatus status);
 
-    @Query(value = "select t.* from trips t.status=\"OPEN\"",nativeQuery = true)
+    @Query(value = "select * from trips where status=\"OPEN\"",nativeQuery = true)
     Page<Trip> getActiveTripsPage(Pageable pageable);
+
+    @Query(value = "select count(*) from trips where status=\"OPEN\"",nativeQuery = true)
+    Integer retrieveActiveTripsCount();
 
     @Query(value = "select t.* from trips as t inner join applications as ap on t.id = ap.tripid where t.status=\"OPEN\" and ap.userid = ?1",nativeQuery = true)
     List<Trip> getActiveTripsByUser(String ID);

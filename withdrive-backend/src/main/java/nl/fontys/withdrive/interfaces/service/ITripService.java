@@ -13,7 +13,8 @@ public interface ITripService {
 
     List<TripResponseDTO> RetrieveAll();
 
-    List<TripResponseDTO> retrieveActiveTrips();
+    List<TripResponseDTO> retrieveActiveTrips(Integer page);
+    Integer retrieveActiveTripsCount();
 
     List<TripResponseDTO> retrieveActiveTripsByUser(UUID id);
     List<TripResponseDTO> retrieveActiveTripsByOrigin(String origin);

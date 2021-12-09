@@ -30,12 +30,17 @@ public class TripController {
         this.users= users;
     }
 
-    @GetMapping()
-    public ResponseEntity<List<TripResponseDTO>> getActiveTrips(){
-        List<TripResponseDTO> list = this.trips.retrieveActiveTrips();
+    @GetMapping("/allActive/{page}")
+    public ResponseEntity<List<TripResponseDTO>> getActiveTrips(@PathVariable(value = "page") Integer page){
+        List<TripResponseDTO> list = this.trips.retrieveActiveTrips(page);
         if(list.size()>0)
             return ResponseEntity.ok().body(list);
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("count")
+    public ResponseEntity<Integer> getActiveTrips(){
+        return ResponseEntity.ok().body(this.trips.retrieveActiveTripsCount());
     }
 
     @GetMapping("/all")

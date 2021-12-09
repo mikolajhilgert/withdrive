@@ -70,6 +70,11 @@ public class TripData implements ITripData {
     }
 
     @Override
+    public Integer retrieveActiveTripsCount() {
+        return db.retrieveActiveTripsCount();
+    }
+
+    @Override
     public List<Trip> retrieveActiveTripsByUser(UUID id) {
         return db.getActiveTripsByUser(id.toString());
     }

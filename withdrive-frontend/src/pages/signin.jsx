@@ -22,7 +22,7 @@ const SignIn = () => {
                     this.email.value = "";
                     this.password.value = "";
                 })
-                .catch(err=>{setMsg("Error");})
+                .catch(err=>{setMsg("Detail mismatch");})
         }
 
         return (
@@ -44,9 +44,9 @@ const SignIn = () => {
                 <br></br>
                 <div className="form-group"><button type="submit" className="btn btn-primary btn-block">Submit</button></div>
                 <br></br>
-                <p className={text.right+" form-group"}>
+                {/* <p className={text.right+" form-group"}>
                     <a href="#">Forgotten password?</a>
-                </p>
+                </p> */}
                 <h1>{msg}</h1>
             </form>
             </div>

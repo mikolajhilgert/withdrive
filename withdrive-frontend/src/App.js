@@ -41,6 +41,7 @@ function App() {
       const token = JSON.parse(localStorage.getItem("user"))&& JSON.parse(localStorage.getItem("user"))["access_token"];
       if (jwtDecode(token).exp > Date.now() / 1000 && AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")===true) {
         return true;
+
       }
     }
     else return false;

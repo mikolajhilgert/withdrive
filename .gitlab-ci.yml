@@ -2,6 +2,7 @@ stages:
   - build
   - test
   - sonarqube
+  - integration
 
 build:
   stage: build
@@ -35,3 +36,9 @@ sonarqube:
   allow_failure: true
   only:
     - main # or the name of your main branch
+    
+integration:
+  stage: test
+  script:
+    -  cd CC:\Users\mikol\AppData\Roaming\npm
+    -  ./newman run https://www.getpostman.com/collections/3694d3e77a13c6220724

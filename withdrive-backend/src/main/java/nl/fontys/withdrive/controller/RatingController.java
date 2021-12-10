@@ -38,20 +38,17 @@ public class RatingController {
         ratings.add(rating);
     }
 
-    @GetMapping("avg/{userID}")
+    @GetMapping("/avg/{userID}")
     public float getRatingsByUser(@PathVariable UUID userID) {
         return ratings.averageRatingUser(userID);
     }
 
-    @GetMapping("/by/user")
+    @GetMapping("/check/{tripID}")
     @ResponseStatus(HttpStatus.OK)
-    public void getRatingsByUser(@RequestBody RatingDTO rating) {
-        ratings.add(rating);
+    public boolean hasUserRatedTrip(@PathVariable UUID tripID) {
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        return ratings.hasReviewed(tripID,loggedInUser.getUserID());
     }
 
-    @GetMapping("/by/ratertrip")
-    @ResponseStatus(HttpStatus.OK)
-    public void getRatingsByRater(@RequestBody RatingDTO rating) {
-        ratings.add(rating);
-    }
+
 }

@@ -22,7 +22,8 @@ const CitySelect = (props) =>{
     }
 
     return(
-        <Select name="origin" value={city} onChange={handleSelection} options={cities.map(result=>result)}
+        <Select name="origin" value={city} onChange={handleSelection} 
+        options={cities.map(result=>result)}
         getOptionLabel={(option) => option.city}
         getOptionValue={(option) => option.city}
         filterOption={createFilter({ignoreAccents: false})}

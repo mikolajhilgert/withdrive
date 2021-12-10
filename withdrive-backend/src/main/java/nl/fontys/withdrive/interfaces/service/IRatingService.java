@@ -11,4 +11,5 @@ public interface IRatingService {
     RatingDTO getRatingByUserAndTrip(UUID user, UUID trip);
     Float averageRatingUser(UUID user);
     List<AnonymousRatingDTO> getRatingsPerUser(UUID user);
+    boolean hasReviewed(UUID trip, UUID user);
 }

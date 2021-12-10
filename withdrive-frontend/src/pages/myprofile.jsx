@@ -6,12 +6,14 @@ import UserService from "../services/UserService";
 import moment from 'moment';
 import Person from '@material-ui/icons/Person';
 import BackButton from '../components/backButton.component'
+import AuthService from '../services/AuthService';
 
 import form from '../modules/innerPage.module.css'
 import NotFound from './notfound';
 
     const MyProfile = () => {
-        
+        AuthService.checkToken();
+
         const [startDate, setStartDate] = useState(new Date());
         const [user, setUser] = useState(null);
         
@@ -33,6 +35,7 @@ import NotFound from './notfound';
         const passwordCheck = React.useRef();
 
         const handleRegistration = e => {
+            
             e.preventDefault();
             if(password.current.value === passwordCheck.current.value===""){
                 UserService.updateUser(email.current.value,firstname.current.value,lastname.current.value,moment(startDate).format("DD-MM-YYYY"),gender.current.value,phonenum.current.value)

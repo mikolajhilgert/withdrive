@@ -27,12 +27,6 @@ public class User {
     @ManyToMany(fetch=FetchType.EAGER)
     private @Getter @Setter Collection<Role> roles = new ArrayList<>();
 
-//    @ManyToMany(fetch=FetchType.LAZY)
-//    private @Getter @Setter Collection<Rating> givenRatings = new ArrayList<>();
-
-//    @ManyToMany(fetch=FetchType.LAZY)
-//    private @Getter @Setter Collection<Rating> ratings = new ArrayList<>();
-
     @OneToMany(
             mappedBy = "driver",
             cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST}
@@ -40,13 +34,21 @@ public class User {
     @JsonIgnore
     private List<Trip> trips = new ArrayList<>();
 
-    @OneToMany(mappedBy = "applicant")
+    @OneToMany(
+            mappedBy = "applicant",
+            cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST}
+    )
     Set<TripApplication> application;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(
+            mappedBy = "user",
+            cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST}
+    )
     Set<Rating> rater;
 
-    @OneToMany(mappedBy = "rater")
+    @OneToMany(
+            mappedBy = "rater",
+            cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
     Set<Rating> user;
 
 }

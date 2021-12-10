@@ -17,7 +17,7 @@ import form from '../modules/innerPage.module.css'
 let id = window.location.pathname.split('/').pop();
 
 const EditTrip = () => {
-
+    AuthService.checkToken();
     
 
     const [trip, setTrip] = useState();

@@ -43,4 +43,9 @@ public class RatingService implements IRatingService {
     public List<AnonymousRatingDTO> getRatingsPerUser(UUID user) {
         return null;
     }
+
+    @Override
+    public boolean hasReviewed(UUID trip, UUID user) {
+        return saved.hasReviewed(trip,user);
+    }
 }

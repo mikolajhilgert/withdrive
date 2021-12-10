@@ -42,4 +42,13 @@ public class RatingData implements IRatingData {
     public List<Rating> getRatingsPerUser(UUID user) {
         return null;
     }
+
+    @Override
+    public boolean hasReviewed(UUID trip, UUID user) {
+        Integer count = db.hasReviewed(trip.toString(),user.toString());
+        if(count == 0){
+            return false;
+        }
+        return true;
+    }
 }

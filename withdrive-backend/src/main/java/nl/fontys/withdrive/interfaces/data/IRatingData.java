@@ -10,4 +10,5 @@ public interface IRatingData {
     Rating getRatingByUserAndTrip(UUID user, UUID trip);
     Float averageRatingUser(UUID user);
     List<Rating> getRatingsPerUser(UUID user);
+    boolean hasReviewed(UUID trip, UUID user);
 }

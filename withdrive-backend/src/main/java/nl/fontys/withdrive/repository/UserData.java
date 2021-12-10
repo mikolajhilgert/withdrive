@@ -67,15 +67,18 @@ public class UserData implements IUserData {
         if(user.getPassword() != null){
             toUpdate.setPassword(user.getPassword());
         }
-        toUpdate.setUserID(user.getUserID());
-        toUpdate.setEmail(user.getEmail());
-        toUpdate.setDateOfBirth(user.getDateOfBirth());
-        toUpdate.setFirstName(user.getFirstName());
-        toUpdate.setLastName(user.getLastName());
-        toUpdate.setGender(user.getGender());
-        toUpdate.setPhoneNumber(user.getPhoneNumber());
+        if(toUpdate != null){
+            toUpdate.setUserID(user.getUserID());
+            toUpdate.setEmail(user.getEmail());
+            toUpdate.setDateOfBirth(user.getDateOfBirth());
+            toUpdate.setFirstName(user.getFirstName());
+            toUpdate.setLastName(user.getLastName());
+            toUpdate.setGender(user.getGender());
+            toUpdate.setPhoneNumber(user.getPhoneNumber());
 
-        db.save(toUpdate);
+            db.save(toUpdate);
+        }
+
     }
 
     @Override

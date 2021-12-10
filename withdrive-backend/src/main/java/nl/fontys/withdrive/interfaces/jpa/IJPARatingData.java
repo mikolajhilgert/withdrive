@@ -14,4 +14,6 @@ public interface IJPARatingData extends JpaRepository<Rating, UUID> {
 //    Rating findByRaterAndTrip(User user, Trip trip);
     @Query(value = "SELECT AVG(rating) FROM ratings WHERE userid= :userID and type=\"PASSENGER\"",nativeQuery = true)
     Float averageRatingUser(@Param("userID") String userID);
+    @Query(value = "SELECT count(rating) from ratings where raterid= :userID and tripid = :tripID",nativeQuery = true)
+    Integer hasReviewed(@Param("tripID") String tripID,@Param("userID") String userID);
 }

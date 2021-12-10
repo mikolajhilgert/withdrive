@@ -36,14 +36,14 @@ import authHeader from './AuthHeader';
 
     checkToken(){
         async function check(){
-            return await axios.get(API_URL + "check",{headers: authHeader()}).then(() => {return true}).catch(() => {return false;});
+            await axios.get(API_URL + "check",{headers: authHeader()}).catch(() => {window.history.pushState({}, '', "/sign-out");window.location.reload();});
         }
-        return check();
+        check();
     }
 
-    checkTokenAdmin(){
+    checkTokenAdmin(){    
         async function check(){
-            return await axios.get(API_URL + "admin",{headers: authHeader()}).then(() => {return true}).catch(() => {return false;});
+            return await axios.get(API_URL + "admin",{headers: authHeader()}).catch(() => {window.history.pushState({}, '', "/sign-out");window.location.reload();});
         }
         return check();
     }

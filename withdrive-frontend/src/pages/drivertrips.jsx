@@ -4,9 +4,10 @@ import DriverTrips from '../components/drivertrips.component'
 import DriverAllTrips from '../components/driveralltrips.component'
 import BackButton from '../components/backButton.component'
 import form from '../modules/innerPage.module.css'
-
+import AuthService from '../services/AuthService';
 
 const MyTrips = () => {
+    AuthService.checkToken();
     const [select, setSelect] = useState(false);
     
     const handleToggle = () => {

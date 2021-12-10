@@ -6,11 +6,13 @@ import BackButton from '../components/backButton.component'
 import form from '../modules/innerPage.module.css'
 import text from '../modules/text.module.css'
 import ApplicationService from '../services/ApplicationService';
+import AuthService from '../services/AuthService';
+
 
 let id = window.location.pathname.split('/').pop();
 
 const CreateTrip = () => {
-
+    AuthService.checkToken();
 
 
 const History =  useHistory();

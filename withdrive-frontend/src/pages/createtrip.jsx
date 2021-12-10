@@ -10,11 +10,11 @@ import CitySelect from '../components/citySelect.component'
 
 import form from '../modules/innerPage.module.css'
 import text from '../modules/text.module.css'
-
+import AuthService from '../services/AuthService';
 
 
 const CreateTrip = () => {
-
+    AuthService.checkToken();
 
 
 const History =  useHistory();

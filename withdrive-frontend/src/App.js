@@ -76,7 +76,7 @@ function App() {
           <Route exact path='/' component={Index} />
           <Route path="/view-trips" component={ViewTrips} />
           <Route path="/sign-out" component={SignOut} />
-          <Route path="/trip/view" component={ViewTrip} />
+          <Route path="/trip/view" component={ViewTrip}/>
           
           <Route path="/sign-in"render={() => (requireAuth() ? (<Redirect to="/view-trips"/>) : (<Login/>))} />
           <Route path="/sign-up" render={() => (requireAuth() ? (<Redirect to="/sign-in"/>) : (<SignUp/>))} />

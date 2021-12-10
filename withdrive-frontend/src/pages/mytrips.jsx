@@ -14,9 +14,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Rating from '@mui/material/Rating';
 import Button from '@mui/material/Button';
 import ReviewService from '../services/ReviewService'
-
+import AuthService from '../services/AuthService';
 
 const MyTrips = () => {
+    AuthService.checkToken();
     const [select, setSelect] = useState(false);
     const [show, setShow] = useState(false);
     const [trip, setTrip] = React.useState("");
@@ -38,7 +39,7 @@ const MyTrips = () => {
             text: text.current.value,
             type: "PASSENGER",
         };
-        ReviewService.postRating(review);
+        ReviewService.postRating(review)
         setOpen(false);
     }
 
@@ -49,6 +50,7 @@ const MyTrips = () => {
     const LeaveRating = (data) => {
         setTrip(data);
         setOpen(true);
+
     }
 
     function Table() {

@@ -7,7 +7,8 @@ import { IconButton } from '@mui/material';
 import Preview from '@material-ui/icons/Pageview';
 import Star from '@material-ui/icons/Star';
 import ApplicationService from '../services/ApplicationService';
-
+import ReviewService from '../services/ReviewService'
+import { store } from 'react-notifications-component';
 
 
 
@@ -16,9 +17,28 @@ export default function DriverTable(props) {
     function handleClick(mode, selected) {
         switch(mode){
             case 0:
+                window.history.pushState({}, '', "/trip/view/" + selected.row.tripID);
+                window.location.replace("/trip/view/" + selected.row.tripID);
                 break;
             default:
-                props.rating(selected.id);
+                ReviewService.hasUserLeftReview(selected.id).then((response)=>{
+                    if(response.data === false){
+                        props.rating(selected.id);
+                    }else{
+                        store.addNotification({
+                            title: "Alert",
+                            message: "You have already left a rating for this trip!",
+                            type: "warning",
+                            insert: "top",
+                            container: "top-center",
+                            dismiss: {
+                                duration: 5000,
+                                onScreen: true
+                            }
+                        });
+                    }
+                })
+
                 break;
         }
     }

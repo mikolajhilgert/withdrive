@@ -73,6 +73,7 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public boolean Update(UserDTO user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         this.saved.Update(converter.DTOToEntity(user));
         return true;
     }

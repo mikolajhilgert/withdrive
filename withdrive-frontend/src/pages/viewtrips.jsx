@@ -3,8 +3,10 @@ import TripTable from "../components/alltrips.component"
 import form from '../modules/innerPage.module.css'
 import text from '../modules/text.module.css'
 import moment from 'moment'
+import AuthService from '../services/AuthService';
 
 const Index = () => {
+    AuthService.checkToken();
         return (
         <div className={form.authwrapper}>  
             <div className={form.authinner_table}>

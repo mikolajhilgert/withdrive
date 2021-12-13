@@ -13,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,7 +36,7 @@ public class TripController {
         List<TripResponseDTO> list = this.trips.retrieveActiveTrips(page);
         if(list.size()>0)
             return ResponseEntity.ok().body(list);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(Collections.emptyList());
     }
 
     @GetMapping("count")
@@ -105,7 +106,7 @@ public class TripController {
         if(trip!=null){
             return ResponseEntity.ok().body(trip);
         }
-        return new ResponseEntity("Please provide a valid number.", HttpStatus.NOT_FOUND);
+        return ResponseEntity.ok().body(Collections.emptyList());
     }
 
     @GetMapping("/active/{origin}")

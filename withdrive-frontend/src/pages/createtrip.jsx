@@ -86,7 +86,7 @@ return (
             <br></br>
             <div className="form-group">
                 <label>Details:</label>
-                <textarea name="details" className="form-control" cols="25" rows="5" required ref={details}></textarea>
+                <textarea className="form-control" cols="25" rows="5" required ref={details}></textarea>
             </div>
             <br></br>
             <div className="form-group">

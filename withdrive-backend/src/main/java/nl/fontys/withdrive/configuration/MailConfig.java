@@ -35,7 +35,7 @@ public class MailConfig
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo("dirigrip@gmail.com");
         message.setFrom("mail.withdrive@gmail.com");
-        message.setText("FATAL - Application crash. Save your job !!");
+        message.setText("Default message !!");
         return message;
     }
 }

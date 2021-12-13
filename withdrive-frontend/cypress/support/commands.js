@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('login', (username, password) => {
+    var reqBody = "username=" + username + "&password=" + password + "&grant_type=password";
+    cy.request({
+        method: 'POST',
+        url: 'http://localhost:8080/user/login',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: reqBody
+    }).then(({ body }) => {
+        window.localStorage.setItem("user", JSON.stringify(body))
+    })
+})

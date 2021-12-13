@@ -21,7 +21,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@Service @Transactional @Slf4j
+@Service @Transactional
 public class UserService implements IUserService, UserDetailsService {
     private final IUserData saved;
     private final IUserConverter converter;
@@ -38,7 +38,6 @@ public class UserService implements IUserService, UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = saved.retrieveByEmail(email);
         if(user == null){
-            log.error("User was not found in the database");
             throw new UsernameNotFoundException("User was not found in the database");
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();

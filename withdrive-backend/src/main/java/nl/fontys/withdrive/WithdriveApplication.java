@@ -1,21 +1,21 @@
 package nl.fontys.withdrive;
 
+import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Role;
 import nl.fontys.withdrive.enumeration.TripStatus;
-import nl.fontys.withdrive.service.EmailService;
 import nl.fontys.withdrive.service.TripService;
 import nl.fontys.withdrive.service.UserService;
+import org.hibernate.mapping.Collection;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Collections;
 import java.util.UUID;
 
 @EnableScheduling
@@ -37,7 +37,7 @@ public class WithdriveApplication {
     }
 
     @Bean
-    CommandLineRunner run(UserService userService, EmailService mailer){
+    CommandLineRunner run(UserService userService, TripService tripService){
         return args -> {
 
 //            mailer.sendMail("dirigrip@gmail.com", "Test Subject", "Testing body");
@@ -50,6 +50,8 @@ public class WithdriveApplication {
           userService.Add(new UserDTO(UUID.fromString("c88ec1bb-974b-48bf-9306-ff3fa7827e80"),"passenger@withdrive.com","Maria","Jopek","10-02-1990","female","+420606058797","password",null));
 
           userService.addRoleToUser("admin@withdrive.com","ROLE_ADMIN");
+
+          tripService.Add(new TripRequestDTO(UUID.randomUUID(),"Eindhoven","Amsterdam","Quick trip","2021-12-16T13:30","12-ABC-55",2,10,UUID.fromString("d1ec1b55-3297-445e-be4f-a31ddc342ad7"), Collections.emptyList(), TripStatus.OPEN));
         };
     }
 

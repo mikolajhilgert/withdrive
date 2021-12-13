@@ -1,21 +1,25 @@
 package nl.fontys.withdrive.service;
 
+import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import nl.fontys.withdrive.interfaces.service.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class EmailService implements IEmailService {
     private final JavaMailSender mailSender;
-
+    private final UserService users;
     private final SimpleMailMessage preConfiguredMessage;
 
     @Autowired
-    public EmailService(JavaMailSender mailSender, SimpleMailMessage preConfiguredMessage) {
+    public EmailService(JavaMailSender mailSender,UserService users, SimpleMailMessage preConfiguredMessage) {
         this.mailSender = mailSender;
         this.preConfiguredMessage = preConfiguredMessage;
+        this.users = users;
     }
 
     /**
@@ -33,16 +37,40 @@ public class EmailService implements IEmailService {
     /**
      * This method will send a pre-configured message
      * */
-    public void sendApplicationNotification(String to)
+    public void sendApplicationNotification(UUID to)
     {
         SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
-        mailMessage.setText("");
+        mailMessage.setTo(users.RetrieveByID(to).getEmail());
+        mailMessage.setSubject("A user has applied for your trip!");
+        mailMessage.setText("Dear user,\n" +
+                "You have received a new application for one of your upcoming trips.\n" +
+                "Please check your driver profile and react!\n\n"+
+                "Kind regards,\n" +
+                "withdrive Team");
         mailSender.send(mailMessage);
     }
-    public void sendApplicationResponseNotification(String to)
-    {
+
+    @Override
+    public void sendApplicationResponseNotification(UUID to) {
         SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
-        mailMessage.setText("");
+        mailMessage.setTo(users.RetrieveByID(to).getEmail());
+        mailMessage.setSubject("A driver has replied to your application!");
+        mailMessage.setText("Dear user,\n" +
+                "You have received a response to your application.\n" +
+                "Please check your profile!\n"+
+                "Kind regards,\n" +
+                "withdrive Team");
         mailSender.send(mailMessage);
     }
+
+    @Override
+    public void sendReviewNotification(UUID to) {
+        SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
+        mailMessage.setTo(users.RetrieveByID(to).getEmail());
+        mailMessage.setText("Dear user," +
+                "A trip you are part of has begun" +
+                "Please leave a review on your driver!");
+        mailSender.send(mailMessage);
+    }
+
 }

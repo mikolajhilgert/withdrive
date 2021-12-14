@@ -39,8 +39,6 @@ public class WithdriveApplication {
     @Bean
     CommandLineRunner run(UserService userService, TripService tripService){
         return args -> {
-
-//            mailer.sendMail("dirigrip@gmail.com", "Test Subject", "Testing body");
           userService.saveRole(new Role(UUID.fromString("81b83fb2-0727-4404-8cf2-1f73feeb2980"),"ROLE_DEFAULT"));
           userService.saveRole(new Role(UUID.fromString("90d87f90-f1a3-4e92-863d-5468247dcb14"),"ROLE_USER"));
           userService.saveRole(new Role(UUID.fromString("a5c7c167-7fe0-4f2b-867a-55e3c0aeb5ab"),"ROLE_ADMIN"));

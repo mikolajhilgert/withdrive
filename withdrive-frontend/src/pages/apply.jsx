@@ -41,7 +41,7 @@ return (
             <br></br>
             <div className="form-group">
                 <label>Application area:</label>
-                <textarea name="details" className="form-control" cols="25" rows="15" minlength="25" maxlength="450" required ref={app}></textarea>
+                <textarea name="details" className="form-control" cols="25" rows="15" minlength="25" maxlength="450" data-cy="text" required ref={app}></textarea>
             </div>
             <br></br><br></br>
             <button type="submit" className="btn btn-primary btn-block form-control">Submit application!</button>

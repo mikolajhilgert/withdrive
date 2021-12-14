@@ -11,11 +11,11 @@ import SkyLight from 'react-skylight';
 let id = window.location.pathname.split('/').pop();
 
 const columns = [
-  { field: 'fullName', headerName: 'Name', flex:1 },
-  { field: 'age', headerName: 'Age', width:"100" },
-  { field: 'gender', headerName: 'Gender', width:"100" },
-  { field: 'status', headerName: 'Status', width:"100" },
-  { field: 'message', headerName: 'Application',width:"200",
+  { field: 'fullName', headerName: 'Name', flex: 1 , minWidth: 150},
+  { field: 'age', headerName: 'Age', flex: 1 , minWidth: 100 },
+  { field: 'gender', headerName: 'Gender', flex: 1 , minWidth: 100 },
+  { field: 'status', headerName: 'Status', flex: 1 , minWidth: 100 },
+  { field: 'message', headerName: 'Application',flex: 1 , minWidth: 200,
   renderCell: (cellValues) => {
     return (
       <Fragment>
@@ -25,7 +25,7 @@ const columns = [
   }},
   {
     field: "Actions",
-    flex:1,
+    flex: 1 , minWidth: 250,
     renderCell: (cellValues) => {
       if(cellValues.row.trip.passengers.length<cellValues.row.trip.maxPassengers){
         if(cellValues.row.status === "PENDING"){

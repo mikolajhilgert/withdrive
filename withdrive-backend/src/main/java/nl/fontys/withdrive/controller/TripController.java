@@ -41,7 +41,9 @@ public class TripController {
 
     @GetMapping("count")
     public ResponseEntity<Integer> getActiveTrips(){
-        return ResponseEntity.ok().body(this.trips.retrieveActiveTripsCount());
+        if(this.trips.retrieveActiveTripsCount()>0)
+            return ResponseEntity.ok().body(this.trips.retrieveActiveTripsCount());
+        return ResponseEntity.ok().body(0);
     }
 
     @GetMapping("/all")

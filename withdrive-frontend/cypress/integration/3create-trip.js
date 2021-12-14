@@ -18,7 +18,9 @@ describe('create_trip', () => {
         cy.get('[min="0.00"]').type('5');
         cy.get('.innerPage_authinner_big__ajjBj').click();
         cy.get('.btn').click();
+        
         /* ==== End Cypress Studio ==== */
+        cy.visit('/sign-out')
     })
 })
 

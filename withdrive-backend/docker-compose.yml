@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  docker-mysql:
+    image: mysql
+    container_name: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=00000000
+      - MYSQL_DATABASE=withdrive
+      - MYSQL_PASSWORD=00000000
+    ports:
+      - "3306:3306"
+
+  app:
+    image: backend
+    container_name: backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://docker-mysql:3306/withdrive
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "00000000"
+    build:
+        dockerfile: "Dockerfile"
+    depends_on:
+      - docker-mysql
+
+  frontend:
+    image: withdrive-frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"

@@ -33,10 +33,12 @@ public class Trip{
     @Enumerated(EnumType.STRING)
     private @Getter @Setter TripStatus status;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip",
+            cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
     Set<TripApplication> application;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip",
+            cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
     Set<Rating> trip;
 
     @ManyToOne

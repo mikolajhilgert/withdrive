@@ -1,8 +1,7 @@
 describe('create_trip', () => {
     it("create_trip", () => {
-        cy.login("driver@withdrive.com","password")
+        cy.login("drivertester@withdrive.com","password")
         cy.visit('/')
-
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#responsive-navbar-nav > :nth-child(2) > div > .nav-link').click();
         cy.get('[href="/create-trip"] > .MuiMenuItem-root').click();
@@ -14,9 +13,9 @@ describe('create_trip', () => {
         cy.get(':nth-child(8) > .form-control').type('12-ABC-266');
         cy.get(':nth-child(10) > .form-control').click();
         cy.get(':nth-child(10) > .form-control').type('We will leave from the Central station!')
-        cy.get('.innerPage_authinner_big__ajjBj').click();
+        // cy.get('.innerPage_authinner_big__ajjBj').click();
         cy.get('[min="0.00"]').type('5');
-        cy.get('.innerPage_authinner_big__ajjBj').click();
+        //cy.get('.innerPage_authinner_big__ajjBj').click();
         cy.get('.btn').click();
         
         /* ==== End Cypress Studio ==== */

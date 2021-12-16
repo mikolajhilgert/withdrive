@@ -33,7 +33,6 @@ function App() {
       }
     }
     else return false;
-
   }
 
   function requireAdminAuth() {
@@ -41,26 +40,10 @@ function App() {
       const token = JSON.parse(localStorage.getItem("user"))&& JSON.parse(localStorage.getItem("user"))["access_token"];
       if (jwtDecode(token).exp > Date.now() / 1000 && AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")===true) {
         return true;
-
       }
     }
     else return false;
-
   }
-
-  // function requireAdminAuth(){
-  //   let result = true;
-  //   AuthService.checkTokenAdmin().then(response=> {
-  //     result=response;
-  //   })
-  //   if (AuthService.getCurrentUser()!==null && result===true ) {
-  //     if(AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")===true){
-  //       return true;
-  //     }
-  //     else return false;
-  //   }
-  //   else return false;
-  // }
 
   function LogOrNotFound(){
     if (AuthService.getCurrentUser()!==null){
@@ -73,11 +56,10 @@ function App() {
     <Router>
       <Nav/>
         <Switch>
-          <Route exact path='/' component={Index} />
-          <Route path="/view-trips" component={ViewTrips} />
-          <Route path="/sign-out" component={SignOut} />
-          <Route path="/trip/view" component={ViewTrip}/>
-          
+          <Route exact path='/' component={() => <Index/>} />
+          <Route path="/view-trips" component={() => <ViewTrips/>} />
+          <Route path="/sign-out" component={() => <SignOut/>} />
+          <Route path="/trip/view" component={() => <ViewTrip/>}/>
           <Route path="/sign-in"render={() => (requireAuth() ? (<Redirect to="/view-trips"/>) : (<Login/>))} />
           <Route path="/sign-up" render={() => (requireAuth() ? (<Redirect to="/sign-in"/>) : (<SignUp/>))} />
           <Route path="/create-trip" render={() => (requireAuth() ? (<CreateTrip/>) : (LogOrNotFound()))} />
@@ -87,11 +69,9 @@ function App() {
           <Route path="/trip/apply" render={() => (requireAuth() ? (<ApplyTrip/>) : (LogOrNotFound()))} />
           <Route path="/trip/apps" render={() => (requireAuth() ? (<ViewTripApps/>) : (LogOrNotFound()))} />
           <Route path="/my-profile" render={() => (requireAuth() ? (<MyProfile/>) : (LogOrNotFound()))} />
-
           <Route path="/view-users" render={() => (requireAdminAuth() ? (<AdminViewUsers/>) : (LogOrNotFound()))} />
           <Route path="/send-alerts" render={() => (requireAdminAuth() ? (<AdminSendAlerts/>) : (LogOrNotFound()))} />
-          
-          <Route component={<NotFound/>}/>
+          <Route component={() => <NotFound/>}/>
         </Switch>
       </Router>
   );

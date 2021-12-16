@@ -32,7 +32,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 //User tests using mockito
-@ActiveProfiles("test")
 @SpringBootTest
 public class TripServiceTest {
     // https://javacodehouse.com/blog/mockito-tutorial/

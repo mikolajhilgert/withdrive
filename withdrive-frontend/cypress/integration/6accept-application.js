@@ -1,6 +1,6 @@
 describe('accept_application', () => {
     it("accept_application", () => {
-        cy.login("driver@withdrive.com","password")
+        cy.login("drivertester@withdrive.com","password")
         cy.visit('/')
         /* ==== Generated with Cypress Studio ==== */
         cy.get('#responsive-navbar-nav > :nth-child(2) > div > .nav-link').click();
@@ -18,7 +18,7 @@ describe('accept_application', () => {
         cy.get('.css-78trlr-MuiButtonBase-root-MuiIconButton-root').click();
         cy.get('[aria-label="view"] > .MuiSvgIcon-root').click();
         cy.wait(1000)
-        cy.get('[href="/sign-out"]').click();
+        cy.visit('/sign-out')
         /* ==== End Cypress Studio ==== */
     })
 })

@@ -23,7 +23,6 @@ import java.util.UUID;
 import static org.mockito.Mockito.*;
 
 //User tests using mockito
-@ActiveProfiles("test")
 @SpringBootTest
 public class UserServiceTest {
     // https://javacodehouse.com/blog/mockito-tutorial/

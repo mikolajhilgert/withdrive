@@ -12,14 +12,29 @@ import { store } from 'react-notifications-component';
 
 
 
-export default function DriverTable(props) {
+export default function UserTripTable(props) {
+
+    const [apps, setApps] = useState([]);
+
+    useEffect(() => {
+        getAvailableTrips()
+    }, [])
+
+
+    const getAvailableTrips = () => {
+        ApplicationService.getAllAppsByUser().then((response) => {
+            setApps(response.data);
+        });
+    }
 
     function handleClick(mode, selected) {
         switch(mode){
             case 0:
-                window.history.pushState({}, '', "/trip/view/" + selected.row.tripID);
-                window.location.replace("/trip/view/" + selected.row.tripID);
+                var id = selected.row.id;
+                window.history.pushState({}, '', "/trip/view/" + id);
+                window.location.replace("/trip/view/" + id);
                 break;
+
             default:
                 ReviewService.hasUserLeftReview(selected.id).then((response)=>{
                     if(response.data === false){
@@ -65,18 +80,7 @@ export default function DriverTable(props) {
         },
     ];
 
-    const [apps, setApps] = useState([]);
 
-    useEffect(() => {
-        getAvailableTrips()
-    }, [])
-
-
-    const getAvailableTrips = () => {
-        ApplicationService.getAllAppsByUser().then((response) => {
-            setApps(response.data);
-        });
-    }
 
     apps.map((app) => {
         app['id'] = app.trip.tripID;

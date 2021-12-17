@@ -50,7 +50,6 @@ const MyTrips = () => {
     const LeaveRating = (data) => {
         setTrip(data);
         setOpen(true);
-
     }
 
     function Table() {

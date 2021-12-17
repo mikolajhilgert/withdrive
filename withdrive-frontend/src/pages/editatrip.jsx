@@ -1,21 +1,24 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useHistory } from "react-router";
 import cities from '../data/nl.json'
 import Select, { createFilter } from 'react-select';
-import '../css_override/largerForm.css';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import TripService from '../services/TripService';
 import CustomOption from '../components/selectFix.component';
-import IsAuthenticated from '../components/accessCheck.component';
+
 import AuthService from '../services/AuthService';
 import NotFound from '../pages/notfound'
 import BackButton from '../components/backButton.component'
 
+import form from '../modules/innerPage.module.css'
+
 let id = window.location.pathname.split('/').pop();
 
 const EditTrip = () => {
+    AuthService.checkToken();
+    
 
     const [trip, setTrip] = useState();
     const [origin, setOrigin] = useState("");
@@ -26,12 +29,11 @@ const EditTrip = () => {
             setTrip(response.data);
             setOrigin(cities.find(o => o.city === response.data.origin));
             setDestination(cities.find(o => o.city === response.data.destination));
-            
+
         });
     }, [id])
 
 
-    IsAuthenticated(AuthService.getCurrentUser());
     const History = useHistory();
 
     const [open, setOpen] = React.useState(false);
@@ -51,7 +53,7 @@ const EditTrip = () => {
     
     const handleRegistration = e => {
         e.preventDefault();
-        if (origin.city != null && destination.city != null && startDate != new Date()) {
+        if (origin.city !== null && destination.city !== null && startDate !== new Date()) {
             const trip = {
                 tripID: id,
                 origin: origin.city,
@@ -62,7 +64,6 @@ const EditTrip = () => {
                 maxPassengers: max.current.value,
                 pricePerPassenger: price.current.value,
             };
-            console.log(trip);
             TripService.editTrip(trip);
             alert("Your trip listing has been updated!");
             History.push("/driver-trips");
@@ -75,7 +76,7 @@ const EditTrip = () => {
 
     function handleDelete(){
         var r = window.confirm("Are you sure you want to delete this trip?\nYou cannot undo this action!");
-        if (r == true) {
+        if (r === true) {
             TripService.deleteTrip(id);
             History.push("/driver-trips");
             window.location.reload();
@@ -85,8 +86,8 @@ const EditTrip = () => {
 
     if (!trip) return <NotFound/>;
     return (
-        <div className="auth-wrapper">
-            <div className="auth-inner">
+<div className={form.authwrapper}>
+    <div className={form.authinner_big}>
             <BackButton />
                 <form onSubmit={handleRegistration}>
                     

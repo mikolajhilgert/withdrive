@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import nl.fontys.withdrive.dto.user.UserDTO;
-import nl.fontys.withdrive.dto.user.UserViewDTO;
+import nl.fontys.withdrive.dto.user.UserMiniDTO;
 import nl.fontys.withdrive.enumeration.TripStatus;
 
 import java.util.Collections;
@@ -23,7 +22,8 @@ public class TripResponseDTO {
     private @Getter @Setter String licensePlate;
     private @Getter @Setter int maxPassengers;
     private @Getter @Setter double pricePerPassenger;
-    private @Getter @Setter UserViewDTO driver;
+    private @Getter @Setter
+    UserMiniDTO driver;
     private @Getter @Setter TripStatus status;
-    private @Getter @Setter List<UserViewDTO> passengers = Collections.emptyList();
+    private @Getter @Setter List<UserMiniDTO> passengers = Collections.emptyList();
 }

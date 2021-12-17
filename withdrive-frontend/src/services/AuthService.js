@@ -1,4 +1,5 @@
 import axios from 'axios';
+import authHeader from './AuthHeader';
     const API_URL = "http://localhost:8080/user/";
 
     class AuthService {
@@ -31,6 +32,20 @@ import axios from 'axios';
 
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));;
+    }
+
+    checkToken(){
+        async function check(){
+            await axios.get(API_URL + "check",{headers: authHeader()}).catch(() => {window.history.pushState({}, '', "/sign-out");window.location.reload();});
+        }
+        check();
+    }
+
+    checkTokenAdmin(){    
+        async function check(){
+            return await axios.get(API_URL + "admin",{headers: authHeader()}).catch(() => {window.history.pushState({}, '', "/sign-out");window.location.reload();});
+        }
+        return check();
     }
 }
 

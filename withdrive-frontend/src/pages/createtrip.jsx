@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
+
 import { useHistory } from "react-router";
-import cities from '../data/nl.json'
-import Select,{createFilter} from 'react-select';
-import '../css_override/largerForm.css';
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import TripService from '../services/TripService';
-import CustomOption from '../components/selectFix.component';
-import IsAuthenticated from '../components/accessCheck.component';
+
+import CitySelect from '../components/citySelect.component'
+
+import form from '../modules/innerPage.module.css'
+import text from '../modules/text.module.css'
 import AuthService from '../services/AuthService';
 
+
 const CreateTrip = () => {
-IsAuthenticated(AuthService.getCurrentUser());
+    AuthService.checkToken();
+
+
 const History =  useHistory();
 const [origin, setOrigin] = useState("");
 const [destination, setDestination] = useState("");
@@ -27,10 +31,10 @@ const max = React.useRef();
 
 const handleRegistration = e => {
     e.preventDefault();
-    if(origin.city != null && destination.city != null && startDate != new Date()){
+    if(origin !== null && destination !== null && startDate !== new Date()){
         const trip = {
-            origin: origin.city,
-            destination: destination.city,
+            origin: origin,
+            destination: destination,
             description: details.current.value,
             date: moment(startDate).format('YYYY-MM-DDTHH:mm'),
             licensePlate: plate.current.value,
@@ -46,12 +50,17 @@ const handleRegistration = e => {
         setMsg("Error: Details missing");
     }
 }
-
+const setOriginCity = (data) =>{
+    setOrigin(data);
+}
+const setDestinationCity = (data) =>{
+    setDestination(data);
+}
 return (
-<div className="auth-wrapper">
-    <div className="auth-inner">
+<div className={form.authwrapper}>
+    <div className={form.authinner_big}>
         <form onSubmit={handleRegistration}>
-            <h3>Tell us about your ride</h3>
+            <h3 className={text.center}>Tell us about your ride</h3>
             <div className="form-group">
                 <label>Date and time of the trip:</label>
                 <DatePicker className="form-control" dateFormat="yyyy/MM/dd" closeOnScroll={true} selected={startDate} onChange={(date)=>
@@ -61,25 +70,12 @@ return (
             <br></br>
             <div className="form-group">
                 <label>Trip origin:</label>
-                <Select name="origin" value={origin} onChange={setOrigin} options={cities.map(result=>result)}
-                    getOptionLabel={(option) => option.city}
-                    getOptionValue={(option) => option.city}
-                    filterOption={createFilter({ignoreAccents: false})}
-                    components={{ Option: CustomOption }}
-                >
-                </Select>
+                <CitySelect setCity={setOriginCity} text="Select your trips origin"/>
             </div>
             <br></br>
             <div className="form-group">
                 <label>Trip destination:</label>
-                <Select name="destination" value={destination} onChange={setDestination}
-                    options={cities.map(result=>result)}
-                    getOptionLabel={(option) => option.city}
-                    getOptionValue={(option) => option.city}
-                    filterOption={createFilter({ignoreAccents: false})}
-                    components={{ Option: CustomOption }}
-                >
-                </Select>
+                <CitySelect setCity={setDestinationCity} text="Select your trips destination"/>
             </div>
             <hr>
             </hr>
@@ -90,7 +86,7 @@ return (
             <br></br>
             <div className="form-group">
                 <label>Details:</label>
-                <textarea name="details" className="form-control" cols="25" rows="5" required ref={details}></textarea>
+                <textarea className="form-control" cols="25" rows="5" required ref={details}></textarea>
             </div>
             <br></br>
             <div className="form-group">

@@ -1,19 +1,19 @@
 package nl.fontys.withdrive.controller;
 
+import nl.fontys.withdrive.dto.rating.RatingDTO;
 import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
-import nl.fontys.withdrive.entity.User;
-import nl.fontys.withdrive.interfaces.service.ITripManager;
-import nl.fontys.withdrive.interfaces.service.IUserManager;
+import nl.fontys.withdrive.interfaces.service.ITripService;
+import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,21 +22,28 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/trip")
 public class TripController {
-    private final ITripManager trips;
-    private final IUserManager users;
+    private final ITripService trips;
+    private final IUserService users;
 
     @Autowired
-    public TripController(ITripManager trips, IUserManager users){
+    public TripController(ITripService trips, IUserService users){
         this.trips = trips;
         this.users= users;
     }
 
-    @GetMapping()
-    public ResponseEntity<List<TripResponseDTO>> getActiveTrips(){
-        List<TripResponseDTO> list = this.trips.retrieveActiveTrips();
+    @GetMapping("/allActive/{page}")
+    public ResponseEntity<List<TripResponseDTO>> getActiveTrips(@PathVariable(value = "page") Integer page){
+        List<TripResponseDTO> list = this.trips.retrieveActiveTrips(page);
         if(list.size()>0)
             return ResponseEntity.ok().body(list);
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().body(Collections.emptyList());
+    }
+
+    @GetMapping("count")
+    public ResponseEntity<Integer> getActiveTrips(){
+        if(this.trips.retrieveActiveTripsCount()>0)
+            return ResponseEntity.ok().body(this.trips.retrieveActiveTripsCount());
+        return ResponseEntity.ok().body(0);
     }
 
     @GetMapping("/all")
@@ -95,6 +102,35 @@ public class TripController {
     }
 
     @GetMapping("/active")
+    public ResponseEntity<List<TripResponseDTO>> GetActiveTripsByUser(){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<TripResponseDTO> trip = this.trips.retrieveActiveTripsByUser(loggedInUser.getUserID());
+        if(trip!=null){
+            return ResponseEntity.ok().body(trip);
+        }
+        return ResponseEntity.ok().body(Collections.emptyList());
+    }
+
+    @GetMapping("/active/{origin}")
+    public ResponseEntity<List<TripResponseDTO>> GetActiveTripsByOrigin(@PathVariable String origin){
+        List<TripResponseDTO> trips = this.trips.retrieveActiveTripsByOrigin(origin);
+        if(trips!=null){
+            return ResponseEntity.ok().body(trips);
+        }
+        return new ResponseEntity("Please provide a valid number.", HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/active/driver")
+    public ResponseEntity<List<TripResponseDTO>> GetActiveTripsByDriver() {
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        List<TripResponseDTO> trip = this.trips.retrieveActiveTripsByDriver(loggedInUser.getUserID());
+        if(trip!=null){
+            return ResponseEntity.ok().body(trip);
+        }
+        return new ResponseEntity("Please provide a valid number.", HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/allu")
     public ResponseEntity<List<TripResponseDTO>> GetTripsByUser(){
         UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         List<TripResponseDTO> trip = this.trips.retrieveTripsByUser(loggedInUser.getUserID());
@@ -103,7 +139,7 @@ public class TripController {
         }
         return new ResponseEntity("Please provide a valid number.", HttpStatus.NOT_FOUND);
     }
-    @GetMapping("/active/driver")
+    @GetMapping("/alld")
     public ResponseEntity<List<TripResponseDTO>> GetTripsByDriver() {
         UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         List<TripResponseDTO> trip = this.trips.retrieveTripsByDriver(loggedInUser.getUserID());

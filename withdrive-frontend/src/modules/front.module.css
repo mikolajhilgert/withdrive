@@ -1,0 +1,50 @@
+.authwrapper {
+    display: flex;
+    padding-top: 10vh;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+}
+
+.authinner {
+    width: 100%;
+    margin: auto;
+    background: #ffffff;
+    padding: 40px 55px 45px 55px;
+}
+
+.postcontent {
+    margin-left: 210px
+  }
+
+  .posttext {
+    font-size: 130%;
+  }
+.postcontainer {
+    margin: 20px 20px 0 0;
+    overflow: auto
+}
+
+.postthumb {
+    float: left
+}
+
+.postthumb img {
+    padding-right: 30px;
+    display: block;
+    height: 500px;
+}
+
+@media(max-width: 675px) {
+    .authwrapper h3 {
+        text-align: center;
+        margin: 0;
+        line-height: 1;
+    }
+
+    .postthumb img {
+        padding-right: 0px;
+        display: block;
+        height: 160px;
+    }
+}

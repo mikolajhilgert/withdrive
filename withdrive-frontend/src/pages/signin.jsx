@@ -1,7 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { useHistory } from "react-router";
 import AuthService from "../services/AuthService";
 import LockOutlinedIcon from '@material-ui/icons/LockOpen';
+
+import form from '../modules/innerPage.module.css'
+import text from '../modules/text.module.css'
 
 const SignIn = () => {
         const [msg, setMsg] = React.useState(null);
@@ -19,16 +22,15 @@ const SignIn = () => {
                     this.email.value = "";
                     this.password.value = "";
                 })
-                .catch(err=>{setMsg("Error");})
+                .catch(err=>{setMsg("Detail mismatch");})
         }
 
         return (
-        <div className="auth-wrapper">  
-            <div className="auth-inner">
+        <div className={form.authwrapper}>  
+            <div className={form.authinner_form}>
             <form onSubmit={handleLogin}>
                 <center><LockOutlinedIcon/></center>
                 <h2><center>Sign In</center></h2>
-                <h4>              </h4>
                 <div className="form-group">
                     <label>Email address</label>
                     <input type="email" className="form-control" placeholder="Enter email" ref={email} required/>
@@ -41,9 +43,10 @@ const SignIn = () => {
                 
                 <br></br>
                 <div className="form-group"><button type="submit" className="btn btn-primary btn-block">Submit</button></div>
-                <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
-                </p>
+                <br></br>
+                {/* <p className={text.right+" form-group"}>
+                    <a href="#">Forgotten password?</a>
+                </p> */}
                 <h1>{msg}</h1>
             </form>
             </div>

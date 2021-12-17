@@ -6,10 +6,10 @@ import AuthService from "../services/AuthService";
 import moment from 'moment';
 import VpnKey from '@material-ui/icons/VpnKey';
 
+import form from '../modules/innerPage.module.css'
+
     const SignUp = () => {
         const [startDate, setStartDate] = useState(new Date());
-
-        const useDate = new Date();
                 
         const [msg, setMsg] = React.useState(null);
         const History = useHistory();
@@ -25,7 +25,6 @@ import VpnKey from '@material-ui/icons/VpnKey';
         const handleRegistration = e => {
             e.preventDefault();
             if(password.current.value === passwordCheck.current.value){
-                //console.log(email.current.value,firstname.current.value,lastname.current.value,useDate.toISOString().split('T')[0],gender.current.value,phonenum.current.value,password.current.value);
                 AuthService.register(email.current.value,firstname.current.value,lastname.current.value,moment(startDate).format("DD-MM-YYYY"),gender.current.value,phonenum.current.value,password.current.value)
                 .then(() => {
                     History.push("/sign-in");
@@ -37,16 +36,12 @@ import VpnKey from '@material-ui/icons/VpnKey';
             }
         }
 
-
-
-
         return (
-        <div className="auth-wrapper">  
-            <div className="auth-inner">
+        <div className={form.authwrapper}>  
+            <div className={form.authinner_form}>
             <form onSubmit={handleRegistration}>
             <center><VpnKey/></center>
                 <center><h3>Sign Up</h3></center>
-                <h4>                </h4>
 
                 <div className="form-group">
                     <label>First name</label>

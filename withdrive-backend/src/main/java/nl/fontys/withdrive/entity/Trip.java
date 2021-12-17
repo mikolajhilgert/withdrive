@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import nl.fontys.withdrive.enumeration.ApplicationStatus;
 import nl.fontys.withdrive.enumeration.TripStatus;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -32,9 +33,15 @@ public class Trip{
     @Enumerated(EnumType.STRING)
     private @Getter @Setter TripStatus status;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip",
+            cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
     Set<TripApplication> application;
+
+    @OneToMany(mappedBy = "trip",
+            cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
+    Set<Rating> trip;
 
     @ManyToOne
     private @Getter @Setter User driver;
+
 }

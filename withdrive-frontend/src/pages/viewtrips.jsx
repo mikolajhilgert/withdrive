@@ -1,17 +1,15 @@
 import React from "react";
-import '../css_override/table.css';
 import TripTable from "../components/alltrips.component"
-
-var selection = 'All';
+import form from '../modules/innerPage.module.css'
+import text from '../modules/text.module.css'
+import moment from 'moment'
 
 const Index = () => {
         return (
-        <div className="auth-wrapper">  
-            <div className="auth-inner">
-                <h1>Today is {new Date().toDateString()}</h1>
-            <h4>                                    </h4>
-            <h3>{selection} upcoming trips:</h3>
-            <TripTable></TripTable>
+        <div className={form.authwrapper}>  
+            <div className={form.authinner_table}>
+                <h1 className={text.center}>Today is {moment(new Date()).format("LLLL")}</h1>
+            <TripTable/>
             </div>
         </div>
         );

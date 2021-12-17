@@ -1,8 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 const NotFound = () => {
         return (
-            <div className="auth-wrapper">  
-                <div className="auth-inner">
+            <div className="default">  
+                <div className="default-inner">
                 <div>
                 <h3>404</h3>
                 <h3>Oops.. Page not found!</h3>

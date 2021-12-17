@@ -4,26 +4,18 @@ import nl.fontys.withdrive.converter.UserConverter;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.converter.IUserConverter;
-import nl.fontys.withdrive.interfaces.data.IUserData;
-import nl.fontys.withdrive.interfaces.service.IUserManager;
-import nl.fontys.withdrive.service.UserManager;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-
+@SpringBootTest
 public class UserConverterTest {
     IUserConverter converter = new UserConverter(new ModelMapper());
     UUID testID = UUID.randomUUID();
@@ -33,7 +25,7 @@ public class UserConverterTest {
     public void convertUserDTOToEntityTest()
     {
         UserDTO start = new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null);
-        User wantedResult = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null);
+        User wantedResult = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
 
         User toTest = converter.DTOToEntity(start);
 
@@ -49,7 +41,7 @@ public class UserConverterTest {
     @Test
     public void convertUserEntityToDTOTest()
     {
-        User start = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null);
+        User start = new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
         UserDTO wantedResult = new UserDTO(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null);
 
 
@@ -68,8 +60,8 @@ public class UserConverterTest {
     public void convertListUserEntityToDTOTest()
     {
         List<User> start = List.of(
-                new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null),
-                new User(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null,null,null,null)
+                new User(testID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null),
+                new User(testID2,"emily.black@gmail.com","Emily","Black","10-02-1990","Female","678988273","hello",null,null,null,null,null)
         );
 
         List<UserDTO> wantedResult = List.of(

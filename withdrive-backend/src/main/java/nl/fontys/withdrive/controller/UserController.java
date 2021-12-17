@@ -5,14 +5,14 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
-import nl.fontys.withdrive.dto.RoleToUserForm;
+import nl.fontys.withdrive.dto.user.RoleToUserForm;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Role;
-import nl.fontys.withdrive.interfaces.service.IUserManager;
+import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,10 +31,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private final IUserManager users;
+    private final IUserService users;
 
     @Autowired
-    public UserController(IUserManager users){
+    public UserController(IUserService users){
         this.users = users;
     }
 
@@ -53,6 +53,17 @@ public class UserController {
             return ResponseEntity.ok().body(user);
         }
         //return ResponseEntity.notFound().build();
+        return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("myDetails")
+    public ResponseEntity<UserDTO> GetUserDetails(){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        UserDTO user = this.users.RetrieveByID(loggedInUser.getUserID());
+        if(user!=null){
+            user.setPassword("");
+            return ResponseEntity.ok().body(user);
+        }
         return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
     }
 
@@ -84,19 +95,22 @@ public class UserController {
 
     @PutMapping()
     public ResponseEntity<UserDTO> UpdateUser(@RequestBody UserDTO user){
-        if(this.users.Update(user)){
+        UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
+        user.setUserID(loggedInUser.getUserID());
+        if (users.existsByEmail(user.getEmail()) && !Objects.equals(user.getEmail(), loggedInUser.getEmail())){
+            String entity =  "An user with the email:" + user.getEmail() + " already exists.";
+            return new ResponseEntity(entity,HttpStatus.CONFLICT);
+        } else {
+            this.users.Update(user);
             String url = "user" + "/" + user.getUserID(); // url of the created student
             URI uri = URI.create(url);
             return new ResponseEntity(uri,HttpStatus.CREATED);
         }
-        else{
-            return new ResponseEntity("Please provide a valid user number.",HttpStatus.NOT_FOUND);
-        }
     }
 
     @DeleteMapping("{userID}")
-    public ResponseEntity<UserDTO> DeleteUser(@PathVariable UUID number) {
-        if (this.users.Delete(number)) {
+    public ResponseEntity<?> deleteUser(@PathVariable UUID userID) {
+        if (this.users.Delete(userID)) {
             return ResponseEntity.noContent().build();
         } else {
             return new ResponseEntity("Please provide a valid user number.", HttpStatus.NOT_FOUND);
@@ -108,6 +122,16 @@ public class UserController {
         String url = "user" + "/" + form.getRoleName(); // url of the created student
         users.addRoleToUser(form.getEmail(),form.getRoleName());
         return new ResponseEntity("Please provide a valid user number.", HttpStatus.FOUND);
+    }
+
+    @GetMapping("/check")
+    public ResponseEntity<?>checkTokenStatus(){
+        return ResponseEntity.ok().body("");
+    }
+
+    @GetMapping("/admin")
+    public ResponseEntity<?>checkTokenStatusAdmin(){
+        return ResponseEntity.ok().body("");
     }
 
     @GetMapping("/token/refresh")

@@ -32,6 +32,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 //User tests using mockito
+@ActiveProfiles("test")
 @SpringBootTest
 public class TripServiceTest {
     // https://javacodehouse.com/blog/mockito-tutorial/
@@ -59,7 +60,7 @@ public class TripServiceTest {
                 new Trip(tripID,"Eindhoven","Venlo","Quick trip","19/11/2021","AL-125-GG",2,2.5,TripStatus.OPEN,null,null,driver),
                 new Trip(tripID2,"Venlo","Eindhoven","Quick trip","19/11/2021","AL-125-GG",2,2.5, TripStatus.OPEN,null,null,driver)
         );
-        TripApplication tripApplication = new TripApplication(new TripApplicationKEY(),user,trips.get(0),ApplicationStatus.PENDING,"test");
+
 
         when(db.RetrieveByNumber(tripID)).thenReturn(trips.get(0));
         when(db.RetrieveAll()).thenReturn(trips);

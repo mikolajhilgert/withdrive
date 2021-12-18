@@ -3,7 +3,8 @@ stages:
   - test
   - sonarqube
   - integration
-  - e2e
+  - cypress
+  - docker
 
 build:
   stage: build
@@ -41,11 +42,30 @@ sonarqube:
 integration:
   stage: integration
   script:
+    -  cd withdrive-backend
+    -  ./gradlew build -x test 
     -  cd C:\Users\mikol\AppData\Roaming\npm
     -  ./newman run https://www.getpostman.com/collections/3694d3e77a13c6220724
+    -  ./gradlew.bat --stop
     
-e2e:
-  stage: e2e
+cypress:
+  stage: cypress
   script:
+    -  cd withdrive-backend
+    -  ./gradlew build -x test 
+    -  cd ..
     -  cd withdrive-frontend
     -  npx cypress run
+    -  ./gradlew.bat --stop
+
+docker:
+  stage: docker
+  script:
+    -  cd withdrive-frontend
+    -  docker build -t frontend .
+    -  cd ..
+    -  cd withdrive-backend
+    -  replace C:\Users\mikol\withdrive\withdrive-backend\src\main\resources\application.properties C:\Users\mikol\withdrive\withdrive-backend\src\main\java\nl\fontys\withdrive\zproperties\prod\application.properties
+    -  ./gradlew build -x test
+    -  docker build -t backend .
+    -  replace C:\Users\mikol\withdrive\withdrive-backend\src\main\resources\application.properties C:\Users\mikol\withdrive\withdrive-backend\src\main\java\nl\fontys\withdrive\zproperties\test\application.properties

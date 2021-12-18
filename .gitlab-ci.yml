@@ -62,3 +62,4 @@ docker:
     -  ./gradlew build -x test
     -  docker build -t backend .
     -  replace "C:\Users\mikol\withdrive\withdrive-backend\override\test\application.properties" "C:\Users\mikol\withdrive\withdrive-backend\src\main\resources"
+    - ./gradlew.bat --stop

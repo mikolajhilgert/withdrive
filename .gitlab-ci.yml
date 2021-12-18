@@ -42,21 +42,14 @@ sonarqube:
 integration:
   stage: integration
   script:
-    -  cd withdrive-backend
-    -  ./gradlew build -x test 
     -  cd C:\Users\mikol\AppData\Roaming\npm
     -  ./newman run https://www.getpostman.com/collections/3694d3e77a13c6220724
-    -  ./gradlew.bat --stop
     
 cypress:
   stage: cypress
   script:
-    -  cd withdrive-backend
-    -  ./gradlew build -x test 
-    -  cd ..
     -  cd withdrive-frontend
     -  npx cypress run
-    -  ./gradlew.bat --stop
 
 docker:
   stage: docker

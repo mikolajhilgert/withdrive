@@ -58,7 +58,7 @@ docker:
     -  docker build -t frontend .
     -  cd ..
     -  cd withdrive-backend
-    -  replace C:\Users\mikol\withdrive\withdrive-backend\src\main\resources\application.properties C:\Users\mikol\withdrive\withdrive-backend\src\main\java\nl\fontys\withdrive\zproperties\prod\application.properties
+    -  replace "C:\Users\mikol\withdrive\withdrive-backend\src\main\resources\application.properties" "C:\Users\mikol\withdrive\withdrive-backend\override\prod\application.properties"
     -  ./gradlew build -x test
     -  docker build -t backend .
-    -  replace C:\Users\mikol\withdrive\withdrive-backend\src\main\resources\application.properties C:\Users\mikol\withdrive\withdrive-backend\src\main\java\nl\fontys\withdrive\zproperties\test\application.properties
+    -  replace "C:\Users\mikol\withdrive\withdrive-backend\src\main\resources\application.properties" "C:\Users\mikol\withdrive\withdrive-backend\override\test\application.properties"

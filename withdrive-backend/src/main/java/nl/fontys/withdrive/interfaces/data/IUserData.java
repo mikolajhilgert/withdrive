@@ -28,4 +28,6 @@ public interface IUserData {
     List<User> GetDrivers();
 
     boolean existsByEmail(String email);
+
+    User findByResetPasswordToken(String token);
 }

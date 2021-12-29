@@ -24,8 +24,13 @@ public class User {
     private @Getter @Setter String phoneNumber;
     private @Getter @Setter String password;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER,
+            cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
     private @Getter @Setter Collection<Role> roles = new ArrayList<>();
+
+    @JsonIgnore
+    @JoinColumn(name="reset_password_token")
+    private @Getter @Setter String resetPasswordToken;
 
     @OneToMany(
             mappedBy = "driver",
@@ -50,7 +55,6 @@ public class User {
             mappedBy = "rater",
             cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
     Set<Rating> user;
-
 }
 
 

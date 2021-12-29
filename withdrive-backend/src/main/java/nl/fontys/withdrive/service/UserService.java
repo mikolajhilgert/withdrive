@@ -1,11 +1,14 @@
 package nl.fontys.withdrive.service;
 
+import com.sun.mail.imap.Utility;
 import lombok.extern.slf4j.Slf4j;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Role;
 import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.converter.IUserConverter;
 import nl.fontys.withdrive.interfaces.data.IUserData;
+import nl.fontys.withdrive.interfaces.service.IEmailService;
+import nl.fontys.withdrive.interfaces.service.ISanitizeService;
 import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,12 +29,16 @@ public class UserService implements IUserService, UserDetailsService {
     private final IUserData saved;
     private final IUserConverter converter;
     private final PasswordEncoder passwordEncoder;
+    private final ISanitizeService sanitize;
+    private final IEmailService mailer;
 
     @Autowired
-    public UserService(IUserData saved, IUserConverter converter, PasswordEncoder passwordEncoder){
+    public UserService(IUserData saved, IUserConverter converter, PasswordEncoder passwordEncoder, ISanitizeService sanitize,IEmailService mailer){
         this.saved = saved;
         this.converter = converter;
         this.passwordEncoder = passwordEncoder;
+        this.sanitize = sanitize;
+        this.mailer = mailer;
     }
 
     @Override
@@ -49,10 +56,13 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public boolean Add(UserDTO user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        //addRoleToUser(user.getEmail(),"ROLE_USER");
-        this.saved.Create(converter.DTOToEntity(user));
-        return true;
+        if(sanitize.checkUser(user)){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            //addRoleToUser(user.getEmail(),"ROLE_USER");
+            this.saved.Create(converter.DTOToEntity(user));
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -96,6 +106,40 @@ public class UserService implements IUserService, UserDetailsService {
     @Override
     public boolean existsByEmail(String email) {
         return saved.existsByEmail(email);
+    }
+
+    @Override
+    public void updateResetPasswordToken(String token, String email, String link) {
+        User user = saved.retrieveByEmail(email);
+        String resetPasswordLink =  link + "/reset-password?token=" + token;
+        String content = "Hello,"
+                + "You have requested to reset your password"
+                + "Click the link below to change your password:"+
+                resetPasswordLink;
+        if (user != null) {
+            mailer.sendMail(email, "You requested to reset your password!",content);
+            user.setResetPasswordToken(token);
+            saved.Update(user);
+        }
+    }
+
+    @Override
+    public UserDTO getByResetPasswordToken(String token) {
+        if(saved.findByResetPasswordToken(token) != null){
+            return converter.EntityToDTO(saved.findByResetPasswordToken(token));
+        }
+        return null;
+    }
+
+    @Override
+    public void updatePassword(String email, String newPassword) {
+        User user = saved.retrieveByEmail(email);
+        if(user != null){
+            String encodedPassword = passwordEncoder.encode(newPassword);
+            user.setPassword(encodedPassword);
+            user.setResetPasswordToken(null);
+            saved.Update(user);
+        }
     }
 
 

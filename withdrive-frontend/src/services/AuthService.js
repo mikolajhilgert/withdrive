@@ -47,6 +47,25 @@ import authHeader from './AuthHeader';
         }
         return check();
     }
+
+    recoverPassword(email){
+        var params = new URLSearchParams();
+        params.append('email', email);
+
+        axios.post(API_URL+"forgot_password",params);
+    }
+
+    changePassword(password,token){
+        var params = new URLSearchParams();
+        params.append('password', password);
+        params.append('token', token);
+
+        axios.post(API_URL+"reset_password",params);
+    }
+
+    verifyChangePassword(token){
+        return axios.get(API_URL+"reset_password/"+token);
+    }
 }
 
     export default new AuthService();

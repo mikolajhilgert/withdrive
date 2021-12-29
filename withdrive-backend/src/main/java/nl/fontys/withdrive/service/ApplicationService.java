@@ -39,7 +39,7 @@ public class ApplicationService implements IApplicationService {
             if(app.getTrip().getDriver().getUserID() != user){
                 saved.Create(app);
             }
-            mailer.sendApplicationNotification(app.getTrip().getDriver().getUserID());
+            mailer.sendApplicationNotification(app.getTrip().getDriver().getEmail());
         }
     }
 
@@ -80,7 +80,7 @@ public class ApplicationService implements IApplicationService {
         TripApplication temp = applicationConverter.RequestDTOToEntity(RetrieveByUserIDAndTripID(application.getUser(),application.getTrip()));
         temp.setStatus(status);
         saved.Update(temp);
-        mailer.sendApplicationNotification(application.getUser());
+        //mailer.sendApplicationNotification(application.getUser());
     }
 
     @Override

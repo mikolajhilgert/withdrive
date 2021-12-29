@@ -11,6 +11,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UserMiniDTO {
     private @Getter @Setter UUID userID;
-    private @Getter @Setter String firstName;
-    private @Getter @Setter String lastName;
+//    private @Getter @Setter String firstName;
+//    private @Getter @Setter String lastName;
 }

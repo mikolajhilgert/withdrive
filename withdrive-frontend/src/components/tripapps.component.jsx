@@ -6,9 +6,10 @@ import NotFound from '../pages/notfound';
 import ApplicationService from '../services/ApplicationService';
 import Button from 'react-bootstrap/Button'
 import Popup from 'react-popup';
-import SkyLight from 'react-skylight';
 
 let id = window.location.pathname.split('/').pop();
+
+
 
 const columns = [
   { field: 'fullName', headerName: 'Name', flex: 1 , minWidth: 150},
@@ -87,6 +88,7 @@ export default function AppTable() {
     const getApplications = () => {
         ApplicationService.getApps(id).then((response) => {
             setApps(response.data);
+            console.log(response.data)
         });
     }   
     

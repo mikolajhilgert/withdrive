@@ -103,4 +103,9 @@ public class UserData implements IUserData {
         }
         return  true;
     }
+
+    @Override
+    public User findByResetPasswordToken(String token) {
+        return db.getByResetPasswordToken(token);
+    }
 }

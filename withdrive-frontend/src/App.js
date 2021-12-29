@@ -17,11 +17,13 @@ import MyTrips from "./pages/mytrips";
 import DriverTrips from "./pages/drivertrips";
 import EditTrip from "./pages/editatrip";
 import ApplyTrip from "./pages/apply";
-import ViewTripApps from "./pages/viewApps"
+import ViewTripApps from "./pages/viewapps"
 import AdminViewUsers from "./pages/admin/viewusers"
 import AdminSendAlerts from "./pages/admin/sendalert"
 import MyProfile from "./pages/myprofile"
 import LogOut from './pages/signout';
+import ForgotPassword from './pages/forgotpassword';
+import ResetPassword from './pages/resetpassword';
 import NotFound from './pages/notfound';
 
 function App() {
@@ -38,7 +40,7 @@ function App() {
   function requireAdminAuth() {
     if (AuthService.getCurrentUser()!==null ) {
       const token = JSON.parse(localStorage.getItem("user"))&& JSON.parse(localStorage.getItem("user"))["access_token"];
-      if (jwtDecode(token).exp > Date.now() / 1000 && AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")===true) {
+      if (jwtDecode(token).exp > Date.now() / 1000 && AuthService.getCurrentUser().roles.includes("ROLE_ADMIN")) {
         return true;
       }
     }
@@ -60,6 +62,8 @@ function App() {
           <Route path="/view-trips" component={() => <ViewTrips/>} />
           <Route path="/sign-out" component={() => <SignOut/>} />
           <Route path="/trip/view" component={() => <ViewTrip/>}/>
+          <Route path="/forgotten-password" component={() => <ForgotPassword/>}/>
+          <Route path="/reset-password" component={() => <ResetPassword/>}/>
           <Route path="/sign-in"render={() => (requireAuth() ? (<Redirect to="/view-trips"/>) : (<Login/>))} />
           <Route path="/sign-up" render={() => (requireAuth() ? (<Redirect to="/sign-in"/>) : (<SignUp/>))} />
           <Route path="/create-trip" render={() => (requireAuth() ? (<CreateTrip/>) : (LogOrNotFound()))} />

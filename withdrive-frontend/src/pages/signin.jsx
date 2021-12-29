@@ -44,9 +44,9 @@ const SignIn = () => {
                 <br></br>
                 <div className="form-group"><button type="submit" className="btn btn-primary btn-block">Submit</button></div>
                 <br></br>
-                {/* <p className={text.right+" form-group"}>
-                    <a href="#">Forgotten password?</a>
-                </p> */}
+                <p className={text.right+" form-group"}>
+                    <a href="forgotten-password">Forgotten password?</a>
+                </p>
                 <h1>{msg}</h1>
             </form>
             </div>

@@ -11,6 +11,7 @@ import nl.fontys.withdrive.interfaces.data.IApplicationData;
 import nl.fontys.withdrive.interfaces.service.IApplicationService;
 import nl.fontys.withdrive.interfaces.service.IEmailService;
 import nl.fontys.withdrive.interfaces.service.ITripService;
+import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +24,14 @@ public class ApplicationService implements IApplicationService {
     private final IApplicationData saved;
     private final IApplicationConverter applicationConverter;
     private final IEmailService mailer;
+    private final IUserService users;
 
     @Autowired
-    public ApplicationService(IApplicationData saved, IApplicationConverter applicationConverter, IEmailService mailer){
+    public ApplicationService(IApplicationData saved, IApplicationConverter applicationConverter, IEmailService mailer, IUserService users){
         this.saved = saved;
         this.applicationConverter = applicationConverter;
         this.mailer = mailer;
+        this.users = users;
     }
 
     @Override
@@ -80,7 +83,7 @@ public class ApplicationService implements IApplicationService {
         TripApplication temp = applicationConverter.RequestDTOToEntity(RetrieveByUserIDAndTripID(application.getUser(),application.getTrip()));
         temp.setStatus(status);
         saved.Update(temp);
-        //mailer.sendApplicationNotification(application.getUser());
+        mailer.sendApplicationNotification(users.RetrieveByID(application.getUser()).getEmail());
     }
 
     @Override

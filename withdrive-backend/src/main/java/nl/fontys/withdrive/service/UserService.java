@@ -1,7 +1,5 @@
 package nl.fontys.withdrive.service;
 
-import com.sun.mail.imap.Utility;
-import lombok.extern.slf4j.Slf4j;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Role;
 import nl.fontys.withdrive.entity.User;
@@ -112,9 +110,8 @@ public class UserService implements IUserService, UserDetailsService {
     public void updateResetPasswordToken(String token, String email, String link) {
         User user = saved.retrieveByEmail(email);
         String resetPasswordLink =  link + "/reset-password/" + token;
-        String content = "Hello,"
-                + "You have requested to reset your password"
-                + "Click the link below to change your password:"+
+        String content = "Hello,\n"
+                + "Click the link below to change your password:\n "+
                 resetPasswordLink;
         if (user != null) {
             mailer.sendMail(email, "You requested to reset your password!",content);

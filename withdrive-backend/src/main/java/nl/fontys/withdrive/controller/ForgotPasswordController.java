@@ -33,7 +33,7 @@ public class ForgotPasswordController {
             users.updateResetPasswordToken(token, email, "http://localhost:3000");
 
         } catch (Exception ex) {
-            System.out.println("Exception!");
+            System.out.println(ex);
         }
     }
 

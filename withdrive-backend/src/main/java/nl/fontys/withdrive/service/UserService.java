@@ -111,7 +111,7 @@ public class UserService implements IUserService, UserDetailsService {
     @Override
     public void updateResetPasswordToken(String token, String email, String link) {
         User user = saved.retrieveByEmail(email);
-        String resetPasswordLink =  link + "/reset-password?token=" + token;
+        String resetPasswordLink =  link + "/reset-password/" + token;
         String content = "Hello,"
                 + "You have requested to reset your password"
                 + "Click the link below to change your password:"+

@@ -1,6 +1,5 @@
 describe('apply_to_trip', () => {
     it("apply_to_trip", () => {
-        cy.wait(1000)
         cy.login("tester@withdrive.com","password")
         cy.visit('/')
         cy.get('[href="/view-trips"]').click();

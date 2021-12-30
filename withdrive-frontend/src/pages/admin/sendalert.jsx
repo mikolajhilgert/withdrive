@@ -15,10 +15,6 @@ function Alert() {
     const [stompClient, setStompClient] = useState(null);
     const [msgToSend, setSendMessage] = useState("Enter your message here!");
 
-    window.onbeforeunload = function() {
-        stompClient.close();
-    };
-
     function handle(){
         var r = window.confirm("Are you sure you want to send this alert?");
         if (r === true) {

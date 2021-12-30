@@ -17,10 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service @Transactional
 public class UserService implements IUserService, UserDetailsService {
@@ -80,9 +77,17 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public boolean Update(UserDTO user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        this.saved.Update(converter.DTOToEntity(user));
-        return true;
+        if (sanitize.checkUser(user)) {
+            User old = saved.RetrieveByID(user.getUserID());
+            if (!Objects.equals(user.getPassword(), "")) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            } else {
+                user.setPassword(old.getPassword());
+            }
+            this.saved.Update(converter.DTOToEntity(user));
+            return true;
+        }
+        return false;
     }
 
     @Override

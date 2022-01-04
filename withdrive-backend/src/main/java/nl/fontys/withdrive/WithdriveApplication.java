@@ -49,6 +49,7 @@ public class WithdriveApplication {
 
           userService.addRoleToUser("admin@withdrive.com","ROLE_ADMIN");
 
+
           //tripService.Add(new TripRequestDTO(UUID.randomUUID(),"Eindhoven","Amsterdam","Quick trip","2021-12-16T13:30","12-ABC-55",2,10,UUID.fromString("d1ec1b55-3297-445e-be4f-a31ddc342ad7"), Collections.emptyList(), TripStatus.OPEN));
         };
     }

@@ -5,7 +5,6 @@ import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.converter.IUserConverter;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import nl.fontys.withdrive.dto.user.UserDTO;
-import nl.fontys.withdrive.interfaces.service.ISanitizeService;
 import nl.fontys.withdrive.interfaces.service.IUserService;
 import nl.fontys.withdrive.service.UserService;
 import org.junit.jupiter.api.Assertions;
@@ -32,16 +31,13 @@ public class UserServiceTest {
     IUserData db;
     @Mock
     IUserService service;
-    @Mock
-    ISanitizeService sanitize;
     IUserConverter converter = new UserConverter(new ModelMapper());
     UUID testID = UUID.randomUUID();
     UUID testID2 = UUID.randomUUID();
 
     @BeforeEach
     public void setUp()  {
-        service = new UserService(db,converter, new BCryptPasswordEncoder(), sanitize, null);
-        when(sanitize.checkUser(any(UserDTO.class))).thenReturn(true);
+        service = new UserService(db,converter, new BCryptPasswordEncoder(), null);
     }
 
     @Test

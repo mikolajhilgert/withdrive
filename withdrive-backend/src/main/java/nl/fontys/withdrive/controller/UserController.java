@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.net.URI;
 import java.util.*;
@@ -74,7 +75,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserDTO> CreateUser(@RequestBody UserDTO user) {
+    public ResponseEntity<UserDTO> CreateUser(@Valid @RequestBody UserDTO user) {
         if (users.existsByEmail(user.getEmail())){
             String entity =  "An user with the email:" + user.getEmail() + " already exists.";
             return new ResponseEntity(entity,HttpStatus.CONFLICT);
@@ -94,7 +95,7 @@ public class UserController {
     }
 
     @PutMapping()
-    public ResponseEntity<UserDTO> UpdateUser(@RequestBody UserDTO user){
+    public ResponseEntity<UserDTO> UpdateUser(@Valid @RequestBody UserDTO user){
         UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         user.setUserID(loggedInUser.getUserID());
         if (users.existsByEmail(user.getEmail()) && !Objects.equals(user.getEmail(), loggedInUser.getEmail())){

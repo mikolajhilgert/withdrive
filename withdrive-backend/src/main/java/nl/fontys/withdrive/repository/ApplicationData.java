@@ -5,12 +5,13 @@ import nl.fontys.withdrive.interfaces.data.IApplicationData;
 import nl.fontys.withdrive.interfaces.jpa.IJPAApplicationData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+@Repository @Transactional
 public class ApplicationData implements IApplicationData {
 
     private final IJPAApplicationData db;

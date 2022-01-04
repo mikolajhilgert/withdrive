@@ -37,6 +37,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.20'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'org.springframework.security:spring-security-test'
+    implementation('org.springframework.boot:spring-boot-starter-validation')
     implementation 'org.springframework.boot:spring-boot-devtools:2.5.5'
     implementation 'org.springframework.boot:spring-boot-starter:2.5.5'
     implementation group: 'com.auth0', name: 'java-jwt', version: '3.18.2'

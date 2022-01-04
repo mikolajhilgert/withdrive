@@ -6,7 +6,6 @@ import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.converter.IUserConverter;
 import nl.fontys.withdrive.interfaces.data.IUserData;
 import nl.fontys.withdrive.interfaces.service.IEmailService;
-import nl.fontys.withdrive.interfaces.service.ISanitizeService;
 import nl.fontys.withdrive.interfaces.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,15 +23,13 @@ public class UserService implements IUserService, UserDetailsService {
     private final IUserData saved;
     private final IUserConverter converter;
     private final PasswordEncoder passwordEncoder;
-    private final ISanitizeService sanitize;
     private final IEmailService mailer;
 
     @Autowired
-    public UserService(IUserData saved, IUserConverter converter, PasswordEncoder passwordEncoder, ISanitizeService sanitize,IEmailService mailer){
+    public UserService(IUserData saved, IUserConverter converter, PasswordEncoder passwordEncoder, IEmailService mailer){
         this.saved = saved;
         this.converter = converter;
         this.passwordEncoder = passwordEncoder;
-        this.sanitize = sanitize;
         this.mailer = mailer;
     }
 
@@ -51,13 +48,10 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public boolean Add(UserDTO user) {
-        if(sanitize.checkUser(user)){
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            //addRoleToUser(user.getEmail(),"ROLE_USER");
-            this.saved.Create(converter.DTOToEntity(user));
-            return true;
-        }
-        return false;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        //addRoleToUser(user.getEmail(),"ROLE_USER");
+        this.saved.Create(converter.DTOToEntity(user));
+        return true;
     }
 
     @Override
@@ -77,17 +71,14 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public boolean Update(UserDTO user) {
-        if (sanitize.checkUser(user)) {
-            User old = saved.RetrieveByID(user.getUserID());
-            if (!Objects.equals(user.getPassword(), "")) {
-                user.setPassword(passwordEncoder.encode(user.getPassword()));
-            } else {
-                user.setPassword(old.getPassword());
-            }
-            this.saved.Update(converter.DTOToEntity(user));
-            return true;
+        User old = saved.RetrieveByID(user.getUserID());
+        if (!Objects.equals(user.getPassword(), "")) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else {
+            user.setPassword(old.getPassword());
         }
-        return false;
+        this.saved.Update(converter.DTOToEntity(user));
+        return true;
     }
 
     @Override

@@ -8,6 +8,7 @@ import nl.fontys.withdrive.dto.trip.TripRequestDTO;
 import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationRequestDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationResponseDTO;
+import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.entity.Trip;
 import nl.fontys.withdrive.entity.TripApplication;
 import nl.fontys.withdrive.entity.TripApplicationKEY;
@@ -22,6 +23,7 @@ import nl.fontys.withdrive.interfaces.data.IUserData;
 import nl.fontys.withdrive.interfaces.service.IApplicationService;
 import nl.fontys.withdrive.interfaces.service.IEmailService;
 import nl.fontys.withdrive.interfaces.service.ITripService;
+import nl.fontys.withdrive.interfaces.service.IUserService;
 import nl.fontys.withdrive.service.ApplicationService;
 import nl.fontys.withdrive.service.EmailService;
 import nl.fontys.withdrive.service.TripService;
@@ -31,6 +33,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
@@ -42,8 +45,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 //User tests using mockito
 @ActiveProfiles("test")
@@ -54,6 +56,8 @@ public class ApplicationServiceTest {
     IApplicationData db;
     @Mock
     IUserData userData;
+    @Mock
+    IUserService userService;
     @Mock
     ITripData tripData;
     @Mock
@@ -70,10 +74,10 @@ public class ApplicationServiceTest {
     @BeforeEach
     public void setUp()  {
         converter = new ApplicationConverter(new ModelMapper(),userData,tripData);
-        service = new ApplicationService(db,converter,mailService);
-        User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
-        User user = new User(userID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
-        User user2 = new User(userID2,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
+        service = new ApplicationService(db,converter,mailService,userService);
+        User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null,null);
+        User user = new User(userID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null,null);
+        User user2 = new User(userID2,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null,null);
         List<Trip> trips = List.of(
                 new Trip(tripID,"Eindhoven","Venlo","Quick trip","31/12/2021","AL-125-GG",2,2.5,TripStatus.OPEN,null,null,driver)
         );
@@ -86,10 +90,14 @@ public class ApplicationServiceTest {
         when(db.RetrieveByUserID(userID)).thenReturn(List.of(apps.get(0)));
         when(db.RetrieveByUserIDAndTripID(any(UUID.class),any(UUID.class))).thenReturn(apps.get(1));
 
+        doNothing().when(mailService).sendApplicationNotification(any(String.class));
+        doNothing().when(mailService).sendApplicationResponseNotification(any(String.class));
+
         when(tripData.RetrieveByNumber(tripID)).thenReturn(trips.get(0));
         when(userData.RetrieveByID(driverID)).thenReturn(driver);
         when(userData.RetrieveByID(userID)).thenReturn(user);
         when(userData.RetrieveByID(userID2)).thenReturn(user2);
+        when(userService.RetrieveByID(any(UUID.class))).thenReturn(new UserDTO(userID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null));
     }
 
     @Test

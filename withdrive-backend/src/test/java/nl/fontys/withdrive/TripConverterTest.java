@@ -40,7 +40,7 @@ public class TripConverterTest {
     UUID testID2 = UUID.randomUUID();
     UUID driverID = UUID.randomUUID();
     TripConverter converter;
-    User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
+    User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null,null);
     UserMiniDTO driverMini = new UserMiniDTO(driverID);
 
 

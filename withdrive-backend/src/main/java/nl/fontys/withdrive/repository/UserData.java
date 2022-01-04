@@ -82,7 +82,9 @@ public class UserData implements IUserData {
     }
 
     @Override
-    public void Delete(UUID number) {
+    public void Delete(UUID number)
+    {
+//        roles.deleteRolesFromUser(number.toString());
         db.deleteById(number);
     }
 

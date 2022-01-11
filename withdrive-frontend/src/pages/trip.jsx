@@ -8,7 +8,11 @@ import NotFound from './notfound'
 import Rating from '@mui/material/Rating';
 import BackButton from '../components/backButton.component'
 import AuthService from "../services/AuthService";
-import Popup from 'react-popup';
+import ViewReview from '../components/viewreview.component'
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
 import form from '../modules/innerPage.module.css'
 
@@ -17,6 +21,11 @@ let id = window.location.pathname.split('/').pop();
 const Trip = () => {
     const [trip,setTrip] = useState(null);
     const [rating,setRating] = useState(0);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     React.useEffect(() => {
         TripService.getTrip(id).then((response) => {
@@ -49,10 +58,6 @@ function showButton(actual,max){
     }
 }
 
-function showRatings(){
-    Popup.alert("Reviews:")
-}
-
 return (
 <>
     <br></br>
@@ -74,11 +79,11 @@ return (
                             </tr>
                             <tr>
                                 <td>
-                                Driver rating:
+                                Average driver rating:
                                 <br></br>
                                 <Rating name="read-only" value={rating} precision={0.5} readOnly/>
                                 <br></br>
-                                {/* <button onClick={() => {showRatings()}}>See driver reviews</button> */}
+                                <button onClick={() => {setOpen(true)}}>See driver reviews</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -88,6 +93,23 @@ return (
                     <br></br>
                     <Map trip={trip} />    
         </div>
+        <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Drivers reviews:"}
+        </DialogTitle>
+        <DialogContent>
+            <ViewReview id={trip.driver.userID}/>
+
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </div>
 </>
 );

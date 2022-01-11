@@ -16,6 +16,10 @@ class ReviewService {
     hasUserLeftReview(tripID){
         return axios.get(API_BASE_URL+"/check/"+tripID,{headers: authHeader()})
     }
+
+    getRatingsByDriver(userID){
+        return axios.get(API_BASE_URL+"/driver/"+userID)
+    }
 }
 
 export default new ReviewService()

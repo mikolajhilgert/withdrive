@@ -41,7 +41,7 @@ public class RatingService implements IRatingService {
 
     @Override
     public List<AnonymousRatingDTO> getRatingsPerUser(UUID user) {
-        return null;
+        return ratingConverter.ListEntityToAnonymousDTO(saved.getRatingsPerUser(user));
     }
 
     @Override

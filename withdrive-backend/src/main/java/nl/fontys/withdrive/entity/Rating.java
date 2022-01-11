@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import nl.fontys.withdrive.enumeration.RatingType;
 
 import javax.persistence.*;
 
@@ -33,8 +32,5 @@ public class Rating {
     Trip trip;
     private @Getter @Setter float rating;
     private @Getter @Setter String text;
-
-    @Enumerated(EnumType.STRING)
-    private @Getter @Setter RatingType type;
 
 }

@@ -40,7 +40,7 @@ public class RatingData implements IRatingData {
 
     @Override
     public List<Rating> getRatingsPerUser(UUID user) {
-        return null;
+        return db.getRatingPerUser(user.toString());
     }
 
     @Override

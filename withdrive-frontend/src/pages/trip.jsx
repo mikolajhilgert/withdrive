@@ -44,7 +44,7 @@ const Trip = () => {
     if(!trip) return <NotFound/>;
 
 function showButton(actual,max){
-    if(actual<max){
+    if(actual<max && trip.status !== "LOCKED"){
         return(<Button onClick={()=>{
             if(AuthService.getCurrentUser() !== null){
                 window.history.pushState({}, '', "/trip/apply/"+id);window.location.reload();
@@ -54,7 +54,7 @@ function showButton(actual,max){
             
         }}> Apply now!</Button>)
     }else{
-        return("Trip is full!")
+        return("Applications not available!")
     }
 }
 

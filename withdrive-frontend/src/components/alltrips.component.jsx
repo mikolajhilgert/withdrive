@@ -10,12 +10,12 @@ import Select from './citySelect.component'
 
 
 const columns = [
-  { field: 'date', headerName: 'Date', minWidth: "320"},
-  { field: 'origin', headerName: 'From',minWidth: "200" },
-  { field: 'destination', headerName: 'To', minWidth: "200" },
-  { field: 'pricePerPassenger', headerName: 'Price', minWidth: "200" },
-  { field: 'PassengerCount', headerName: 'Available seats', minWidth: "200"},
-  { field: "Apply",flex: 1,minWidth: "210",renderCell: (cellValues) => {return (<Button color="primary" onClick={() => { handleClick(cellValues); }} >View details</Button>);}},
+  { field: 'date', headerName: 'Date', flex: 1, minWidth: 320},
+  { field: 'origin', headerName: 'From', flex: 1,minWidth: 150 },
+  { field: 'destination', headerName: 'To', flex: 1, minWidth: 150 },
+  { field: 'pricePerPassenger', headerName: 'Price', flex: 1, minWidth: 80 },
+  { field: 'PassengerCount', flex: 1, headerName: 'Available seats', minWidth:100},
+  { field: "Apply",flex: 1,minWidth: 210,renderCell: (cellValues) => {return (<Button color="primary" onClick={() => { handleClick(cellValues); }} >View details</Button>);}},
 ];
 
 function handleClick(selected) {

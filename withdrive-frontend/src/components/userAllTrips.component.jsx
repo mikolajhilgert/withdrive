@@ -37,8 +37,21 @@ export default function UserTripTable(props) {
 
             default:
                 ReviewService.hasUserLeftReview(selected.id).then((response)=>{
-                    if(response.data === false){
+                    if(response.data === false && selected.row.status === "ACCEPTED"){
                         props.rating(selected.id);
+                    }
+                    else if(selected.row.status !== "ACCEPTED"){
+                        store.addNotification({
+                            title: "Alert",
+                            message: "You were never a part of this trip!",
+                            type: "warning",
+                            insert: "top",
+                            container: "top-center",
+                            dismiss: {
+                                duration: 5000,
+                                onScreen: true
+                            }
+                        });
                     }else{
                         store.addNotification({
                             title: "Alert",

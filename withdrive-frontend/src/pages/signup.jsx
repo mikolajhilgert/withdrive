@@ -29,7 +29,7 @@ import form from '../modules/innerPage.module.css'
                 .then(() => {
                     History.push("/sign-in");
                     window.location.reload();
-                    }).catch(err=>{setMsg("This email already exists. Perhaps login?");})
+                    }).catch(err=>{setMsg("Error, perhaps email exists? Or check input fields.");})
 
             }else{
                 setMsg("Error: Passwords do not match");

@@ -3,6 +3,7 @@ package nl.fontys.withdrive.converter;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationRequestDTO;
 import nl.fontys.withdrive.dto.tripApplication.ApplicationResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
+import nl.fontys.withdrive.dto.user.UserPassengerDTO;
 import nl.fontys.withdrive.entity.TripApplication;
 import nl.fontys.withdrive.entity.User;
 import nl.fontys.withdrive.interfaces.converter.IApplicationConverter;
@@ -52,7 +53,7 @@ public class ApplicationConverter implements IApplicationConverter {
             ApplicationResponseDTO temp = mapper.map(app, ApplicationResponseDTO.class);
             for(User u : allUsers){
                 if(u.getUserID() == app.getApplicant().getUserID()){
-                    temp.setUser(mapper.map(u,UserDTO.class));
+                    temp.setUser(mapper.map(u, UserPassengerDTO.class));
                 }
             }
             output.add(temp);

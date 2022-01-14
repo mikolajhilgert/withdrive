@@ -27,7 +27,7 @@ const MyTrips = () => {
                 <BackButton />
                 <div>
                     <h3>Driver trips:</h3>
-                    All trips<Switch onClick={() => handleToggle()} defaultChecked /> Upcoming trips
+                    Completed trips<Switch onClick={() => handleToggle()} defaultChecked /> Upcoming trips
                     <Table />
                 </div>
                 <br></br>

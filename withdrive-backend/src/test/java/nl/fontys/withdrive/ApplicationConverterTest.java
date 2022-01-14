@@ -49,9 +49,9 @@ public class ApplicationConverterTest {
 
 
     ApplicationConverter converter;
-    User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
-    User user = new User(userID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
-    User user2 = new User(userID2,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null);
+    User driver = new User(driverID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null,null);
+    User user = new User(userID,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null,null);
+    User user2 = new User(userID2,"john.doe@gmail.com","John","Doe","10-02-1990","Male","789762183","password",null,null,null,null,null,null);
     Trip trip = new Trip(testID,"Venlo","Eindhoven","Quick trip","19/11/2021","AL-125-GG",2,2.5, TripStatus.OPEN,null,null,driver);
 
 

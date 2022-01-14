@@ -13,4 +13,14 @@ describe('delete_user', () => {
         cy.wait(1500)
         cy.visit('/sign-out')
     })
+    it("send_alert", () => {
+        cy.login("admin@withdrive.com","password")
+        cy.visit('/')
+        cy.get('[href="/send-alerts"]').click();
+        cy.get('[data-cy=text]').type('Test Test Test Test Test Test Test')
+        cy.get('.btn').click();
+        cy.wait(4000)
+        cy.get('[href="/sign-out"]').click();
+        /* ==== End Cypress Studio ==== */
+    })
 })

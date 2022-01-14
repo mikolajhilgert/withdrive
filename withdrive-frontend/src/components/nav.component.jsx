@@ -29,14 +29,12 @@ const Navigation = () => {
     React.useEffect(() => {
         // use SockJS as the websocket client
         const socket = SockJS(ENDPOINT);
+        
         // Set stomp to use websockets
         const stompClient = Stomp.over(socket);
         // connect to the backend
         stompClient.connect({}, () => {
-            // subscribe to the backend
             stompClient.subscribe('/topic/greetings', (data) => {
-
-                console.log(data);
                 onMessageReceived(data);
             });
         });

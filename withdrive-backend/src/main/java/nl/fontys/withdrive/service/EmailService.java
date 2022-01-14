@@ -12,14 +12,12 @@ import java.util.UUID;
 @Service
 public class EmailService implements IEmailService {
     private final JavaMailSender mailSender;
-    private final UserService users;
     private final SimpleMailMessage preConfiguredMessage;
 
     @Autowired
-    public EmailService(JavaMailSender mailSender,UserService users, SimpleMailMessage preConfiguredMessage) {
+    public EmailService(JavaMailSender mailSender, SimpleMailMessage preConfiguredMessage) {
         this.mailSender = mailSender;
         this.preConfiguredMessage = preConfiguredMessage;
-        this.users = users;
     }
 
     /**
@@ -37,10 +35,10 @@ public class EmailService implements IEmailService {
     /**
      * This method will send a pre-configured message
      * */
-    public void sendApplicationNotification(UUID to)
+    public void sendApplicationNotification(String to)
     {
         SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
-        mailMessage.setTo(users.RetrieveByID(to).getEmail());
+        mailMessage.setTo(to);
         mailMessage.setSubject("A user has applied for your trip!");
         mailMessage.setText("Dear user,\n" +
                 "You have received a new application for one of your upcoming trips.\n" +
@@ -51,9 +49,9 @@ public class EmailService implements IEmailService {
     }
 
     @Override
-    public void sendApplicationResponseNotification(UUID to) {
+    public void sendApplicationResponseNotification(String to) {
         SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
-        mailMessage.setTo(users.RetrieveByID(to).getEmail());
+        mailMessage.setTo(to);
         mailMessage.setSubject("A driver has replied to your application!");
         mailMessage.setText("Dear user,\n" +
                 "You have received a response to your application.\n" +
@@ -64,9 +62,9 @@ public class EmailService implements IEmailService {
     }
 
     @Override
-    public void sendReviewNotification(UUID to) {
+    public void sendReviewNotification(String to) {
         SimpleMailMessage mailMessage = new SimpleMailMessage(preConfiguredMessage);
-        mailMessage.setTo(users.RetrieveByID(to).getEmail());
+        mailMessage.setTo(to);
         mailMessage.setText("Dear user," +
                 "A trip you are part of has begun" +
                 "Please leave a review on your driver!");

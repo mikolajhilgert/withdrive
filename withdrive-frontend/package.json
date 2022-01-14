@@ -54,6 +54,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "cypress": "^9.1.1"
+    "cypress": "^9.2.0"
   }
 }

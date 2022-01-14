@@ -2,6 +2,8 @@ package nl.fontys.withdrive.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -24,8 +26,12 @@ public class User {
     private @Getter @Setter String phoneNumber;
     private @Getter @Setter String password;
 
-    @ManyToMany(fetch=FetchType.EAGER)
+    @ManyToMany(
+            fetch=FetchType.EAGER
+    )
     private @Getter @Setter Collection<Role> roles = new ArrayList<>();
+
+
 
     @OneToMany(
             mappedBy = "driver",
@@ -51,11 +57,6 @@ public class User {
             cascade ={ CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
     Set<Rating> user;
 
+    @JsonIgnore
+    private @Getter @Setter String resetPasswordToken;
 }
-
-
-
-
-
-
-

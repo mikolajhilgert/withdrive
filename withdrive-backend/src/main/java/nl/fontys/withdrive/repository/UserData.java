@@ -82,7 +82,9 @@ public class UserData implements IUserData {
     }
 
     @Override
-    public void Delete(UUID number) {
+    public void Delete(UUID number)
+    {
+//        roles.deleteRolesFromUser(number.toString());
         db.deleteById(number);
     }
 
@@ -102,5 +104,10 @@ public class UserData implements IUserData {
             return false;
         }
         return  true;
+    }
+
+    @Override
+    public User findByResetPasswordToken(String token) {
+        return db.getByResetPasswordToken(token);
     }
 }

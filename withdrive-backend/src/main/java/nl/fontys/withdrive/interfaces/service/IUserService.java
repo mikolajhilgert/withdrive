@@ -25,4 +25,11 @@ public interface IUserService {
     void addRoleToUser(String email, String roleName);
 
     boolean existsByEmail(String email);
+
+    void updateResetPasswordToken(String token, String email, String link);
+
+    UserDTO getByResetPasswordToken(String token);
+
+    void updatePassword(String email, String newPassword);
+
 }

@@ -100,8 +100,8 @@ const MyTrips = () => {
                 <BackButton />
                 <div>
                     <h3>Your trips as a passenger:</h3>
-                    All trips<Switch onClick={() => handleToggle()} defaultChecked /> Upcoming trips
-                    <Table />
+                    Completed trips<Switch onClick={() => handleToggle()} defaultChecked /> Upcoming trips
+                    <Table/>
                     {DialogComponent}
                 </div>
             </div>

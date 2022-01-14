@@ -15,10 +15,6 @@ function Alert() {
     const [stompClient, setStompClient] = useState(null);
     const [msgToSend, setSendMessage] = useState("Enter your message here!");
 
-    window.onbeforeunload = function() {
-        stompClient.close();
-    };
-
     function handle(){
         var r = window.confirm("Are you sure you want to send this alert?");
         if (r === true) {
@@ -39,7 +35,7 @@ function Alert() {
             <div className={form.authinner_table}>
                 <div className="form-group">
                     <label>Message:</label>
-                    <textarea name="details" className="form-control" cols="25" rows="15" minlength="25" required onChange={(event) => setSendMessage(event.target.value)}></textarea>
+                    <textarea name="details" className="form-control" cols="25" rows="15" data-cy="text" minlength="25" required onChange={(event) => setSendMessage(event.target.value)}></textarea>
                 </div>
                 <br></br>
                 <center><Button onClick={handle}>Send Message</Button></center>

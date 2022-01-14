@@ -1,6 +1,8 @@
 package nl.fontys.withdrive.controller;
 
+import nl.fontys.withdrive.dto.rating.AnonymousRatingDTO;
 import nl.fontys.withdrive.dto.rating.RatingDTO;
+import nl.fontys.withdrive.dto.trip.TripResponseDTO;
 import nl.fontys.withdrive.dto.user.UserDTO;
 import nl.fontys.withdrive.interfaces.service.IApplicationService;
 import nl.fontys.withdrive.interfaces.service.IRatingService;
@@ -12,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -48,6 +52,14 @@ public class RatingController {
     public boolean hasUserRatedTrip(@PathVariable UUID tripID) {
         UserDTO loggedInUser = this.users.retrieveByEmail(SecurityContextHolder.getContext().getAuthentication().getName());
         return ratings.hasReviewed(tripID,loggedInUser.getUserID());
+    }
+
+    @GetMapping("/driver/{userID}")
+    public ResponseEntity<List<AnonymousRatingDTO>> getByDriver(@PathVariable UUID userID) {
+        List<AnonymousRatingDTO> list = ratings.getRatingsPerUser(userID);
+        if(!list.isEmpty())
+            return ResponseEntity.ok().body(list);
+        return ResponseEntity.ok().body(Collections.emptyList());
     }
 
 

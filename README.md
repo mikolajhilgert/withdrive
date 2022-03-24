@@ -1,6 +1,6 @@
 # withdrive
 
-Project repository for the withdrive project.
+Project repository for the withdrive project. Withdrive is an car-pooling platform that can be used by drivers and passengers alike.
 
 This was done as part of my semester long project.
 

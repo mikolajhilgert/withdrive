@@ -8,3 +8,5 @@ The back-end RESTFUL service is developed using Java & Spring Boot and dependenc
 A main focus of the semester was learning the basics of web-security, and understanding the need for extensive testing which included; unit, API, frontend and end to end tests.
 
 The project also worked with the Gitlab CI/CD to ensure working code and continious delivery to Docker.
+
+<img src="https://i.imgur.com/nzFBTfC.png" class="center"/>

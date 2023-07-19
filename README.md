@@ -10,3 +10,5 @@ A main focus of the semester was learning the basics of web-security, and unders
 The project also worked with the Gitlab CI/CD to ensure working code and continious delivery to Docker.
 
 <img src="https://i.imgur.com/nzFBTfC.png" class="center"/>
+
+Documentation is available upon request.
